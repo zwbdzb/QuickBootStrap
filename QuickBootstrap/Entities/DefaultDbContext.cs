@@ -12,5 +12,7 @@ namespace QuickBootstrap.Entities
         /// </summary>
         public DbSet<User> User { get; set; }
 
+        public DbSet<SalesData>  SalesData { get; set; }
+
     }
 }

@@ -64,6 +64,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -176,6 +177,7 @@
     <Compile Include="Controllers\UserManageController.cs" />
     <Compile Include="Controllers\WebAPI\SalesDataController.cs" />
     <Compile Include="Entities\InitData.cs" />
+    <Compile Include="Entities\SalesData.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\DefaultDbContext.cs" />
     <Compile Include="Extendsions\ControllerExtendsions.cs" />
@@ -204,8 +206,10 @@
     <Compile Include="Services\ILoginService.cs" />
     <Compile Include="Services\Impl\LoginService.cs" />
     <Compile Include="Services\Impl\ProfileService.cs" />
+    <Compile Include="Services\Impl\SalesDataService.cs" />
     <Compile Include="Services\Impl\UserManageService.cs" />
     <Compile Include="Services\IProfileService.cs" />
+    <Compile Include="Services\ISalesDataService.cs" />
     <Compile Include="Services\IUserManageService.cs" />
     <Compile Include="Services\Util\Paged.cs" />
     <Compile Include="Services\Util\PagedResult.cs" />
@@ -266,6 +270,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="logs\debug\" />
+    <Folder Include="logs\error\" />
+    <Folder Include="logs\fatal\" />
+    <Folder Include="logs\info\" />
+    <Folder Include="logs\warn\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
