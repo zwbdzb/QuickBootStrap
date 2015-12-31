@@ -174,6 +174,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\UserManageController.cs" />
+    <Compile Include="Controllers\WebAPI\SalesDataController.cs" />
     <Compile Include="Entities\InitData.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\DefaultDbContext.cs" />
@@ -193,6 +194,12 @@
     <Compile Include="Models\ProfileChangePasswordRequest.cs" />
     <Compile Include="Models\UserCreateRequest.cs" />
     <Compile Include="Models\UserManageChangePassword.cs" />
+    <Compile Include="Mvc\JsonApiController.cs" />
+    <Compile Include="Mvc\JsonApiResult.cs" />
+    <Compile Include="Mvc\JsonController.cs" />
+    <Compile Include="Mvc\JsonResponseResult.cs" />
+    <Compile Include="Mvc\LimitPropsContractResolver .cs" />
+    <Compile Include="Mvc\ResponseError.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ILoginService.cs" />
     <Compile Include="Services\Impl\LoginService.cs" />
@@ -204,6 +211,11 @@
     <Compile Include="Services\Util\PagedResult.cs" />
     <Compile Include="Services\Util\Paging.cs" />
     <Compile Include="Services\Util\ServiceContext.cs" />
+    <Compile Include="Validations\IValidationRule.cs" />
+    <Compile Include="Validations\RegexValidation.cs" />
+    <Compile Include="Validations\RequiredValidation.cs" />
+    <Compile Include="Validations\StringLengthValidation.cs" />
+    <Compile Include="Validations\Validation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\base.css" />
@@ -254,7 +266,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\WebAPI\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
