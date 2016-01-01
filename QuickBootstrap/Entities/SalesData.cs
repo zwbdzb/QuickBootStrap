@@ -17,7 +17,7 @@ namespace QuickBootstrap.Entities
         public int Id { get; set; }
 
         [DisplayName("下订单时间")]
-        public string GenerationTime { get; set; }
+        public DateTime? GenerationTime { get; set; }
 
         [Required]
         [DisplayName("订单号")]

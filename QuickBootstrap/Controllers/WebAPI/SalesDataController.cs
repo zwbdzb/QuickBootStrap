@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using AutoMapper;
+using log4net.DateFormatter;
 using Microsoft.Practices.Unity;
 using QuickBootstrap.Entities;
+using QuickBootstrap.Extendsions;
 using QuickBootstrap.Helpers;
 using QuickBootstrap.Models;
 using QuickBootstrap.Mvc;
@@ -21,9 +24,9 @@ namespace QuickBootstrap.Controllers.WebAPI
         [HttpGet]
         [Route("", Name = "SalesData")]
         public IHttpActionResult SalesData([FromUri]SaleDataRequest request)
-        {
-           
-           // _salesDataService.InsertSalesData(model);
+        { 
+            var model = Mapper.Map<SalesData>(request);
+            _salesDataService.InsertSalesData(model);
             return Json(new {success = true});
         }
 

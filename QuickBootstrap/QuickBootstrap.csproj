@@ -205,6 +205,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\UnityHelper.cs" />
+    <Compile Include="Migrations\201601011621005_Merge1ssss.cs" />
+    <Compile Include="Migrations\201601011621005_Merge1ssss.Designer.cs">
+      <DependentUpon>201601011621005_Merge1ssss.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\HomeLoginRequest.cs" />
     <Compile Include="Models\ProfileChangePasswordRequest.cs" />
@@ -295,6 +299,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201601011621005_Merge1ssss.resx">
+      <DependentUpon>201601011621005_Merge1ssss.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
