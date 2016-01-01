@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Runtime.Remoting.Channels;
 using System.Web.Mvc;
 using System.Web.Http;
 using System.Web.Optimization;
@@ -13,6 +14,14 @@ namespace QuickBootstrap
     {
         protected void Application_Start()
         {
+            // 在托管代码抛出异常的时候，将异常信息使用Log4J 管理起来
+            AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
+            {
+                var log = LogManager.GetLogger(typeof(MvcApplication));
+                log.Error(args);
+            };
+
+
             // 注册区域
             AreaRegistration.RegisterAllAreas();
             // Web API 启动特性路由
@@ -21,6 +30,8 @@ namespace QuickBootstrap
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             // 注册网站路由
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            QuickBootstrap.Configuration.Configure();
             // 注册js，css压缩
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
@@ -30,10 +41,9 @@ namespace QuickBootstrap
         protected void Application_Error(object sender, EventArgs e)
         {
             var lastError = Server.GetLastError().GetBaseException();
-            {
-                var log = LogManager.GetLogger(typeof(MvcApplication));
-                log.Error(lastError);
-            }
+            var log = LogManager.GetLogger(typeof(MvcApplication));
+            log.Error(lastError);
+
         }
 
         /// <summary>

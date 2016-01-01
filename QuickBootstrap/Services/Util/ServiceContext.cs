@@ -10,7 +10,7 @@ namespace QuickBootstrap.Services.Util
         /// <summary>
         /// 数据库操作上下文
         /// </summary>
-        public readonly DefaultDbContext DbContext = new DefaultDbContext();
+        protected readonly DefaultDbContext DbContext = new DefaultDbContext();
 
         /// <summary>
         /// 缓存组件
@@ -63,6 +63,7 @@ namespace QuickBootstrap.Services.Util
             }
         }
 
+        // 实现释放资源的方法
         public void Dispose()
         {
             if (DbContext != null)

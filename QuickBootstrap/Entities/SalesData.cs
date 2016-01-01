@@ -12,24 +12,17 @@ namespace QuickBootstrap.Entities
 {
     public class SalesData
     {
-        [Key]
         [DisplayName("记录ID")]
-        [System.Data.Linq.Mapping.Column(Name = "Id", DbType = "int", IsPrimaryKey = true, IsDbGenerated = true, CanBeNull = false)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [DisplayName("下订单日期")]
-        public string Yyyymmdd { get; set; }
-
-        [Required]
-        [MaxLength(32)]
         [DisplayName("下订单时间")]
-        public string Hhmiss { get; set; }
+        public string GenerationTime { get; set; }
 
         [Required]
         [DisplayName("订单号")]
         public string O_cd { get; set; }
 
-        [Required]
         [DisplayName("广告主账号")]
         public string M_id { get; set; }
 
@@ -42,8 +35,6 @@ namespace QuickBootstrap.Entities
         [DisplayName("应得的佣金")]
         public decimal  Comm { get; set; }
 
-
-        [Required]
         [DisplayName("联盟会员下会员账户")]
         public string U_id { get; set; }
 
@@ -61,7 +52,6 @@ namespace QuickBootstrap.Entities
         [DisplayName("商品单价")]
         public decimal  Price { get; set; }
 
-        [Required]
         [DisplayName("商品分类")]
         public string  C_cd { get; set; }
 

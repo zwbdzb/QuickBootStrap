@@ -41,8 +41,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Enyim.Caching">
-      <HintPath>..\packages\EnyimMemcached.2.12\lib\net35\Enyim.Caching.dll</HintPath>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Enyim.Caching, Version=2.13.0.0, Culture=neutral, PublicKeyToken=cec98615db04012e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnyimMemcached.2.13\lib\net35\Enyim.Caching.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
@@ -61,6 +71,9 @@
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz">
+      <HintPath>..\packages\Quartz.2.3.3\lib\net40\Quartz.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -153,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\Configuration.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -194,6 +208,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\HomeLoginRequest.cs" />
     <Compile Include="Models\ProfileChangePasswordRequest.cs" />
+    <Compile Include="Models\SaleDataRequest.cs" />
     <Compile Include="Models\UserCreateRequest.cs" />
     <Compile Include="Models\UserManageChangePassword.cs" />
     <Compile Include="Mvc\JsonApiController.cs" />
@@ -202,6 +217,7 @@
     <Compile Include="Mvc\JsonResponseResult.cs" />
     <Compile Include="Mvc\LimitPropsContractResolver .cs" />
     <Compile Include="Mvc\ResponseError.cs" />
+    <Compile Include="Profiles\SaleDataRequestProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ILoginService.cs" />
     <Compile Include="Services\Impl\LoginService.cs" />
@@ -231,6 +247,9 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -270,11 +289,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="logs\debug\" />
-    <Folder Include="logs\error\" />
-    <Folder Include="logs\fatal\" />
-    <Folder Include="logs\info\" />
-    <Folder Include="logs\warn\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

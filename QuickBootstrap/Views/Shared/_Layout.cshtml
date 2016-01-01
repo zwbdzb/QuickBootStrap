@@ -33,9 +33,6 @@
                     @if (Request.Cookies[UserAuthorizationAttribute.CookieUserName] != null &&
                          !string.IsNullOrWhiteSpace(Request.Cookies[UserAuthorizationAttribute.CookieUserName].Value))
                     {
-
-                        //其他功能菜单
-                        <li><a href="/MemberPerformance">会员业绩</a></li>
                         <li><a href="/UserManage">用户管理</a></li>
                     }
 
