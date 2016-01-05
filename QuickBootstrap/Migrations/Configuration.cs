@@ -21,13 +21,13 @@ namespace QuickBootstrap.Migrations
             {
                 new User
                 {
-                    UserName="mr.wangya@qq.com", 
+                    UserName="wangya@qq.com", 
                     UserPwd= "670b14728ad9902aecba32e22fa4f6bd", //000000
                     CreateTime = DateTime.Now,
                     Nick = "王亚",
                 },
                 new User{
-                     UserName="hiAladdin@163.com", 
+                     UserName="Aladdin@163.com", 
                     UserPwd= "670b14728ad9902aecba32e22fa4f6bd", //000000
                     CreateTime = DateTime.Now,
                     Nick = "王军",

@@ -47,37 +47,39 @@ namespace QuickBootstrap
         }
 
 
-        // 查询当日起，往前查询120天到30 天的数据，现在不能确定是每天执行，还是间隔执行
+        // 每天执行90次，每次分别执行 -120 天到-90 天的业绩数据
         public void Execute(IJobExecutionContext context)
         {
             Debug.WriteLine(DateTime.Now+"作业开始执行");
             // 每天总共执行90次
-            for(int i=0;i<=90;i++)
+            for(int i=1;i<=90;i++)
             {
                 ExecQuery(i);
             }
         }
 
+        // http://www.linktech.cn/AC/trans_list.htm?account_id=xiaoqi3535&sign=6e4ffd56aac70e0ebe8d670946624f58&syyyymmdd=20150901&eyyyymmdd=20150931&type=&affiliate_id=&merchant_id=&stat=true&output_type=json
         public void ExecQuery(int i)
-        {
+        {   
             var sign = EncryptUtil.Encrypt(AccountId + "^" + AccountPwd);
+               sign = "6e4ffd56aac70e0ebe8d670946624f58";
             var queryEndTime = DateTime.Now.AddDays(-30);
             var queryStartTime = queryEndTime.AddDays(-90);
 
             var req = new RestRequest("AC/trans_list.htm", Method.GET);
-            req.AddParameter("account_id", AccountId);
-            req.AddParameter("sign", EncryptUtil.Encrypt(AccountId + "^" + AccountPwd));
-            req.AddParameter("syyyymmdd", queryStartTime);
-            req.AddParameter("eyyyymmdd", queryStartTime.AddDays(i));
-            req.AddParameter("type", "cps");
-            req.AddParameter("affiliate_id", "");            // 其余可选参数
-            req.AddParameter("merchant_id", "");
-            req.AddParameter("stat", "certain");
-            req.AddParameter("output_type", "");
-            req.AddParameter("sbill_yyyymmdd", "");
-            req.AddParameter("sbill_yyyymmdd", "");
-            req.AddParameter("u_id", "");
-            req.AddParameter("callback", "json");
+            req.AddQueryParameter("account_id", AccountId);
+            req.AddQueryParameter("sign", sign);
+            req.AddQueryParameter("syyyymmdd", queryStartTime.ToString("yyyyMMdd"));
+            req.AddQueryParameter("eyyyymmdd", queryStartTime.AddDays(i).ToString("yyyyMMdd"));
+            req.AddQueryParameter("type", "cps");
+            req.AddQueryParameter("affiliate_id", "");            // 其余可选参数
+            req.AddQueryParameter("merchant_id", "");
+            req.AddQueryParameter("stat", "certain");
+            req.AddQueryParameter("output_type", "");
+            req.AddQueryParameter("sbill_yyyymmdd", "");
+            req.AddQueryParameter("sbill_yyyymmdd", "");
+            req.AddQueryParameter("u_id", "");
+            req.AddQueryParameter("callback", "json");
 
             var resContent = WebClient.Execute(req).Content;
             var orderResp = JsonConvert.DeserializeObject<OrderResponse>(resContent);

@@ -46,7 +46,7 @@ namespace QuickBootstrap
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            
+            JobScheduler.Stop();
 
             var lastError = Server.GetLastError().GetBaseException();
             var log = LogManager.GetLogger(typeof(MvcApplication));
