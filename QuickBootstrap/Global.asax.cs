@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data.Entity;
 using System.Runtime.Remoting.Channels;
 using System.Web.Mvc;
@@ -6,6 +7,9 @@ using System.Web.Http;
 using System.Web.Optimization;
 using System.Web.Routing;
 using log4net;
+using Quartz;
+using Quartz.Impl;
+using QuickBootstrap.App_Start;
 using QuickBootstrap.Entities;
 
 namespace QuickBootstrap
@@ -18,7 +22,7 @@ namespace QuickBootstrap
             AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
             {
                 var log = LogManager.GetLogger(typeof(MvcApplication));
-                log.Error(args);
+                log.Error(args.Exception.Message);
             };
 
 
@@ -31,15 +35,19 @@ namespace QuickBootstrap
             // 注册网站路由
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            QuickBootstrap.Configuration.Configure();
+            AutoMapConfiguration.Configure();
             // 注册js，css压缩
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            JobScheduler.Start();
 
             InitDataBase();
         }
 
         protected void Application_Error(object sender, EventArgs e)
         {
+            
+
             var lastError = Server.GetLastError().GetBaseException();
             var log = LogManager.GetLogger(typeof(MvcApplication));
             log.Error(lastError);

@@ -19,10 +19,13 @@ namespace QuickBootstrap
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap-table.js",
+                      "~/Scripts/bootstrap-table-*",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-table.css",
                       "~/Content/base.css"));
         }
     }

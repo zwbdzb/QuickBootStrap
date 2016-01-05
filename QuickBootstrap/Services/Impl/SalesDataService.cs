@@ -28,5 +28,21 @@ namespace QuickBootstrap.Services.Impl
                 return false;
             }
         }
+
+        //  更新数据，这里是根据订单更新数据
+        public bool UpdateSalesData(Func<SalesData, bool> whereExp, Action<SalesData> setValue)
+        {
+            try
+            {
+                 var model  = DbContext.SalesData.SingleOrDefault(whereExp);
+                 setValue(model);
+                 DbContext.Entry(model).State = EntityState.Modified;
+                 return DbContext.SaveChanges() > 0;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace QuickBootstrap.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [DisplayName("下订单时间")]
+        [DisplayName("订单时间")]
         public DateTime? GenerationTime { get; set; }
 
         [Required]
@@ -57,8 +57,28 @@ namespace QuickBootstrap.Entities
 
 
         [Required]
-        [DisplayName("商品分类")]
+        [DisplayName("添加时间")]
         public DateTime AddTime { get; set; }
+
+        // 销售量 (额)
+        public  string Sales { get; set; }
+
+        // 佣金
+        public decimal? Commission { get; set; }
+
+        [DisplayName("业绩状态状态")]
+        [DefaultValue(0)]
+        public int? Stat_code { get; set; }
+
+        public string Stat_desc { get; set; }
+
+        public string Cancel_comment { get; set; }
+
+        // 结算日期
+        public DateTime?  Bill_yyyymmdd { get; set; }
+
+        [DisplayName("更新时间")]
+        public DateTime? UpdateTime { get; set; }
 
     }
 }

@@ -6,7 +6,7 @@ using AutoMapper;
 
 namespace QuickBootstrap
 {
-    public class Configuration
+    public class AutoMapConfiguration
     {
         public static void Configure()
         {

@@ -10,5 +10,7 @@ namespace QuickBootstrap.Services
     public interface ISalesDataService
     {
         bool InsertSalesData(SalesData model);
+
+        bool UpdateSalesData(Func<SalesData, bool> whereExp, Action<SalesData> setValue);
     }
 }
