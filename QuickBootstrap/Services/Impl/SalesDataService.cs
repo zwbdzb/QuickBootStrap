@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using AutoMapper;
 using QuickBootstrap.Entities;
+using QuickBootstrap.Models;
 using QuickBootstrap.Services.Util;
 
 namespace QuickBootstrap.Services.Impl
@@ -31,7 +32,7 @@ namespace QuickBootstrap.Services.Impl
         }
 
         //  更新数据，这里是根据订单更新数据
-        public bool UpdateSalesData(Func<SalesData, bool> whereExp, Action<SalesData> setValue)
+        public bool UpdateSalesData(Func<SalesData, bool> whereExp, Action<SalesData> setValue, OrderData data)
         {
             var model = DbContext.SalesData.SingleOrDefault(whereExp);
             try
@@ -44,11 +45,8 @@ namespace QuickBootstrap.Services.Impl
                 }
                 else
                 {
-                    
-                    var saleModel = Mapper.Map<SalesData>(model);
-                    InsertSalesData(saleModel);
-                    //    DbContext.SalesData.Add(model);
-                    return DbContext.SaveChanges() > 0;
+                    var saleModel = Mapper.Map<SalesData>(data);
+                    return  InsertSalesData(saleModel);
                 }
             }
             catch (Exception ex)

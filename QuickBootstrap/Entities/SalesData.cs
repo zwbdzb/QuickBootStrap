@@ -16,7 +16,13 @@ namespace QuickBootstrap.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [DisplayName("订单时间")]
+        //[DisplayName("订单日期")]
+        //public DateTime? Yyyymmdd { get; set; }
+
+        //[DisplayName("订单时间")]
+        //public DateTime? Hhmiss { get; set; }
+
+        [DisplayName("完整订单时间")]
         public DateTime? GenerationTime { get; set; }
 
         [Required]
@@ -26,7 +32,7 @@ namespace QuickBootstrap.Entities
         [DisplayName("广告主账号")]
         public string M_id { get; set; }
 
-        [Required]
+      //  [Required]
         [DisplayName("注册者账户和真实姓名")]
         public string  Mbr_id { get; set; }
 
@@ -56,9 +62,9 @@ namespace QuickBootstrap.Entities
         public string  C_cd { get; set; }
 
 
-        [Required]
+      //  [Required]
         [DisplayName("添加时间")]
-        public DateTime AddTime { get; set; }
+        public DateTime? AddTime { get; set; }
 
         // 销售量 (额)
         public  string Sales { get; set; }

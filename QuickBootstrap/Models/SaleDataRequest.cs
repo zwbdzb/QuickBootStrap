@@ -8,7 +8,7 @@ namespace QuickBootstrap.Models
 {
     public class SaleDataRequest
     {
-        public  string Yyyymmdd { get; set; }
+        public string Yyyymmdd { get; set; }
         public string Hhmiss { get; set; }
 
         public string O_cd { get; set; }

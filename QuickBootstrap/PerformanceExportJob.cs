@@ -84,7 +84,7 @@ namespace QuickBootstrap
             //req.AddQueryParameter("callback", "CbFunction");
 
             var resContent = WebClient.Execute(req).Content;
-            var orderResp = JsonConvert.DeserializeObject<OrderResponse>(resContent);
+            var orderResp = JsonConvert.DeserializeObject<JsonOrderResponse>(resContent);
 
             if (!string.IsNullOrEmpty(orderResp.Is_success) && orderResp.Is_success == "TRUE")
             {
@@ -99,12 +99,12 @@ namespace QuickBootstrap
                             {
                                 x.Sales = c.Sales;
                                 x.Commission = c.Commission;
-                                x.Stat_code = c.State_code;
-                                x.Stat_desc = c.State_desc;
+                                x.Stat_code = c.Stat_code;
+                                x.Stat_desc = c.Stat_desc;
                                 x.Cancel_comment = c.Cancel_comment;
                                 x.Bill_yyyymmdd = DateTime.Parse(c.Bill_yyyymmdd);
                                 x.UpdateTime = DateTime.Now;
-                            });
+                            },c);
                     }
                 }
                 else

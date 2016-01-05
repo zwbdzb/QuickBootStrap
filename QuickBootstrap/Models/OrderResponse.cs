@@ -5,7 +5,7 @@ using System.Web;
 
 namespace QuickBootstrap.Models
 {
-    public class OrderResponse
+    public class JsonOrderResponse
     {
         public string Is_success { get; set; }
         public int  List_count { get; set; }
@@ -27,8 +27,8 @@ namespace QuickBootstrap.Models
         public string Sales { get; set; }
         public decimal Commission { get; set; }
 
-        public int  State_code { get; set; }
-        public string State_desc { get; set; }
+        public int  Stat_code { get; set; }
+        public string Stat_desc { get; set; }
 
         public string Cancel_comment { get; set; }
 
