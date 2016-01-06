@@ -34,7 +34,7 @@ namespace QuickBootstrap.Profiles
                 .ForMember(dest => dest.GenerationTime, opt => opt.MapFrom(src => DateTime.ParseExact(src.Order_time.Replace(" ",""), "yyyyMMddHHmmss", null)))
                 .ForMember(dest => dest.P_cd, opt => opt.MapFrom(src => src.Product_code))
                 .ForMember(dest => dest.It_cnt, opt => opt.MapFrom(src => src.Item_count))
-                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Item_price))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => decimal.Parse(src.Item_price)))
                 .ForMember(dest => dest.C_cd, opt => opt.MapFrom(src => src.Category_code))
 
 

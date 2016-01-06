@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data.Linq.Mapping;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Migrations.Model;
 using System.Linq;
 using System.Web;
 using QuickBootstrap.Attributes;

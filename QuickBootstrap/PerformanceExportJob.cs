@@ -21,6 +21,8 @@ namespace QuickBootstrap
 {
     public class PerformanceExportJob:IJob
     {
+        ILog log = LogManager.GetLogger(typeof(PerformanceExportJob));
+
         private readonly ISalesDataService _salesDataService = UnityHelper.Instance.Unity.Resolve<ISalesDataService>();
 
         private static RestClient _client;
@@ -53,12 +55,16 @@ namespace QuickBootstrap
             Debug.WriteLine(DateTime.Now+"作业开始执行");
             // 作业范围
             var queryStartTime = DateTime.Now.AddDays(-30).AddDays(-90);
-            // 每天总共执行90次
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
             for (int i=1;i<=90;i++)
             {
                 ExecQuery(queryStartTime);
                 queryStartTime = queryStartTime.AddDays(1);
             }
+            stopWatch.Stop();
+            var time = stopWatch.ElapsedMilliseconds;
+            log.Info(string.Format("{0}-start query  cost time {1} ", DateTime.Now, time));
         }
 
         // http://www.linktech.cn/AC/trans_list.htm?account_id=xiaoqi3535&sign=6e4ffd56aac70e0ebe8d670946624f58&syyyymmdd=20150901&eyyyymmdd=20150931&type=&affiliate_id=&merchant_id=&stat=true&output_type=json
@@ -109,14 +115,13 @@ namespace QuickBootstrap
                 }
                 else
                 {
-                    var log = LogManager.GetLogger(typeof(PerformanceExportJob));
-                    log.Error(string.Format("{0}查询{1}-start query result : no data ", DateTime.Now, startTime));
+                    log.Info(string.Format("{0}查询{1}-start query result : no data ", DateTime.Now, startTime));
                 }
                
             }
             else 
             {
-                var log = LogManager.GetLogger(typeof (PerformanceExportJob));
+                
                 log.Error(string.Format("{0}查询{1}-start query error", DateTime.Now, startTime));
             }
         }
