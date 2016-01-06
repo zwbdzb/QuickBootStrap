@@ -70,16 +70,14 @@ namespace QuickBootstrap
         // http://www.linktech.cn/AC/trans_list.htm?account_id=xiaoqi3535&sign=6e4ffd56aac70e0ebe8d670946624f58&syyyymmdd=20150901&eyyyymmdd=20150931&type=&affiliate_id=&merchant_id=&stat=true&output_type=json
         public void ExecQuery(DateTime startTime)
         {
-          //  var query = "AC/trans_list.htm?account_id=xiaoqi3535&sign=6e4ffd56aac70e0ebe8d670946624f58&syyyymmdd=20150901&eyyyymmdd=20150931&type=&affiliate_id=&merchant_id=&stat=true&output_type=json";
-            var sign = EncryptUtil.Encrypt(AccountId + "^" + AccountPwd);
-               sign = "6e4ffd56aac70e0ebe8d670946624f58";
+            var sign = EncryptUtil.MD5ForPHP(AccountId + "^." + AccountPwd);    // 6e4ffd56aac70e0ebe8d670946624f58
 
             var req = new RestRequest("/AC/trans_list.htm");
             req.AddQueryParameter("account_id", AccountId);
             req.AddQueryParameter("sign", sign);
             req.AddQueryParameter("syyyymmdd", startTime.ToString("yyyyMMdd"));
             req.AddQueryParameter("eyyyymmdd", startTime.AddDays(1).ToString("yyyyMMdd"));
-            req.AddQueryParameter("type", "");
+            req.AddQueryParameter("type", "cps");
             req.AddQueryParameter("affiliate_id", "");            // 其余可选参数
             req.AddQueryParameter("merchant_id", "");
             req.AddQueryParameter("stat", "certain");
@@ -121,8 +119,8 @@ namespace QuickBootstrap
             }
             else 
             {
-                
-                log.Error(string.Format("{0}查询{1}-start query error", DateTime.Now, startTime));
+
+                log.Error(string.Format("{0}查询{1}-start query error:{3}", DateTime.Now, startTime ));
             }
         }
     }
