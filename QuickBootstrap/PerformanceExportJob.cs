@@ -70,8 +70,8 @@ namespace QuickBootstrap
         // http://www.linktech.cn/AC/trans_list.htm?account_id=xiaoqi3535&sign=6e4ffd56aac70e0ebe8d670946624f58&syyyymmdd=20150901&eyyyymmdd=20150931&type=&affiliate_id=&merchant_id=&stat=true&output_type=json
         public void ExecQuery(DateTime startTime)
         {
-            var sign = EncryptUtil.MD5ForPHP(AccountId + "^." + AccountPwd);    // 6e4ffd56aac70e0ebe8d670946624f58
-
+            var sign = EncryptUtil.MD5ForPHP(AccountId + "^." + AccountPwd);    // 
+            sign = "6e4ffd56aac70e0ebe8d670946624f58";
             var req = new RestRequest("/AC/trans_list.htm");
             req.AddQueryParameter("account_id", AccountId);
             req.AddQueryParameter("sign", sign);
@@ -106,7 +106,7 @@ namespace QuickBootstrap
                                 x.Stat_code = c.Stat_code;
                                 x.Stat_desc = c.Stat_desc;
                                 x.Cancel_comment = c.Cancel_comment;
-                                x.Bill_yyyymmdd = DateTime.Parse(c.Bill_yyyymmdd);
+                                x.Bill_yyyymmdd = c.Bill_yyyymmdd;
                                 x.UpdateTime = DateTime.Now;
                             },c);
                     }

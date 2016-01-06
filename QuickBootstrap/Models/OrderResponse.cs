@@ -24,7 +24,7 @@ namespace QuickBootstrap.Models
         public string Category_code { get; set; }
         public string Item_count { get; set; }
         public string Item_price { get; set; }
-        public string Sales { get; set; }
+        public decimal Sales { get; set; }
         public decimal Commission { get; set; }
 
         public int  Stat_code { get; set; }

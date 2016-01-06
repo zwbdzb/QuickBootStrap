@@ -7,12 +7,23 @@ namespace QuickBootstrap.Entities
     /// </summary>
     public class DefaultDbContext : DbContext
     {
-        /// <summary>
-        /// 用户表
-        /// </summary>
+
+        static DefaultDbContext()
+        {
+            System.Data.Entity.Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DefaultDbContext>());
+        }
+     
         public DbSet<User> User { get; set; }
 
         public DbSet<SalesData>  SalesData { get; set; }
+
+        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SalesData>().Property(x => x.Comm).HasPrecision(18, 4);
+            modelBuilder.Entity<SalesData>().Property(x => x.Price).HasPrecision(18, 2);
+            modelBuilder.Entity<SalesData>().Property(x => x.Sales).HasPrecision(18, 2);
+            base.OnModelCreating(modelBuilder);
+        }
 
     }
 }

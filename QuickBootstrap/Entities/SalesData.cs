@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.SqlTypes;
 
 namespace QuickBootstrap.Entities
 {
@@ -55,7 +56,8 @@ namespace QuickBootstrap.Entities
 
         [Required]
         [DisplayName("商品单价")]
-        public decimal  Price { get; set; }
+        [Column("Price", TypeName = "Money")]
+        public decimal Price { get; set; }
 
         [DisplayName("商品分类")]
         [Column("C_cd", TypeName = "nvarchar")]
@@ -66,12 +68,12 @@ namespace QuickBootstrap.Entities
         public DateTime? AddTime { get; set; }
 
         // 销售量 (额)
-        [Column("Sales", TypeName = "nvarchar")]
-        [MaxLength(30)]
-        public  string Sales { get; set; }
+        [Column("Sales", TypeName = "Money")]
+        public decimal Sales { get; set; }
 
         // 佣金
-        public decimal? Commission { get; set; }
+        [Column("Commission", TypeName = "Money")]
+        public decimal Commission { get; set; }
 
         [DisplayName("业绩状态状态")]
         [DefaultValue(0)]
@@ -84,7 +86,7 @@ namespace QuickBootstrap.Entities
         public string Cancel_comment { get; set; }
 
         // 结算日期
-        public DateTime?  Bill_yyyymmdd { get; set; }
+        public string   Bill_yyyymmdd { get; set; }
 
         [DisplayName("更新时间")]
         public DateTime? UpdateTime { get; set; }
