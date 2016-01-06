@@ -17,7 +17,7 @@ namespace QuickBootstrap.Migrations
 
         protected override void Seed(QuickBootstrap.Entities.DefaultDbContext context)
         {
-            //context.Database.ExecuteSqlCommand("CREATE INDEX IX_OrderNO ON SalesDatas (O_cd)");
+            // context.Database.ExecuteSqlCommand("CREATE INDEX IX_OrderNO ON SalesDatas (O_cd)");
 
             //new List<User>
             //{

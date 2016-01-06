@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data.Linq.Mapping;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Migrations.Model;
-using System.Linq;
-using System.Web;
-using QuickBootstrap.Attributes;
 
 namespace QuickBootstrap.Entities
 {
@@ -17,24 +12,23 @@ namespace QuickBootstrap.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        //[DisplayName("订单日期")]
-        //public DateTime? Yyyymmdd { get; set; }
-
-        //[DisplayName("订单时间")]
-        //public DateTime? Hhmiss { get; set; }
-
         [DisplayName("完整订单时间")]
         public DateTime? GenerationTime { get; set; }
 
         [Required]
         [DisplayName("订单号")]
+        [Column("O_cd", TypeName = "nvarchar")]
+        [MaxLength(30)]
         public string O_cd { get; set; }
 
         [DisplayName("广告主账号")]
+        [Column("M_id", TypeName = "nvarchar")]
+        [MaxLength(30)]
         public string M_id { get; set; }
 
-      //  [Required]
         [DisplayName("注册者账户和真实姓名")]
+        [Column("Mbr_id", TypeName = "nvarchar")]
+        [MaxLength(30)]
         public string  Mbr_id { get; set; }
 
 
@@ -43,11 +37,15 @@ namespace QuickBootstrap.Entities
         public decimal  Comm { get; set; }
 
         [DisplayName("联盟会员下会员账户")]
+        [Column("U_id", TypeName = "nvarchar")]
+        [MaxLength(30)]
         public string U_id { get; set; }
 
 
         [Required]
         [DisplayName("商品编号")]
+        [Column("P_cd", TypeName = "nvarchar")]
+        [MaxLength(30)]
         public string P_cd { get; set; }
 
 
@@ -60,14 +58,16 @@ namespace QuickBootstrap.Entities
         public decimal  Price { get; set; }
 
         [DisplayName("商品分类")]
+        [Column("C_cd", TypeName = "nvarchar")]
+        [MaxLength(30)]
         public string  C_cd { get; set; }
 
-
-      //  [Required]
         [DisplayName("添加时间")]
         public DateTime? AddTime { get; set; }
 
         // 销售量 (额)
+        [Column("Sales", TypeName = "nvarchar")]
+        [MaxLength(30)]
         public  string Sales { get; set; }
 
         // 佣金
@@ -77,6 +77,8 @@ namespace QuickBootstrap.Entities
         [DefaultValue(0)]
         public int? Stat_code { get; set; }
 
+        [Column("Stat_desc", TypeName = "nvarchar")]
+        [MaxLength(50)]
         public string Stat_desc { get; set; }
 
         public string Cancel_comment { get; set; }
