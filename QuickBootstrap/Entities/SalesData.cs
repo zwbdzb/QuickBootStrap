@@ -83,6 +83,11 @@ namespace QuickBootstrap.Entities
         [MaxLength(50)]
         public string Stat_desc { get; set; }
 
+        // 特定网站ID
+        [Column("Affiliate_id", TypeName = "nvarchar")]
+        [MaxLength(30)]
+        public string Affiliate_id { get; set; }
+
         public string Cancel_comment { get; set; }
 
         // 结算日期

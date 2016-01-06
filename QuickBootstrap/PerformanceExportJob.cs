@@ -105,6 +105,7 @@ namespace QuickBootstrap
                                 x.Commission = c.Commission;
                                 x.Stat_code = c.Stat_code;
                                 x.Stat_desc = c.Stat_desc;
+                                x.Affiliate_id = c.Affiliate_id;
                                 x.Cancel_comment = c.Cancel_comment;
                                 x.Bill_yyyymmdd = c.Bill_yyyymmdd;
                                 x.UpdateTime = DateTime.Now;

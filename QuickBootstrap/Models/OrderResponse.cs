@@ -30,6 +30,7 @@ namespace QuickBootstrap.Models
         public int  Stat_code { get; set; }
         public string Stat_desc { get; set; }
 
+        public  string Affiliate_id { get; set; }
         public string Cancel_comment { get; set; }
 
         public string Bill_yyyymmdd { get; set; }

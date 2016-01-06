@@ -216,10 +216,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\UnityHelper.cs" />
+    <Compile Include="Migrations\201601061508066_AddCity.cs" />
+    <Compile Include="Migrations\201601061508066_AddCity.Designer.cs">
+      <DependentUpon>201601061508066_AddCity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\HomeLoginRequest.cs" />
     <Compile Include="Models\OrderResponse.cs" />
     <Compile Include="Models\ProfileChangePasswordRequest.cs" />
+    <Compile Include="Models\QueryParams.cs" />
     <Compile Include="Models\SaleDataRequest.cs" />
     <Compile Include="Models\UserCreateRequest.cs" />
     <Compile Include="Models\UserManageChangePassword.cs" />
@@ -232,6 +237,7 @@
     <Compile Include="PerformanceExportJob.cs" />
     <Compile Include="Profiles\SaleDataRequestProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IPagedList.cs" />
     <Compile Include="Services\ILoginService.cs" />
     <Compile Include="Services\Impl\LoginService.cs" />
     <Compile Include="Services\Impl\ProfileService.cs" />
@@ -241,6 +247,7 @@
     <Compile Include="Services\ISalesDataService.cs" />
     <Compile Include="Services\IUserManageService.cs" />
     <Compile Include="Services\Util\EncryptUtil.cs" />
+    <Compile Include="Services\Util\PagedList.cs" />
     <Compile Include="Services\Util\Paged.cs" />
     <Compile Include="Services\Util\PagedResult.cs" />
     <Compile Include="Services\Util\Paging.cs" />
@@ -353,6 +360,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201601061508066_AddCity.resx">
+      <DependentUpon>201601061508066_AddCity.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
