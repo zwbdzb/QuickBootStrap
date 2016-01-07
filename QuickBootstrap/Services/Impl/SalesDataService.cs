@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using AutoMapper;
+using Microsoft.Ajax.Utilities;
 using QuickBootstrap.Entities;
 using QuickBootstrap.Extendsions;
 using QuickBootstrap.Models;
@@ -57,9 +58,15 @@ namespace QuickBootstrap.Services.Impl
             }
         }
 
+        // 必须动态生成查询字符串
         public PagedList<SalesData> GetSalesData(QueryParams queryParams)
         {
-            var query = DbContext.SalesData.OrderBy(o => o.Id).ToPagedList(1, queryParams.Limit);
+            var  data= DbContext.SalesData.AsQueryable();
+            if (!String.IsNullOrEmpty(queryParams.SpecTime))
+            {
+                data = data.Where(x => x.Yyyymmdd.Equals(queryParams.SpecTime,StringComparison.InvariantCultureIgnoreCase));
+            }
+            var query = data.OrderBy(o => o.Yyyymmdd).ThenBy(o => o.Hhmiss).ToPagedList(1, queryParams.Limit);
 
             return query;
         }

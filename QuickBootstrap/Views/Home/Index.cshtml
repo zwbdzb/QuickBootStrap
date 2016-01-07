@@ -5,49 +5,55 @@
 }
 <div class="content">
     <div class="container">
-        <h1> 业务报表</h1>
-        <form class="form-inline" role="form">
+        <form class="form-horizontal" role="form">
+            <fieldset>
+                <legend>业务报表</legend>
+                <div class="form-group">
+                    <a class="col-sm-1 btn btn-default" id="today" href="#" role="button">今天</a>
+                    <a class="col-sm-1 btn btn-default" id="yesterday" href="#" role="button">昨天</a>
+                    <a class="col-sm-1 btn btn-default" id="month"  href="#" role="button">本月</a>
+                    <a class="col-sm-1 btn btn-default" id="pmonth"  href="#" role="button">上月</a>
 
-            <div class="form-group">
-                <label for="dtp_input2" class="col-md-2 sr-only">Date Picking</label>
-                <div class="input-group date form_date col-md-3" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                    <input class="form-control" size="16" type="text" value="" readonly="">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    <div class="col-sm-4">
+                        <input class="form-control form_date" id="ds_username" type="text" placeholder="开始时间"/>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input class="form-control form_date" id="ds_password" type="text" placeholder="结束时间"/>
+                    </div>
                 </div>
-                <input type="hidden" id="dtp_input1" value=""><br>
-            </div>
 
-            <div class="form-group">
-                <label for="dtp_input2" class="col-md-2 sr-only">Date Picking</label>
-                <div class="input-group date form_date col-md-3" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                    <input class="form-control" size="16" type="text" value="" readonly="">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                <div class="form-group">
+
+                    <label class="col-sm-1 control-label" for="ds_host">广告主：</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" id="ds_host" type="text" placeholder=""/>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <select id="disabledSelect" class="form-control">
+                            <option>订单编号</option>
+                            <option>商品编号</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="text" placeholder=""/>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <select id="disabledSelect" class="form-control">
+                            <option>全部网址</option>
+                            <option>商品编号</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary">查询</button>
+                    </div>
                 </div>
-                <input type="hidden" id="dtp_input2" value=""><br>
-            </div>
 
-
-            <select class="form-group">
-                <option>订单编号</option>
-                <option>商品编号</option>
-                <option>网站编号</option>
-            </select>
-
-            <div class="form-group">
-                <label class="sr-only" for="exampleInputEmail2">邮箱</label>
-                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="请输入你的邮箱地址" />
-            </div>
-            <div class="form-group">
-                <label class="sr-only" for="exampleInputPassword2">密码</label>
-                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="请输入你的邮箱密码"/>
-            </div>
-
-            <button type="submit" class="btn btn-default">Send invitation</button>
+            </fieldset>
 
         </form>
-
 
         <div class="bootstrap-table">
             <table id="table"></table>
@@ -56,7 +62,21 @@
     </div>
 </div>
 <script type="text/javascript">
-    
+
+    $(function() {
+        $("#today").on("click", { foo: new Date().format("yyyyMMdd") }, handler);
+        $("#yesterday").on("click", { foo: new Date().addDate(-1) }, handler);
+        $("#month").on("click", { foo: new Date().getFullYear() + new Date().getFullYear().getMonth }, handler);
+        $("#pmonth").on("click", { foo: new Date().addDate(-1) }, handler);
+    });
+
+    function handler(event) {
+        $('#table').bootstrapTable('refresh', {
+            url: 'api/data/SalesData',
+            query: { SpecTime: event.data.foo }
+        });
+    };
+
     $('.form_date').datetimepicker({
         format: 'yyyy-mm-dd',
         language: 'zh-CN',
@@ -154,6 +174,21 @@
                 RegExp.$1.length == 1 ? o[k] :
                 ("00" + o[k]).substr(("" + o[k]).length));
         return format;
+    }
+
+    Date.prototype.addDate = function(days) {
+        var d = this;
+        d.setDate(d.getDate() + days);
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (day < 10) {
+            day = "0" + day;
+        }
+        var val = d.getFullYear() + "" + month + "" + day;
+        return val;
     }
 
     //传递的参数，已经是limit，params 是特地的5个【limit, offset, search, sort, order】属性组成的查询对象，你可以对查询对象进行属性操作，也可以不使用params对象，自己决定查询参数

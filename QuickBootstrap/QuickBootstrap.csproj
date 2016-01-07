@@ -216,6 +216,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\UnityHelper.cs" />
+    <Compile Include="Migrations\201601071544075_DD.cs" />
+    <Compile Include="Migrations\201601071544075_DD.Designer.cs">
+      <DependentUpon>201601071544075_DD.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\HomeLoginRequest.cs" />
     <Compile Include="Models\OrderResponse.cs" />
@@ -356,6 +360,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201601071544075_DD.resx">
+      <DependentUpon>201601071544075_DD.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

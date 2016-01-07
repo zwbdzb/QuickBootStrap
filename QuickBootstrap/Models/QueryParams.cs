@@ -14,6 +14,7 @@ namespace QuickBootstrap.Models
         public string Sort { get; set; }
         public string Order { get; set; }
 
+        public string SpecTime { get; set; }    // 特定时间
         public DateTime STime { get; set; } // 搜素开始时间
         public DateTime ETime { get; set; } // 搜素开始时间
 
