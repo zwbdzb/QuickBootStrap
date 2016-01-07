@@ -19,13 +19,26 @@ namespace QuickBootstrap
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      // bootstrap table
                       "~/Scripts/bootstrap-table.js",
-                      "~/Scripts/bootstrap-table-*",
+                      "~/Scripts/bootstrap-table-locale-all*",
+
+                      //  三个插件
+                      "~/Scripts/extensions/export/bootstrap-table-*",
+                      "~/Scripts/extensions/toolbar/bootstrap-table-*",
+                      "~/Scripts/extensions/filter-control/bootstrap-table-*",
+                      "~/Scripts/extensions/multiple-search/bootstrap-table-*",
+
+                      // bootstrap datetimepicker
+                      "~/Scripts/js/bootstrap-datetimepicker.js",
+                      "~/Scripts/js/locales/bootstrap-datetimepicker.zh-CN.js",
+
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-table.css",
+                      "~/Content/bootstrap-datetimepicker.css",
                       "~/Content/base.css"));
         }
     }

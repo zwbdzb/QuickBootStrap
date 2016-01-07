@@ -35,9 +35,9 @@ namespace QuickBootstrap.Controllers.WebAPI
 
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("~/api/data/SalesData", Name = "GetSalesData")]
-        public IHttpActionResult GetSalesData(QueryParams queryParams)
+        public IHttpActionResult GetSalesData([FromUri]QueryParams queryParams)
         {
             var  data = _salesDataService.GetSalesData(queryParams);
             return Json(new RespResult<SalesData>

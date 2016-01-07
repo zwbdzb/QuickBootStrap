@@ -59,7 +59,7 @@ namespace QuickBootstrap.Services.Impl
 
         public PagedList<SalesData> GetSalesData(QueryParams queryParams)
         {
-            var query = DbContext.SalesData.OrderBy(o => o.Id).ToPagedList(1, queryParams.PageSize);
+            var query = DbContext.SalesData.OrderBy(o => o.Id).ToPagedList(1, queryParams.Limit);
 
             return query;
         }

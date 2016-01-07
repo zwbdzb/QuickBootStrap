@@ -6,13 +6,26 @@
 
 <div class="content">
     <div class="container">
-        <h1>
-            业绩报告
-        </h1>
+
+        <form class="form-inline">
+            <div class="form-group">
+                <label class="sr-only" for="exampleInputEmail3">Email address</label>
+                <input type="text" class="form-control form_date" id="exampleInputEmail3" placeholder="开始时间">
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="exampleInputPassword3">Password</label>
+                <input type="text" class="form-control form_date" id="exampleInputPassword3" placeholder="结束时间">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="M_id">广告主</label>
+                <input type="text" class="form-control" id="M_id" placeholder="广告主">
+            </div>
+
+            <button type="submit" class="btn btn-default">Sign in</button>
+        </form>
 
         <div class="bootstrap-table">
             <table id="table"></table>
-
         </div>
         <div class="clearfix"></div>
     </div>
@@ -21,28 +34,52 @@
 
 <script type="text/javascript">
     
+    $('.form_date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language: 'zh-CN',
+        autoclose:true,
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0,
+        initialDate:'2015-09-09'
+    });
+
     $(document).ready(function () {
         $('#table').bootstrapTable({
-            locale: 'fr-CA',
-            method: 'post',             // 远程获取数据的方式
+            locale: 'zh-CN',
+            cahce: false,
+            method: 'get',                          // 远程获取数据的方式
             url: "api/data/SalesData",
-            height: $(window).height() -20,       // 表格的高度
+            height: $(window).height() -20,         // 表格的高度
             striped: true,                          // 条纹状
             dataType: "json",                       // 你希望服务端返回你的数据类型
             pagination: true,                       // 是否显示分页toolbar
-            queryParamsType: 'limit',               // limit restful 风格查询参数
+            queryParamsType: 'limit',               // 设置为limit 则是restful 风格查询参数
             singleSelect: false,                    // 单行选择
           //  contentType: "application/x-www-form-urlencoded",
             pageSize: 10,
             pageNumber: 1,
-            search: true,                               //不显示 搜索框
-            showColumns: true,                         //不显示下拉框（选择显示的列）
-            sidePagination: "server",                   //定义服务端分页
-            queryParams: queryParams,
-            //minimunCountColumns: 2,
+          //  search: true,                              //是否显示 搜索框
+            searchAlign:'right',
+            showColumns: true,                         //是否显示下拉框（选择显示的列）
+            sidePagination: "server",                  //定义服务端分页
+          //  queryParams: queryParams,
+          //minimunCountColumns: 2,
             responseHandler: responseHandler,
+          //  searchText:'',
+            //  multipleSearch: false,
+            toolbar: '.form_date',
+            showFilter:true,
+
+            filterControl: true,
+            filterShowClear: true,
+
             columns: [
-                { field: 'GenerationTime', title: '产生时间', formatter: function (value, row, index) { return new Date(value).format('yyyy-MM-dd hh:mm:ss') } },
+                { field: 'GenerationTime', title: '产生时间', formatter: function (value) { return new Date(value).format('yyyy.MM.dd hh:mm:ss') } },
                 { field: 'M_id', title: '广告主', width: 100, align: 'center', valign: 'middle', sortable: false },
                 { field: 'Affiliate_id', title: '网站编号', width: 100, align: 'center', valign: 'middle', sortable: false },
                  
@@ -54,7 +91,7 @@
                 { field: 'Sales', title: '销售额', width: 100, align: 'center', valign: 'middle', sortable: false },
 
                 { field: 'Comm', title: '佣金', width: 100, align: 'center', valign: 'middle', sortable: false },
-                { field: 'Stat_code', title: '业绩状态', width: 100, align: 'center', valign: 'middle', sortable: false },
+                { field: 'Stat_code', title: '业绩状态', filterControl:'select',width: 100, align: 'center', valign: 'middle', sortable: false },
                 { field: 'U_id', title: 'U_ID', width: 100, align: 'center', valign: 'middle', sortable: false },
                 { field: 'Bill_yyyymmdd', title: '结算时间', width: 100, align: 'center', valign: 'middle', sortable: false },
             ]
@@ -99,14 +136,13 @@
 
     //传递的参数，已经是limit，params 是特地的5个【limit, offset, search, sort, order】属性组成的查询对象，你可以对查询对象进行属性操作，也可以不使用params对象，自己决定查询参数
     function queryParams(params) {
-        return {
-            pageSize: params.limit,
-            pageNumber: params.pageNumber,
-
-            // 可以传入用户标识，决定数据查看权限
-            UserName: 4
-
-        };
-
+        //return {
+        //    pageSize: params.limit,
+        //    pageNumber: params.pageNumber,
+        //};
+            params.pageSize = params.limit;
+            params.search = params.search;
+            return params;
     }
+
 </script>
