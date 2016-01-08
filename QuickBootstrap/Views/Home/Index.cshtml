@@ -52,23 +52,36 @@
                         <input name="TypeValue" class="form-control" type="text" placeholder="" />
                     </div>
 
-                    <div class="col-sm-2">
-                        <select id="disabledSelect" class="form-control">
-                            <option>全部网址</option>
-                        </select>
-                    </div>
+                    @*<div class="col-sm-2">
+                    </div>*@
+
                     <div class="col-sm-2">
                         <button type="submit" class="btn btn-primary">查询</button>
                     </div>
                 </div>
-
-
             </fieldset>
-
         </form>
 
+        <div class="form-group">
+            <select id='toolbar'  class="form-control">
+                <option value=''>全部状态</option>
+                <option value='200'>有效</option>
+                <option value='300'>无效</option>
+                <option value='100'>未确认</option>
+                <option value='210'>初步核对有效</option>
+                <option value='310'>已取消</option>
+            </select>
+        </div>
+
         <div class="bootstrap-table">
-            <table id="table"></table>
+            <table id="table"
+                   data-toolbar='#toolbar'
+                   data-show-refresh="true"
+                   data-show-columns="true"
+                   data-show-toggle="true"
+                   data-side-pagination="server"
+                   data-pagination="true"
+                   data-page-list="[10, 25, 50, 100]"></table>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -80,29 +93,35 @@
         $("#yesterday").on("click", { foo: new Date().addDate(-1) }, handler);
         $("#month").on("click", { foo: new Date().getFullYear() + new Date().getFullYear().getMonth }, handler);
         $("#pmonth").on("click", { foo: new Date().addDate(-1) }, handler);
-        // $('form').submit(handler);
 
-        $("form").on("submit", function (event) {
-            event.preventDefault();
-            console.log($(this).serialize());
-        });
+        $("form").on("submit", { query: UIHandler }, handler);
+        $('#toolbar').on('change', { query: UIHHH }, handler);
     });
 
+    // 通用 refresh
     function handler(event) {
-        var ss = $('form').serialize();
         $('#table').bootstrapTable('refresh', {
+            silent: true,
             url: 'api/data/SalesData',
-            query: { SpecTime: event.data.foo }
+            query: event.data.query()               // query  是js对象
         });
         return false;
     };
 
     function UIHandler() {
-            
+        var data = {};
+        $("form").serializeArray().map(function (x) { data[x.name] = x.value; });
+        return data;
     }
 
+
+    function UIHHH() {
+        var data = {};
+        data.Stat_code = $("#toolbar  option:selected").val();
+        return data;
+    }
     $('.form_date').datetimepicker({
-        format: 'yyyy-mm-dd',
+        format: 'yyyymmdd',
         language: 'zh-CN',
         autoclose: true,
         weekStart: 1,
@@ -129,39 +148,44 @@
             //  contentType: "application/x-www-form-urlencoded",
             pageSize: 10,
             pageNumber: 1,
-            //  search: true,                              //是否显示 搜索框
+         //   search: true,                              //是否显示 搜索框
             searchAlign: 'right',
-            showColumns: true,                         //是否显示下拉框（选择显示的列）
-            sidePagination: "server",                  //定义服务端分页
+         //   showColumns: true,                         //是否显示下拉框（选择显示的列）
+         //   sidePagination: "server",                  //定义服务端分页
             //  queryParams: queryParams,
             //minimunCountColumns: 2,
             responseHandler: responseHandler,
             //  searchText:'',
             //  multipleSearch: false,
            // toolbar: '.form_date',
-           // showFilter: true,
+           //  showFilter: true,
 
-            // filterControl: true,
-            //   filterShowClear: true,
+           //  filterControl: true,
+           //  filterShowClear: true,
 
             columns: [
                 { field: 'GenerationTime', title: '时间', formatter: function (value) { return new Date(value).format('yyyy.MM.dd hh:mm:ss') } },
-                { field: 'M_id', title: '广告主', width: 100, align: 'center', valign: 'middle', sortable: false },
+                { field: 'M_id', title: '广告主', filterControl: 'select', width: 100, align: 'left', valign: 'middle', sortable: false },
                 { field: 'Affiliate_id', title: '网站编号', width: 100, align: 'center', valign: 'middle', sortable: false },
 
-                { field: 'O_cd', title: '订单号', width: 100, align: 'center', valign: 'middle', sortable: false },
-                { field: 'P_cd', title: '商品编号', width: 100, align: 'center', valign: 'middle', sortable: false },
-                { field: 'C_cd', title: '分类', width: 100, align: 'center', valign: 'middle', sortable: false },
+                { field: 'O_cd', title: '订单号', width: 100, align: 'left', valign: 'middle', sortable: false },
+                { field: 'P_cd', title: '商品编号', width: 100, align: 'left', valign: 'middle', sortable: false },
+                { field: 'C_cd', title: '分类', width: 100, align: 'left', valign: 'middle', sortable: false },
                 { field: 'It_cnt', title: '个数', width: 100, align: 'center', valign: 'middle', sortable: false },
                 { field: 'Price', title: '单价', width: 100, align: 'center', valign: 'middle', sortable: false },
                 { field: 'Sales', title: '销售额', width: 100, align: 'center', valign: 'middle', sortable: false },
 
                 { field: 'Comm', title: '佣金', width: 100, align: 'center', valign: 'middle', sortable: false },
-                { field: 'Stat_code', title: '业绩状态', filterControl: 'select', width: 100, align: 'center', valign: 'middle', sortable: false },
+
+                { field: 'Stat_code', title: '业绩状态码', visible:false },
+                { field: 'Stat_desc', title: '业绩状态', filterControl: 'select', width: 100, align: 'left', valign: 'middle', sortable: false },
                 { field: 'U_id', title: 'U_ID', width: 100, align: 'center', valign: 'middle', sortable: false },
                 { field: 'Bill_yyyymmdd', title: '结算时间', width: 100, align: 'center', valign: 'middle', sortable: false },
             ]
         });
+
+        var ss = $('#table').bootstrapTable('getOptions');
+
 
     });
     function responseHandler(res) {
@@ -178,7 +202,10 @@
                 "total": 0
             };
         }
+    }
 
+    function ConvertEnum(value) {
+        
     }
 
     Date.prototype.format = function (format) {

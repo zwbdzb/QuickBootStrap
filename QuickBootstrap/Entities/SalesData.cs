@@ -13,13 +13,12 @@ namespace QuickBootstrap.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Column("Yyyymmdd", TypeName = "nvarchar")]
-        [MaxLength(30)]
-        public string Yyyymmdd { get; set; }
+        [Column("Yyyymmdd", TypeName = "int")]
+        public int Yyyymmdd { get; set; }
 
         [Column("Hhmiss", TypeName = "nvarchar")]
         [MaxLength(30)]
-        public string Hhmiss { get; set; }
+        public string  Hhmiss { get; set; }
 
         [DisplayName("完整订单时间")]
         public DateTime? GenerationTime { get; set; }
