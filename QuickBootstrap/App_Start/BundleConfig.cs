@@ -9,6 +9,7 @@ namespace QuickBootstrap
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                        "~/Scripts/DateUtil.js",
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -29,16 +30,20 @@ namespace QuickBootstrap
                       "~/Scripts/extensions/filter-control/bootstrap-table-*",
                       "~/Scripts/extensions/multiple-search/bootstrap-table-*",
 
-                      // bootstrap datetimepicker
-                      "~/Scripts/js/bootstrap-datetimepicker.js",
-                      "~/Scripts/js/locales/bootstrap-datetimepicker.zh-CN.js",
+                      // bootstrap datepicker
+                      "~/Scripts/js/bootstrap-datepicker.js",
+                      "~/Scripts/js/locales/bootstrap-datepicker.zh-CN.min.js",
+
+                      // datejs
+                       "~/Scripts/js/date-zh-CN.js",
+                      "~/Scripts/js/globalization/zh-CN.js",
 
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-table.css",
-                      "~/Content/bootstrap-datetimepicker.css",
+                      "~/Content/bootstrap-datepicker.css",
                       "~/Content/base.css"));
         }
     }

@@ -276,6 +276,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\DateUtil.js" />
     <Content Include="Scripts\extensions\accent-neutralise\bootstrap-table-accent-neutralise.js" />
     <Content Include="Scripts\extensions\accent-neutralise\bootstrap-table-accent-neutralise.min.js" />
     <Content Include="Scripts\extensions\angular\bootstrap-table-angular.js" />

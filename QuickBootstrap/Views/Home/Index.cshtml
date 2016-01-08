@@ -14,46 +14,51 @@
                     <a class="col-sm-1 btn btn-default" id="month" role="button">本月</a>
                     <a class="col-sm-1 btn btn-default" id="pmonth" role="button">上月</a>
 
-                    <div class="input-group date form_date col-md-3" data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                        <input name='STime' class="form-control" size="16" type="text" value="" readonly>
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </span>
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+                    <div class="input-group date col-md-3" data-date-format="yyyymmdd" data-date-end-date="0d">
+                        <input type="text" name='STime' id='STime' class="form-control" readonly>
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
                     </div>
-                    <div class="input-group date form_date col-md-3" data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                        <input name='ETime' class="form-control" size="16" type="text" value="" readonly>
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </span>
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+
+                    <div class="input-group date col-md-3" data-date-format="yyyymmdd" data-date-end-date="0d">
+                        <input type="text" name='ETime' id='ETime' class="form-control" readonly>
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
                     </div>
+
                     <div class="col-sm-2 "></div>
                 </div>
+
 
                 <div class="form-group">
 
                     <label class="col-sm-1 control-label" for="ds_host">广告主：</label>
                     <div class="col-sm-3">
-                        <input name='M_id' class="form-control" id="ds_host" type="text" placeholder="" />
+                        <input name='M_id' id='M_id' class="form-control" id="ds_host" type="text" placeholder="" />
                     </div>
 
                     <div class="col-sm-2">
-                        <select name='QueryType' id="disabledSelect" class="form-control">
+                        <select name='QueryType' id="QueryType" class="form-control">
                             <option value='O_cd'>订单编号</option>
                             <option value='P_cd'>商品编号</option>
                         </select>
                     </div>
                     <div class="col-sm-2">
-                        <input name="TypeValue" class="form-control" type="text" placeholder="" />
+                        <input name="TypeValue" id="TypeValue"  class="form-control" type="text" placeholder="" />
                     </div>
 
-                    @*<div class="col-sm-2">
-                    </div>*@
+                    <div class="col-sm-2">
+                            <select  class="form-control" name="Stat" id='Stat'>
+                                <option value=''>全部状态</option>
+                                <option value=200>有效</option>
+                                <option value=300>无效</option>
+                                <option value=100>未确认</option>
+                                <option value=210>初步核对有效</option>
+                                <option value=310>已取消</option>
+                            </select>
+                    </div>
 
                     <div class="col-sm-2">
                         <button type="submit" class="btn btn-primary">查询</button>
@@ -62,7 +67,7 @@
             </fieldset>
         </form>
 
-        <div class="form-group">
+        @*<div class="form-group">
             <select id='toolbar'  class="form-control">
                 <option value=''>全部状态</option>
                 <option value='200'>有效</option>
@@ -71,7 +76,7 @@
                 <option value='210'>初步核对有效</option>
                 <option value='310'>已取消</option>
             </select>
-        </div>
+        </div>*@
 
         <div class="bootstrap-table">
             <table id="table"
@@ -89,10 +94,8 @@
 <script type="text/javascript">
 
     $(function() {
-        $("#today").on("click", { foo: new Date().format("yyyyMMdd") }, handler);
-        $("#yesterday").on("click", { foo: new Date().addDate(-1) }, handler);
-        $("#month").on("click", { foo: new Date().getFullYear() + new Date().getFullYear().getMonth }, handler);
-        $("#pmonth").on("click", { foo: new Date().addDate(-1) }, handler);
+      
+       
 
         $("form").on("submit", { query: UIHandler }, handler);
         $('#toolbar').on('change', { query: UIHHH }, handler);
@@ -120,20 +123,18 @@
         data.Stat_code = $("#toolbar  option:selected").val();
         return data;
     }
-    $('.form_date').datetimepicker({
-        format: 'yyyymmdd',
-        language: 'zh-CN',
-        autoclose: true,
-        weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        forceParse: 0
-    });
 
     $(document).ready(function () {
+        $("#STime").val(getNoOneDay(new Date()));
+        $("#ETime").val(new Date().format("yyyyMMdd")); 
+        
+        $('.date').datepicker({
+            format: 'yyyymmdd',
+            language: 'zh-CN',
+            clearBtn: true,
+            autoclose: true,
+        });
+
         $('#table').bootstrapTable({
             locale: 'zh-CN',
             cahce: false,
@@ -144,24 +145,12 @@
             dataType: "json",                       // 你希望服务端返回你的数据类型
             pagination: true,                       // 是否显示分页toolbar
             queryParamsType: 'limit',               // 设置为limit 则是restful 风格查询参数
+            queryParams:queryParams,
             singleSelect: false,                    // 单行选择
-            //  contentType: "application/x-www-form-urlencoded",
             pageSize: 10,
             pageNumber: 1,
-         //   search: true,                              //是否显示 搜索框
             searchAlign: 'right',
-         //   showColumns: true,                         //是否显示下拉框（选择显示的列）
-         //   sidePagination: "server",                  //定义服务端分页
-            //  queryParams: queryParams,
-            //minimunCountColumns: 2,
             responseHandler: responseHandler,
-            //  searchText:'',
-            //  multipleSearch: false,
-           // toolbar: '.form_date',
-           //  showFilter: true,
-
-           //  filterControl: true,
-           //  filterShowClear: true,
 
             columns: [
                 { field: 'GenerationTime', title: '时间', formatter: function (value) { return new Date(value).format('yyyy.MM.dd hh:mm:ss') } },
@@ -184,18 +173,32 @@
             ]
         });
 
-        var ss = $('#table').bootstrapTable('getOptions');
+        $("#today").on("click", function () {
+            $('.date').datepicker('update', Date.parse('today').format("yyyyMMdd"));
+        });
 
+        $("#yesterday").on("click", function () {
+            $("#STime").val(new Date().addDate(-1)); 
+            $("#ETime").val(new Date().addDate(-1)); 
+            //$('.date').datepicker('update', Date.parse('yesterday').format("yyyyMMdd"));
+        });
 
+        $("#month").on("click", function() {
+            $("#STime").val(getNoOneDay(new Date()));
+            $("#ETime").val(new Date().format("yyyyMMdd")); 
+        });
+
+        $("#pmonth").on("click", function() {
+            $("#STime").val(getNoOneDay(Date.today().last().month()));
+            $("#ETime").val(getLastDay(Date.today().last().month()));
+        });
     });
     function responseHandler(res) {
         if (res.IsOk) {
-            // var resultStr = $.parseJSON(res);
             return {
                 "rows": res.Result,
                 "total": res.Count
             };
-
         } else {
             return {
                 "rows": [],
@@ -203,53 +206,16 @@
             };
         }
     }
-
-    function ConvertEnum(value) {
-        
-    }
-
-    Date.prototype.format = function (format) {
-        var o = {
-            "M+": this.getMonth() + 1, //month
-            "d+": this.getDate(),    //day
-            "h+": this.getHours(),   //hour
-            "m+": this.getMinutes(), //minute
-            "s+": this.getSeconds(), //second
-            "q+": Math.floor((this.getMonth() + 3) / 3),  //quarter
-            "S": this.getMilliseconds() //millisecond
-        }
-        if (/(y+)/.test(format)) format = format.replace(RegExp.$1,
-        (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-        for (var k in o) if (new RegExp("(" + k + ")").test(format))
-            format = format.replace(RegExp.$1,
-                RegExp.$1.length == 1 ? o[k] :
-                ("00" + o[k]).substr(("" + o[k]).length));
-        return format;
-    }
-
-    Date.prototype.addDate = function(days) {
-        var d = this;
-        d.setDate(d.getDate() + days);
-        var month = d.getMonth() + 1;
-        var day = d.getDate();
-        if (month < 10) {
-            month = "0" + month;
-        }
-        if (day < 10) {
-            day = "0" + day;
-        }
-        var val = d.getFullYear() + "" + month + "" + day;
-        return val;
-    }
-
+    
     //传递的参数，已经是limit，params 是特地的5个【limit, offset, search, sort, order】属性组成的查询对象，你可以对查询对象进行属性操作，也可以不使用params对象，自己决定查询参数
     function queryParams(params) {
-        //return {
-        //    pageSize: params.limit,
-        //    pageNumber: params.pageNumber,
-        //};
-        params.pageSize = params.limit;
-        params.search = params.search;
+        params.STime =  $('#STime').val();
+        params.ETime = $('#ETime').val();
+
+        params.M_id = $('#M_id').val();
+        params.QueryType = $('#QueryType').val();
+        params.TypeValue = $('#TypeValue').val();
+        params.Stat = $('#Stat').val();
         return params;
     }
 

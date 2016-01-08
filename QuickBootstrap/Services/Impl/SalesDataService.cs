@@ -62,9 +62,21 @@ namespace QuickBootstrap.Services.Impl
         public PagedList<SalesData> GetSalesData(QueryParams queryParams)
         {
             var  data= DbContext.SalesData.AsQueryable();
-            if (queryParams.STime.HasValue && queryParams.ETime.HasValue)
+            if (queryParams.STime.HasValue && queryParams.ETime.HasValue )
             {
-                data = data.Where(x => x.Yyyymmdd >= queryParams.STime && x.Yyyymmdd<= queryParams.ETime );
+                if (queryParams.STime.Value != queryParams.ETime.Value)
+                    data = data.Where(x => x.Yyyymmdd >= queryParams.STime && x.Yyyymmdd<= queryParams.ETime );
+                else
+                    data = data.Where(x => x.Yyyymmdd == queryParams.STime );
+            }
+            if (queryParams.Stat.HasValue)
+            {
+                data = data.Where(x => x.Stat_code == queryParams.Stat);
+            }
+
+            if (!string.IsNullOrEmpty(queryParams.M_id))
+            {
+                data = data.Where(x => x.M_id == queryParams.M_id);
             }
             if (!string.IsNullOrEmpty(queryParams.TypeValue))
             {
