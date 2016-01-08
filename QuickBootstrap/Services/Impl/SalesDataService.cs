@@ -66,7 +66,7 @@ namespace QuickBootstrap.Services.Impl
             {
                 data = data.Where(x => x.Yyyymmdd.Equals(queryParams.SpecTime,StringComparison.InvariantCultureIgnoreCase));
             }
-            var query = data.OrderBy(o => o.Yyyymmdd).ThenBy(o => o.Hhmiss).ToPagedList(1, queryParams.Limit);
+            var query = data.OrderBy(o => o.Yyyymmdd).ThenBy(o => o.Hhmiss).ToPagedList(queryParams.Offset/queryParams.Limit+1, queryParams.Limit);
 
             return query;
         }

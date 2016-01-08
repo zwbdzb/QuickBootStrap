@@ -9,29 +9,41 @@
             <fieldset>
                 <legend>业务报表</legend>
                 <div class="form-group">
-                    <a class="col-sm-1 btn btn-default" id="today" href="#" role="button">今天</a>
-                    <a class="col-sm-1 btn btn-default" id="yesterday" href="#" role="button">昨天</a>
-                    <a class="col-sm-1 btn btn-default" id="month"  href="#" role="button">本月</a>
-                    <a class="col-sm-1 btn btn-default" id="pmonth"  href="#" role="button">上月</a>
+                    <a class="col-sm-1 btn btn-default" id="today"  role="button">今天</a>
+                    <a class="col-sm-1 btn btn-default" id="yesterday"  role="button">昨天</a>
+                    <a class="col-sm-1 btn btn-default" id="month"   role="button">本月</a>
+                    <a class="col-sm-1 btn btn-default" id="pmonth" role="button">上月</a>
 
-                    <div class="col-sm-4">
-                        <input class="form-control form_date" id="ds_username" type="text" placeholder="开始时间"/>
+                    <div  name='STime' class="input-group date form_date col-md-3" data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </span>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
                     </div>
-
-                    <div class="col-sm-4">
-                        <input class="form-control form_date" id="ds_password" type="text" placeholder="结束时间"/>
+                    <div name='ETime' class="input-group date form_date col-md-3" data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </span>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
                     </div>
+                    <div class="col-sm-2 "   ></div>
                 </div>
 
                 <div class="form-group">
 
                     <label class="col-sm-1 control-label" for="ds_host">广告主：</label>
                     <div class="col-sm-3">
-                        <input class="form-control" id="ds_host" type="text" placeholder=""/>
+                        <input name='M_id' class="form-control" id="ds_host" type="text" placeholder="" />
                     </div>
 
                     <div class="col-sm-2">
-                        <select id="disabledSelect" class="form-control">
+                        <select name='O_cd' id="disabledSelect" class="form-control">
                             <option>订单编号</option>
                             <option>商品编号</option>
                         </select>
@@ -51,6 +63,7 @@
                     </div>
                 </div>
 
+                
             </fieldset>
 
         </form>
@@ -68,14 +81,26 @@
         $("#yesterday").on("click", { foo: new Date().addDate(-1) }, handler);
         $("#month").on("click", { foo: new Date().getFullYear() + new Date().getFullYear().getMonth }, handler);
         $("#pmonth").on("click", { foo: new Date().addDate(-1) }, handler);
+        // $('form').submit(handler);
+
+        $("form").on("submit", function (event) {
+            event.preventDefault();
+            console.log($(this).serialize());
+        });
     });
 
     function handler(event) {
+        var ss = $('form').serialize();
         $('#table').bootstrapTable('refresh', {
             url: 'api/data/SalesData',
             query: { SpecTime: event.data.foo }
         });
+        return false;
     };
+
+    function UIHandler() {
+            
+    }
 
     $('.form_date').datetimepicker({
         format: 'yyyy-mm-dd',
@@ -95,7 +120,7 @@
             locale: 'zh-CN',
             cahce: false,
             method: 'get',                          // 远程获取数据的方式
-            url: "api/data/SalesData",
+            url: "/api/data/SalesData",
             height: $(window).height() - 20,         // 表格的高度
             striped: true,                          // 条纹状
             dataType: "json",                       // 你希望服务端返回你的数据类型
@@ -121,7 +146,7 @@
             //   filterShowClear: true,
 
             columns: [
-                { field: 'GenerationTime', title: '产生时间', formatter: function (value) { return new Date(value).format('yyyy.MM.dd hh:mm:ss') } },
+                { field: 'GenerationTime', title: '时间', formatter: function (value) { return new Date(value).format('yyyy.MM.dd hh:mm:ss') } },
                 { field: 'M_id', title: '广告主', width: 100, align: 'center', valign: 'middle', sortable: false },
                 { field: 'Affiliate_id', title: '网站编号', width: 100, align: 'center', valign: 'middle', sortable: false },
 
