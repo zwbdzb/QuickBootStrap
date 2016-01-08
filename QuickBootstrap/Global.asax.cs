@@ -44,6 +44,15 @@ namespace QuickBootstrap
             InitDataBase();
         }
 
+        protected void Application_End(object sender, EventArgs e)
+        {
+            JobScheduler.Stop();
+
+            var log = LogManager.GetLogger(typeof(MvcApplication));
+            log.Info(string.Format("{0}- website applicetion end ", DateTime.Now ));
+
+        }
+
         protected void Application_Error(object sender, EventArgs e)
         {
             JobScheduler.Stop();

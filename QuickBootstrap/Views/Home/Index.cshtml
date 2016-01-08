@@ -9,13 +9,13 @@
             <fieldset>
                 <legend>业务报表</legend>
                 <div class="form-group">
-                    <a class="col-sm-1 btn btn-default" id="today"  role="button">今天</a>
-                    <a class="col-sm-1 btn btn-default" id="yesterday"  role="button">昨天</a>
-                    <a class="col-sm-1 btn btn-default" id="month"   role="button">本月</a>
+                    <a class="col-sm-1 btn btn-default" id="today" role="button">今天</a>
+                    <a class="col-sm-1 btn btn-default" id="yesterday" role="button">昨天</a>
+                    <a class="col-sm-1 btn btn-default" id="month" role="button">本月</a>
                     <a class="col-sm-1 btn btn-default" id="pmonth" role="button">上月</a>
 
-                    <div  name='STime' class="input-group date form_date col-md-3" data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                        <input class="form-control" size="16" type="text" value="" readonly>
+                    <div class="input-group date form_date col-md-3" data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input name='STime' class="form-control" size="16" type="text" value="" readonly>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-remove"></span>
                         </span>
@@ -23,8 +23,8 @@
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>
-                    <div name='ETime' class="input-group date form_date col-md-3" data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                        <input class="form-control" size="16" type="text" value="" readonly>
+                    <div class="input-group date form_date col-md-3" data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input name='ETime' class="form-control" size="16" type="text" value="" readonly>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-remove"></span>
                         </span>
@@ -32,7 +32,7 @@
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>
-                    <div class="col-sm-2 "   ></div>
+                    <div class="col-sm-2 "></div>
                 </div>
 
                 <div class="form-group">
@@ -43,19 +43,18 @@
                     </div>
 
                     <div class="col-sm-2">
-                        <select name='O_cd' id="disabledSelect" class="form-control">
-                            <option>订单编号</option>
-                            <option>商品编号</option>
+                        <select name='QueryType' id="disabledSelect" class="form-control">
+                            <option value='O_cd'>订单编号</option>
+                            <option value='P_cd'>商品编号</option>
                         </select>
                     </div>
                     <div class="col-sm-2">
-                        <input class="form-control" type="text" placeholder=""/>
+                        <input name="TypeValue" class="form-control" type="text" placeholder="" />
                     </div>
 
                     <div class="col-sm-2">
                         <select id="disabledSelect" class="form-control">
                             <option>全部网址</option>
-                            <option>商品编号</option>
                         </select>
                     </div>
                     <div class="col-sm-2">
@@ -63,7 +62,7 @@
                     </div>
                 </div>
 
-                
+
             </fieldset>
 
         </form>

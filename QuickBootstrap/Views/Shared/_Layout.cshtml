@@ -28,15 +28,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-
                     @if (Request.Cookies[UserAuthorizationAttribute.CookieUserName] != null &&
                          !string.IsNullOrWhiteSpace(Request.Cookies[UserAuthorizationAttribute.CookieUserName].Value))
                     {
                         <li><a href="/UserManage">用户管理</a></li>
                     }
-
                 </ul>
-
                 @if (Request.Cookies[UserAuthorizationAttribute.CookieUserName] != null &&
                     !string.IsNullOrWhiteSpace(Request.Cookies[UserAuthorizationAttribute.CookieUserName].Value))
                 {
@@ -47,7 +44,6 @@
                         <li><a href="/Home/LoginOut">退出登录</a></li>
                     </ul>
                 }
-
             </div>
         </div>
     </div>

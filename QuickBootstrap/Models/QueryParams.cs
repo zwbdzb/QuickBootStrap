@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace QuickBootstrap.Models
 {
+    public enum QueryType
+    {
+        O_cd,
+        P_cd
+    }
+
     public  class QueryParams
     {
         public int Limit { get; set; }
@@ -19,8 +25,11 @@ namespace QuickBootstrap.Models
         public DateTime ETime { get; set; } // 搜素开始时间
 
         public string M_id { get; set; }    // 广告主
-        public string O_cd { get; set; }    // 订单编号
-        public string P_cd { get; set; }    // 商品编号
+
+        public string QueryType { get; set; }    // 查询类型
+        //public string O_cd { get; set; }    // 订单编号
+        //public string P_cd { get; set; }    // 商品编号
+        public string TypeValue { get; set; }
         
     }
 

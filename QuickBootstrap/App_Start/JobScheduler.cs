@@ -38,14 +38,14 @@ namespace QuickBootstrap.App_Start
                     //   .RepeatForever())
                     .Build();
 
-          //  scheduler.ScheduleJob(job, trigger);
+           // scheduler.ScheduleJob(job, trigger);
         }
 
         public static void Stop()
         {
             var scheduler = StdSchedulerFactory.GetDefaultScheduler();
             Debug.WriteLine("default Scheduler is:" + scheduler.SchedulerName);
-            scheduler.Shutdown(true);
+            scheduler.Shutdown(false);
         }
 
     }
