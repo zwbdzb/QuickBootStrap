@@ -28,18 +28,16 @@
             </div>
             <div class="navbar-collapse collapse" role="navigation">
                 <ul class="nav navbar-nav">
-
-                    <li class="dropdown" id="accountmenu">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="/report">业绩报表<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/report/Summary">查看报表</a></li>
-                            <li><a href="/report">CPS报表</a></li>
-                        </ul>
-                    </li>
-
                     @if (Request.Cookies[UserAuthorizationAttribute.CookieUserName] != null &&
                          !string.IsNullOrWhiteSpace(Request.Cookies[UserAuthorizationAttribute.CookieUserName].Value))
                     {
+                        <li class="dropdown" id="accountmenu">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="/report">业绩报表<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/report/Summary">查看报表</a></li>
+                                <li><a href="/report">CPS报表</a></li>
+                            </ul>
+                        </li>
                         <li><a href="/UserManage">用户管理</a></li>
                     }
                 </ul>
