@@ -337,8 +337,14 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\bootstrap-datepicker.js" />
+    <Content Include="Scripts\js\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\js\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\js\core.js" />
+    <Content Include="Scripts\js\date-zh-CN.js" />
+    <Content Include="Scripts\js\date.js" />
+    <Content Include="Scripts\js\extras.js" />
     <Content Include="Scripts\js\locales\bootstrap-datetimepicker.ar.js" />
     <Content Include="Scripts\js\locales\bootstrap-datetimepicker.bg.js" />
     <Content Include="Scripts\js\locales\bootstrap-datetimepicker.ca.js" />
@@ -382,6 +388,9 @@
     <Content Include="Scripts\js\locales\bootstrap-datetimepicker.uk.js" />
     <Content Include="Scripts\js\locales\bootstrap-datetimepicker.zh-CN.js" />
     <Content Include="Scripts\js\locales\bootstrap-datetimepicker.zh-TW.js" />
+    <Content Include="Scripts\js\parser.js" />
+    <Content Include="Scripts\js\sugarpak.js" />
+    <Content Include="Scripts\js\time.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
