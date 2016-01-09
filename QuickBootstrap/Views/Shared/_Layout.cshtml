@@ -16,7 +16,7 @@
 </head>
 <body>
 
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar navbar-inverse  navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,8 +26,10 @@
                 </button>
                 <a href="/" class="navbar-brand">管理后台</a>
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" role="navigation">
                 <ul class="nav navbar-nav">
+                    <li><a href="/report">业绩报表</a></li>
+
                     @if (Request.Cookies[UserAuthorizationAttribute.CookieUserName] != null &&
                          !string.IsNullOrWhiteSpace(Request.Cookies[UserAuthorizationAttribute.CookieUserName].Value))
                     {
@@ -48,7 +50,7 @@
         </div>
     </div>
 
-    <div class="container body-content">
+<div class="container body-content">
         <div style="min-height:650px;">
             @RenderBody()
         </div>

@@ -37,10 +37,13 @@ namespace QuickBootstrap.Extendsions
             return new MvcHtmlString(htmlResult.ToString());
         }
 
-        public static MvcHtmlString ToHtmlInputItem<T>(this HtmlHelper htmlHelper, T t) where T : class
+        public static MvcHtmlString ToHtmlInputItem<T>(this HtmlHelper htmlHelper, T t,string [] props = null) where T : class
         {
             var stringBuilder = new StringBuilder();
-            var properties = t.GetType().GetProperties();
+            var properties = t.GetType().GetProperties();       // 全部属性？我只允许显示指定的属性
+
+            if (props!= null &&  props.Any())
+                properties = properties.TakeWhile(x => props.Contains(x.Name)).ToArray();
 
             foreach (var propertyInfo in properties)
             {

@@ -1,0 +1,222 @@
+﻿@using QuickBootstrap.Entities
+@using QuickBootstrap.Extendsions
+@{
+    ViewBag.Title = "平台概况";
+}
+<div class="content">
+    <div class="container">
+        <form class="form-horizontal" role="form">
+            <fieldset>
+                <legend>业务报表</legend>
+                <div class="form-group">
+                    <a class="col-sm-1 btn btn-default" id="today" role="button">今天</a>
+                    <a class="col-sm-1 btn btn-default" id="yesterday" role="button">昨天</a>
+                    <a class="col-sm-1 btn btn-default" id="month" role="button">本月</a>
+                    <a class="col-sm-1 btn btn-default" id="pmonth" role="button">上月</a>
+
+                    <div class="input-group date col-md-3" data-date-format="yyyymmdd" data-date-end-date="0d">
+                        <input type="text" name='STime' id='STime' class="form-control" readonly>
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+
+                    <div class="input-group date col-md-3" data-date-format="yyyymmdd" data-date-end-date="0d">
+                        <input type="text" name='ETime' id='ETime' class="form-control" readonly>
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 "></div>
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="col-sm-1 control-label" for="ds_host">广告主：</label>
+                    <div class="col-sm-3">
+                        <input name='M_id' id='M_id' class="form-control" id="ds_host" type="text" placeholder="" />
+                    </div>
+
+                    <div class="col-sm-2">
+                        <select name='QueryType' id="QueryType" class="form-control">
+                            <option value='O_cd'>订单编号</option>
+                            <option value='P_cd'>商品编号</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <input name="TypeValue" id="TypeValue"  class="form-control" type="text" placeholder="" />
+                    </div>
+
+                    <div class="col-sm-2">
+                            <select  class="form-control" name="Stat" id='Stat'>
+                                <option value=''>全部状态</option>
+                                <option value=200>有效</option>
+                                <option value=300>无效</option>
+                                <option value=100>未确认</option>
+                                <option value=210>初步核对有效</option>
+                                <option value=310>已取消</option>
+                            </select>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary">查询</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+        @*<div class="form-group">
+            <select id='toolbar'  class="form-control">
+                <option value=''>全部状态</option>
+                <option value='200'>有效</option>
+                <option value='300'>无效</option>
+                <option value='100'>未确认</option>
+                <option value='210'>初步核对有效</option>
+                <option value='310'>已取消</option>
+            </select>
+        </div>*@
+
+        <div class="bootstrap-table">
+            <table id="table"
+                   data-toolbar='#toolbar'
+                   data-show-refresh="true"
+                   data-show-columns="true"
+                   data-show-toggle="true"
+                   data-side-pagination="server"
+                   data-pagination="true"
+                   data-page-list="[10, 25, 50, 100]"></table>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function() {
+      
+       
+
+        $("form").on("submit", { query: UIHandler }, handler);
+        $('#toolbar').on('change', { query: UIHHH }, handler);
+    });
+
+    // 通用 refresh
+    function handler(event) {
+        $('#table').bootstrapTable('refresh', {
+            silent: true,
+            url: 'api/data/SalesData',
+            query: event.data.query()               // query  是js对象
+        });
+        return false;
+    };
+
+    function UIHandler() {
+        var data = {};
+        $("form").serializeArray().map(function (x) { data[x.name] = x.value; });
+        return data;
+    }
+
+
+    function UIHHH() {
+        var data = {};
+        data.Stat_code = $("#toolbar  option:selected").val();
+        return data;
+    }
+
+    $(document).ready(function () {
+        $("#STime").val(getNoOneDay(new Date()));
+        $("#ETime").val(new Date().format("yyyyMMdd")); 
+        
+        $('.date').datepicker({
+            format: 'yyyymmdd',
+            language: 'zh-CN',
+            clearBtn: true,
+            autoclose: true,
+        });
+
+        $('#table').bootstrapTable({
+            locale: 'zh-CN',
+            cahce: false,
+            method: 'get',                          // 远程获取数据的方式
+            url: "/api/data/SalesData",
+            height: $(window).height() - 20,         // 表格的高度
+            striped: true,                          // 条纹状
+            dataType: "json",                       // 你希望服务端返回你的数据类型
+            pagination: true,                       // 是否显示分页toolbar
+            queryParamsType: 'limit',               // 设置为limit 则是restful 风格查询参数
+            queryParams:queryParams,
+            singleSelect: false,                    // 单行选择
+            pageSize: 10,
+            pageNumber: 1,
+            searchAlign: 'right',
+            responseHandler: responseHandler,
+
+            columns: [
+                { field: 'GenerationTime', title: '时间', formatter: function (value) { return new Date(value).format('yyyy.MM.dd hh:mm:ss') } },
+                { field: 'M_id', title: '广告主', filterControl: 'select', width: 100, align: 'left', valign: 'middle', sortable: false },
+                { field: 'Affiliate_id', title: '网站编号', width: 100, align: 'center', valign: 'middle', sortable: false },
+
+                { field: 'O_cd', title: '订单号', width: 100, align: 'left', valign: 'middle', sortable: false },
+                { field: 'P_cd', title: '商品编号', width: 100, align: 'left', valign: 'middle', sortable: false },
+                { field: 'C_cd', title: '分类', width: 100, align: 'left', valign: 'middle', sortable: false },
+                { field: 'It_cnt', title: '个数', width: 100, align: 'center', valign: 'middle', sortable: false },
+                { field: 'Price', title: '单价', width: 100, align: 'center', valign: 'middle', sortable: false },
+                { field: 'Sales', title: '销售额', width: 100, align: 'center', valign: 'middle', sortable: false },
+
+                { field: 'Comm', title: '佣金', width: 100, align: 'center', valign: 'middle', sortable: false },
+
+                { field: 'Stat_code', title: '业绩状态码', visible:false },
+                { field: 'Stat_desc', title: '业绩状态', filterControl: 'select', width: 100, align: 'left', valign: 'middle', sortable: false },
+                { field: 'U_id', title: 'U_ID', width: 100, align: 'center', valign: 'middle', sortable: false },
+                { field: 'Bill_yyyymmdd', title: '结算时间', width: 100, align: 'center', valign: 'middle', sortable: false },
+            ]
+        });
+
+        $("#today").on("click", function () {
+            $('.date').datepicker('update', Date.parse('today').format("yyyyMMdd"));
+        });
+
+        $("#yesterday").on("click", function () {
+            $("#STime").val(new Date().addDate(-1)); 
+            $("#ETime").val(new Date().addDate(-1)); 
+            //$('.date').datepicker('update', Date.parse('yesterday').format("yyyyMMdd"));
+        });
+
+        $("#month").on("click", function() {
+            $("#STime").val(getNoOneDay(new Date()));
+            $("#ETime").val(new Date().format("yyyyMMdd")); 
+        });
+
+        $("#pmonth").on("click", function() {
+            $("#STime").val(getNoOneDay(Date.today().last().month()));
+            $("#ETime").val(getLastDay(Date.today().last().month()));
+        });
+    });
+    function responseHandler(res) {
+        if (res.IsOk) {
+            return {
+                "rows": res.Result,
+                "total": res.Count
+            };
+        } else {
+            return {
+                "rows": [],
+                "total": 0
+            };
+        }
+    }
+    
+    //传递的参数，已经是limit，params 是特地的5个【limit, offset, search, sort, order】属性组成的查询对象，你可以对查询对象进行属性操作，也可以不使用params对象，自己决定查询参数
+    function queryParams(params) {
+        params.STime =  $('#STime').val();
+        params.ETime = $('#ETime').val();
+
+        params.M_id = $('#M_id').val();
+        params.QueryType = $('#QueryType').val();
+        params.TypeValue = $('#TypeValue').val();
+        params.Stat = $('#Stat').val();
+        return params;
+    }
+
+</script>

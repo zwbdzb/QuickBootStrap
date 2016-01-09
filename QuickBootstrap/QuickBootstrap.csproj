@@ -197,6 +197,7 @@
     <Compile Include="Cache\EnyimMemcachedContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\UserManageController.cs" />
     <Compile Include="Controllers\WebAPI\SalesDataController.cs" />
     <Compile Include="Entities\InitData.cs" />
@@ -228,6 +229,7 @@
     <Compile Include="Models\SaleDataRequest.cs" />
     <Compile Include="Models\UserCreateRequest.cs" />
     <Compile Include="Models\UserManageChangePassword.cs" />
+    <Compile Include="Models\WebSiteConfig.cs" />
     <Compile Include="Mvc\JsonApiController.cs" />
     <Compile Include="Mvc\JsonApiResult.cs" />
     <Compile Include="Mvc\JsonController.cs" />
@@ -387,7 +389,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_PartialTongJiCode.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
@@ -398,6 +400,7 @@
     <Content Include="Views\Profile\ChangePassword.cshtml" />
     <Content Include="Views\Profile\Shared\_QuickMenu.cshtml" />
     <Content Include="Views\Shared\_PartialPagingInfo.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
