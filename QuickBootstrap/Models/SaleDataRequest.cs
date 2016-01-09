@@ -27,4 +27,16 @@ namespace QuickBootstrap.Models
 
         public string C_cd { get; set; }
     }
+
+
+    public class SalesReport
+    {
+        public dynamic  Sort { get; set; }
+        public int OrderCount { get; set; }
+        public int ValidOrderCount { get; set; }
+        public decimal SalesTotal { get; set; }
+        public decimal ValidSalesTotal { get; set; }
+        public decimal CommTotal { get; set; }
+        public decimal ValidCommTotal { get; set; }
+    }
 }

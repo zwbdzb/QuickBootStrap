@@ -30,7 +30,7 @@ namespace QuickBootstrap.Profiles
                 .ForMember(dest => dest.GenerationTime, opt => opt.MapFrom(src => src.Order_time))
                 .ForMember(dest => dest.O_cd, opt => opt.MapFrom(src => src.Order_code))
                 .ForMember(dest => dest.M_id, opt => opt.MapFrom(src => src.Merchant_id))
-                .ForMember(dest => dest.Comm, opt => opt.MapFrom(src => src.Commission))
+                .ForMember(dest => dest.Commission, opt => opt.MapFrom(src => src.Commission))
 
                 .ForMember(dest => dest.Yyyymmdd, opt => opt.MapFrom(src => src.Order_time.Split(' ')[0]))
                 .ForMember(dest => dest.Hhmiss, opt => opt.MapFrom(src => src.Order_time.Split(' ')[1]))

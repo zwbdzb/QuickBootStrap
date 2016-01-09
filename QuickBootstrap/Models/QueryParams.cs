@@ -6,20 +6,25 @@ using System.Threading.Tasks;
 
 namespace QuickBootstrap.Models
 {
-    public enum QueryType
-    {
-        O_cd,
-        P_cd
-    }
 
-    public  class QueryParams
+
+    public class QueryParams
     {
         public int Limit { get; set; }
         public int Offset { get; set; }
         public string Search { get; set; }
-        public string Sort { get; set; }
-        public string Order { get; set; }
+        public string Sort { get; set; }                // 分类
+        public string Order { get; set; }               // 排序
 
+        public QueryParams()
+        {
+            Sort = "Yyyymmdd";
+            Order = "desc";
+        }
+    }
+
+    public  class QueryParams1:QueryParams
+    {
         public int? STime { get; set; }         // 搜素开始时间
         public int? ETime { get; set; }         // 搜素开始时间
 
@@ -30,7 +35,18 @@ namespace QuickBootstrap.Models
         public string TypeValue { get; set; }
 
         public int?  Stat { get; set; }
-        
+    }
+
+    public class QueryParams2 : QueryParams
+    {
+        public int? STime { get; set; }         // 搜素开始时间
+        public int? ETime { get; set; }         // 搜素开始时间
+
+        public string M_id { get; set; }            // 广告主
+
+        public string WebSite { get; set; }
+
+        public int? Stat { get; set; }
     }
 
     public class RespResult<T>

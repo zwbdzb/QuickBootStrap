@@ -78,7 +78,7 @@ namespace QuickBootstrap.Entities
         [Column("Sales", TypeName = "Money")]
         public decimal Sales { get; set; }
 
-        // 佣金
+        // 传输的佣金
         [Column("Commission", TypeName = "Money")]
         public decimal Commission { get; set; }
 

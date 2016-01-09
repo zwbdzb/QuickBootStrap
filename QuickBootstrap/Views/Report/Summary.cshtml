@@ -1,13 +1,13 @@
-﻿@using QuickBootstrap.Entities
-@using QuickBootstrap.Extendsions
+﻿
 @{
-    ViewBag.Title = "详细报表";
+    ViewBag.Title = "汇总视图";
 }
+
 <div class="content">
     <div class="container">
         <form class="form-horizontal" role="form">
             <fieldset>
-                <legend>CPS报表</legend>
+                <legend>查看报表</legend>
                 <div class="form-group">
                     <a class="col-sm-1 btn btn-default" id="today" role="button">今天</a>
                     <a class="col-sm-1 btn btn-default" id="yesterday" role="button">昨天</a>
@@ -32,7 +32,7 @@
                 </div>
 
 
-                <div class="form-group">
+                <div class="form-group"  >
 
                     <label class="col-sm-1 control-label" for="ds_host">广告主：</label>
                     <div class="col-sm-3">
@@ -40,53 +40,57 @@
                     </div>
 
                     <div class="col-sm-2">
-                        <select name='QueryType' id="QueryType" class="form-control">
-                            <option value='O_cd'>订单编号</option>
-                            <option value='P_cd'>商品编号</option>
+                        <select name='Website' id="Website" class="form-control">
+                            <option value=''>全部网址</option>
+                            <option value='A100217567'>某网站</option>
+                            <option value='A100217567'>某网站</option>
                         </select>
                     </div>
-                    <div class="col-sm-2">
-                        <input name="TypeValue" id="TypeValue"  class="form-control" type="text" placeholder="" />
-                    </div>
 
-                    <div class="col-sm-2">
-                            <select  class="form-control" name="Stat" id='Stat'>
-                                <option value=''>全部状态</option>
-                                <option value=200>有效</option>
-                                <option value=300>无效</option>
-                                <option value=100>未确认</option>
-                                <option value=210>初步核对有效</option>
-                                <option value=310>已取消</option>
-                            </select>
-                    </div>
-
-                    <div class="col-sm-2">
+                    <div class="col-sm-1">
                         <button type="submit" class="btn btn-primary">查询</button>
                     </div>
                 </div>
             </fieldset>
         </form>
 
-        @*<div class="form-group">
-            <select id='toolbar'  class="form-control">
-                <option value=''>全部状态</option>
-                <option value='200'>有效</option>
-                <option value='300'>无效</option>
-                <option value='100'>未确认</option>
-                <option value='210'>初步核对有效</option>
-                <option value='310'>已取消</option>
+        <div id="toolbar">
+            <select class="form-control" name="Sort" id='Sort'>
+                <option value='Yyyymmdd'>按天分组查看</option>
+                <option value='M_id'>按广告主查看</option>
+                <option value='Affiliate_id'>按网站分组查看</option>
             </select>
-        </div>*@
+        </div>
+
 
         <div class="bootstrap-table">
             <table id="table"
-                   @*data-toolbar='#toolbar'*@
+                   data-toolbar='#toolbar'
                    data-show-refresh="true"
                    data-show-columns="true"
                    data-show-toggle="true"
+                   data-show-multi-sort="true"
+                   data-sort-priority='[{"sortName": "Sort","sortOrder":"asc"},{"sortName":"ValidSalesTotal","sortOrder":"desc"},{"sortName": "ValidCommTotal","sortOrder":"desc"}]'
                    data-side-pagination="server"
                    data-pagination="true"
-                   data-page-list="[10, 25, 50, 100]"></table>
+                   data-page-list="[10, 25, 50, 100]"
+                   data-url="/api/data/SalesReport">
+                <thead>
+                    <tr>
+                        <th data-field="Sort" rowspan="2" data-halign="center" data-align="center">分组</th>
+                        <th colspan="6" data-halign="center" data-align="left">CPS销售（<a href="/report">cps明细报表</a>）</th>
+                    </tr>
+                    <tr>
+                        <th data-field="OrderCount" data-sortable="true" data-halign="center" data-align="left" data-filter-control="input">全部订单数</th>
+                        <th data-field="ValidOrderCount" data-sortable="true" data-halign="center" data-align="left" data-filter-control="input">有效订单数</th>
+                        <th data-field="SalesTotal" data-sortable="true" data-halign="center" data-align="left" data-filter-control="input">全部订单额</th>
+                        <th data-field="ValidSalesTotal" data-halign="center" data-align="left" data-filter-control="input">有效订单额</th>
+                        <th data-field="CommTotal" data-sortable="true" data-halign="center" data-align="left" data-filter-control="input">全部佣金</th>
+                        <th data-field="ValidCommTotal" data-sortable="true" data-halign="center" data-align="left" data-filter-control="input">有效佣金</th>
+                    </tr>
+                </thead>
+
+            </table>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -94,9 +98,6 @@
 <script type="text/javascript">
 
     $(function() {
-      
-       
-
         $("form").on("submit", { query: UIHandler }, handler);
         $('#toolbar').on('change', { query: UIHHH }, handler);
     });
@@ -105,7 +106,7 @@
     function handler(event) {
         $('#table').bootstrapTable('refresh', {
             silent: true,
-            url: '/api/data/SalesData',
+            url: '/api/data/SalesReport',
             query: event.data.query()               // query  是js对象
         });
         return false;
@@ -120,14 +121,14 @@
 
     function UIHHH() {
         var data = {};
-        data.Stat_code = $("#toolbar  option:selected").val();
+        data.Sort = $("#toolbar  option:selected").val();
         return data;
     }
 
     $(document).ready(function () {
         $("#STime").val(getNoOneDay(new Date()));
-        $("#ETime").val(new Date().format("yyyyMMdd")); 
-        
+        $("#ETime").val(new Date().format("yyyyMMdd"));
+
         $('.date').datepicker({
             format: 'yyyymmdd',
             language: 'zh-CN',
@@ -139,8 +140,7 @@
             locale: 'zh-CN',
             cahce: false,
             method: 'get',                          // 远程获取数据的方式
-            url: "/api/data/SalesData",
-            height: $(window).height() - 20,         // 表格的高度
+            height: $(window).height() - 20,        // 表格的高度
             striped: true,                          // 条纹状
             dataType: "json",                       // 你希望服务端返回你的数据类型
             pagination: true,                       // 是否显示分页toolbar
@@ -151,26 +151,6 @@
             pageNumber: 1,
             searchAlign: 'right',
             responseHandler: responseHandler,
-
-            columns: [
-                { field: 'GenerationTime', title: '时间', formatter: function (value) { return new Date(value).format('yyyy.MM.dd hh:mm:ss') } },
-                { field: 'M_id', title: '广告主', filterControl: 'select', width: 100, align: 'left', valign: 'middle', sortable: false },
-                { field: 'Affiliate_id', title: '网站编号', width: 100, align: 'center', valign: 'middle', sortable: false },
-
-                { field: 'O_cd', title: '订单号', width: 100, align: 'left', valign: 'middle', sortable: false },
-                { field: 'P_cd', title: '商品编号', width: 100, align: 'left', valign: 'middle', sortable: false },
-                { field: 'C_cd', title: '分类', width: 100, align: 'left', valign: 'middle', sortable: false },
-                { field: 'It_cnt', title: '个数', width: 100, align: 'center', valign: 'middle', sortable: false },
-                { field: 'Price', title: '单价', width: 100, align: 'center', valign: 'middle', sortable: false },
-                { field: 'Sales', title: '销售额', width: 100, align: 'center', valign: 'middle', sortable: false },
-
-                { field: 'Comm', title: '佣金', width: 100, align: 'center', valign: 'middle', sortable: false },
-
-                { field: 'Stat_code', title: '业绩状态码', visible:false },
-                { field: 'Stat_desc', title: '业绩状态', filterControl: 'select', width: 100, align: 'left', valign: 'middle', sortable: false },
-                { field: 'U_id', title: 'U_ID', width: 100, align: 'center', valign: 'middle', sortable: false },
-                { field: 'Bill_yyyymmdd', title: '结算时间', width: 100, align: 'center', valign: 'middle', sortable: false },
-            ]
         });
 
         $("#today").on("click", function () {
@@ -178,14 +158,14 @@
         });
 
         $("#yesterday").on("click", function () {
-            $("#STime").val(new Date().addDate(-1)); 
-            $("#ETime").val(new Date().addDate(-1)); 
+            $("#STime").val(new Date().addDate(-1));
+            $("#ETime").val(new Date().addDate(-1));
             //$('.date').datepicker('update', Date.parse('yesterday').format("yyyyMMdd"));
         });
 
         $("#month").on("click", function() {
             $("#STime").val(getNoOneDay(new Date()));
-            $("#ETime").val(new Date().format("yyyyMMdd")); 
+            $("#ETime").val(new Date().format("yyyyMMdd"));
         });
 
         $("#pmonth").on("click", function() {
@@ -206,17 +186,16 @@
             };
         }
     }
-    
+
     //传递的参数，已经是limit，params 是特地的5个【limit, offset, search, sort, order】属性组成的查询对象，你可以对查询对象进行属性操作，也可以不使用params对象，自己决定查询参数
     function queryParams(params) {
         params.STime =  $('#STime').val();
         params.ETime = $('#ETime').val();
 
         params.M_id = $('#M_id').val();
-        params.QueryType = $('#QueryType').val();
-        params.TypeValue = $('#TypeValue').val();
-        params.Stat = $('#Stat').val();
+        params.Website = $('#Website').val();
         return params;
     }
 
 </script>
+

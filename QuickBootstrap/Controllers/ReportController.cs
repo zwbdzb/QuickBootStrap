@@ -13,5 +13,10 @@ namespace QuickBootstrap.Controllers
         {
             return View();
         }
+
+        public ActionResult Summary()
+        {
+            return View();
+        }
     }
 }

@@ -29,6 +29,7 @@ namespace QuickBootstrap
                       "~/Scripts/extensions/toolbar/bootstrap-table-*",
                       "~/Scripts/extensions/filter-control/bootstrap-table-*",
                       "~/Scripts/extensions/multiple-search/bootstrap-table-*",
+                      "~/Scripts/extensions/multiple-sort/bootstrap-table-multiple-sort.js",
 
                       // bootstrap datepicker
                       "~/Scripts/js/bootstrap-datepicker.js",

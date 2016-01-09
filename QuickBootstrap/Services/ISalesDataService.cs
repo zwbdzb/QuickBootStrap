@@ -15,6 +15,8 @@ namespace QuickBootstrap.Services
 
         bool UpdateSalesData(Func<SalesData, bool> whereExp, Action<SalesData> setValue, OrderData data);
 
-        PagedList<SalesData> GetSalesData(QueryParams  queryParams);
+        PagedList<SalesData> GetSalesData(QueryParams1  queryParams);
+
+        PagedList<SalesReport> GetSalesReport(QueryParams2 queryParams);
     }
 }

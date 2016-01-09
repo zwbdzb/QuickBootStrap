@@ -38,7 +38,7 @@ namespace QuickBootstrap.App_Start
                     //   .RepeatForever())
                     .Build();
 
-            scheduler.ScheduleJob(job, trigger);
+           // scheduler.ScheduleJob(job, trigger);
         }
 
         public static void Stop()

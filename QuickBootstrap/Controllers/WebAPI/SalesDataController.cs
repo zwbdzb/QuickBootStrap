@@ -37,13 +37,27 @@ namespace QuickBootstrap.Controllers.WebAPI
 
         [HttpGet]
         [Route("~/api/data/SalesData", Name = "GetSalesData")]
-        public IHttpActionResult GetSalesData([FromUri]QueryParams queryParams)
+        public IHttpActionResult GetSalesData([FromUri]QueryParams1 queryParams)
         {
             var  data = _salesDataService.GetSalesData(queryParams);
             return Json(new RespResult<SalesData>
             {
                 IsOk=1,
-                Count= data.PageCount,
+                Count = data.TotalCount,
+                Result = data
+            });
+        }
+
+
+        [HttpGet]
+        [Route("~/api/data/SalesReport", Name = "GetSalesReport")]
+        public IHttpActionResult GetSalesReport([FromUri]QueryParams2 queryParams)
+        {
+            var data = _salesDataService.GetSalesReport(queryParams);
+            return Json(new RespResult<SalesReport>
+            {
+                IsOk = 1,
+                Count = data.TotalCount,
                 Result = data
             });
         }
