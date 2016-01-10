@@ -25,7 +25,7 @@ namespace QuickBootstrap.App_Start
                   (s =>
                      s.WithIntervalInHours(24)
                     .OnEveryDay()
-                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(3, 0))
+                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(9, 6))
                   )
                 .Build();
 

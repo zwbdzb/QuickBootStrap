@@ -3,81 +3,75 @@
 @{
     ViewBag.Title = "详细报表";
 }
+
 <div class="content">
     <div class="container">
         <form class="form-horizontal" role="form">
             <fieldset>
                 <legend>CPS报表</legend>
-                <div class="form-group">
-                    <a class="col-sm-1 btn btn-default" id="today" role="button">今天</a>
-                    <a class="col-sm-1 btn btn-default" id="yesterday" role="button">昨天</a>
-                    <a class="col-sm-1 btn btn-default" id="month" role="button">本月</a>
-                    <a class="col-sm-1 btn btn-default" id="pmonth" role="button">上月</a>
+                
+                <div class="form-group form-inline">
+                    <a class="col-md-1 btn btn-default" id="today" role="button">今天</a>
+                    <a class="col-md-1 btn btn-default" id="yesterday" role="button">昨天</a>
+                    <a class="col-md-1 btn btn-default" id="month" role="button">本月</a>
+                    <a class="col-md-1 btn btn-default" id="pmonth" role="button">上月</a>
 
-                    <div class="input-group date col-md-3" data-date-format="yyyymmdd" data-date-end-date="0d">
+                    <div class="input-group  col-sm-1 "></div>
+
+                    <div class="input-group date col-md-2" data-date-format="yyyymmdd" data-date-end-date="0d">
                         <input type="text" name='STime' id='STime' class="form-control" readonly>
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-th"></span>
                         </div>
                     </div>
-
-                    <div class="input-group date col-md-3" data-date-format="yyyymmdd" data-date-end-date="0d">
+                    
+                    <div class="input-group  date col-md-2" data-date-format="yyyymmdd" data-date-end-date="0d">
                         <input type="text" name='ETime' id='ETime' class="form-control" readonly>
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-th"></span>
                         </div>
                     </div>
-
-                    <div class="col-sm-2 "></div>
+                    <div class="input-group  col-md-3 "></div>
+                    
                 </div>
 
 
                 <div class="form-group">
 
-                    <label class="col-sm-1 control-label" for="ds_host">广告主：</label>
-                    <div class="col-sm-3">
+                    <label class="col-md-1 control-label" for="ds_host">广告主：</label>
+                    <div class="col-md-2">
                         <input name='M_id' id='M_id' class="form-control" id="ds_host" type="text" placeholder="" />
                     </div>
 
-                    <div class="col-sm-2">
+                    <div class="col-md-2">
                         <select name='QueryType' id="QueryType" class="form-control">
                             <option value='O_cd'>订单编号</option>
                             <option value='P_cd'>商品编号</option>
                         </select>
                     </div>
-                    <div class="col-sm-2">
-                        <input name="TypeValue" id="TypeValue"  class="form-control" type="text" placeholder="" />
+                    <div class="col-md-2">
+                        <input name="TypeValue" id="TypeValue" class="form-control" type="text" placeholder="" />
                     </div>
 
-                    <div class="col-sm-2">
-                            <select  class="form-control" name="Stat" id='Stat'>
-                                <option value=''>全部状态</option>
-                                <option value=200>有效</option>
-                                <option value=300>无效</option>
-                                <option value=100>未确认</option>
-                                <option value=210>初步核对有效</option>
-                                <option value=310>已取消</option>
-                            </select>
+                    <div class="col-md-2">
+                        <select class="form-control" name="Stat" id='Stat'>
+                            <option value=''>全部状态</option>
+                            <option value=200>有效</option>
+                            <option value=300>无效</option>
+                            <option value=100>未确认</option>
+                            <option value=210>初步核对有效</option>
+                            <option value=310>已取消</option>
+                        </select>
                     </div>
 
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <button type="submit" class="btn btn-primary">查询</button>
                     </div>
                 </div>
             </fieldset>
         </form>
 
-        @*<div class="form-group">
-            <select id='toolbar'  class="form-control">
-                <option value=''>全部状态</option>
-                <option value='200'>有效</option>
-                <option value='300'>无效</option>
-                <option value='100'>未确认</option>
-                <option value='210'>初步核对有效</option>
-                <option value='310'>已取消</option>
-            </select>
-        </div>*@
-
+       
         <div class="bootstrap-table">
             <table id="table"
                    @*data-toolbar='#toolbar'*@
@@ -94,9 +88,6 @@
 <script type="text/javascript">
 
     $(function() {
-      
-       
-
         $("form").on("submit", { query: UIHandler }, handler);
         $('#toolbar').on('change', { query: UIHHH }, handler);
     });
@@ -124,6 +115,7 @@
         return data;
     }
 
+  
     $(document).ready(function () {
         $("#STime").val(getNoOneDay(new Date()));
         $("#ETime").val(new Date().format("yyyyMMdd")); 
@@ -140,7 +132,7 @@
             cahce: false,
             method: 'get',                          // 远程获取数据的方式
             url: "/api/data/SalesData",
-            height: $(window).height() - 20,         // 表格的高度
+            height: $(window).height() - 50,         // 表格的高度
             striped: true,                          // 条纹状
             dataType: "json",                       // 你希望服务端返回你的数据类型
             pagination: true,                       // 是否显示分页toolbar
@@ -153,7 +145,7 @@
             responseHandler: responseHandler,
 
             columns: [
-                { field: 'GenerationTime', title: '时间', formatter: function (value) { return new Date(value).format('yyyy.MM.dd hh:mm:ss') } },
+                { field: 'GenerationTime', title: '时间', class: 'text-nowrap', align: 'left', valign: 'middle', formatter: function (value) { return new Date(value).format('yyyyMMdd hh:mm:ss') } },
                 { field: 'M_id', title: '广告主', filterControl: 'select', width: 100, align: 'left', valign: 'middle', sortable: false },
                 { field: 'Affiliate_id', title: '网站编号', width: 100, align: 'center', valign: 'middle', sortable: false },
 
@@ -161,15 +153,21 @@
                 { field: 'P_cd', title: '商品编号', width: 100, align: 'left', valign: 'middle', sortable: false },
                 { field: 'C_cd', title: '分类', width: 100, align: 'left', valign: 'middle', sortable: false },
                 { field: 'It_cnt', title: '个数', width: 100, align: 'center', valign: 'middle', sortable: false },
-                { field: 'Price', title: '单价', width: 100, align: 'center', valign: 'middle', sortable: false },
-                { field: 'Sales', title: '销售额', width: 100, align: 'center', valign: 'middle', sortable: false },
+                { field: 'Price', title: '单价(￥)', width: 100, align: 'center', valign: 'middle', sortable: false },
+                { field: 'Sales', title: '销售额(￥)', width: 100, align: 'center', valign: 'middle', sortable: false },
 
-                { field: 'Comm', title: '佣金', width: 100, align: 'center', valign: 'middle', sortable: false },
+                { field: 'Commission', title: '佣金(￥)', width: 100, align: 'center', valign: 'middle', sortable: false },
 
                 { field: 'Stat_code', title: '业绩状态码', visible:false },
                 { field: 'Stat_desc', title: '业绩状态', filterControl: 'select', width: 100, align: 'left', valign: 'middle', sortable: false },
                 { field: 'U_id', title: 'U_ID', width: 100, align: 'center', valign: 'middle', sortable: false },
                 { field: 'Bill_yyyymmdd', title: '结算时间', width: 100, align: 'center', valign: 'middle', sortable: false },
+
+                //{ field: 'Stat_code', title: '业绩状态码', visible: false },
+                //{ field: 'Stat_desc', title: '业绩状态', filterControl: 'select', width: 100, align: 'left', valign: 'middle', sortable: false },
+                //{ field: 'U_id', title: 'U_ID', width: 100, align: 'center', valign: 'middle', sortable: false },
+                //{ field: 'Bill_yyyymmdd', title: '结算时间', width: 100, align: 'center', valign: 'middle', sortable: false },
+
             ]
         });
 

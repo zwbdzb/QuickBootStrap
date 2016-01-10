@@ -8,44 +8,47 @@
         <form class="form-horizontal" role="form">
             <fieldset>
                 <legend>查看报表</legend>
-                <div class="form-group">
+                <div class="form-group form-inline">
                     <a class="col-sm-1 btn btn-default" id="today" role="button">今天</a>
                     <a class="col-sm-1 btn btn-default" id="yesterday" role="button">昨天</a>
                     <a class="col-sm-1 btn btn-default" id="month" role="button">本月</a>
                     <a class="col-sm-1 btn btn-default" id="pmonth" role="button">上月</a>
 
-                    <div class="input-group date col-md-3" data-date-format="yyyymmdd" data-date-end-date="0d">
+                    <div class="input-group  col-sm-1 "></div>
+
+                    <div class="input-group date col-md-2" data-date-format="yyyymmdd" data-date-end-date="0d">
                         <input type="text" name='STime' id='STime' class="form-control" readonly>
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-th"></span>
                         </div>
                     </div>
 
-                    <div class="input-group date col-md-3" data-date-format="yyyymmdd" data-date-end-date="0d">
+                    <div class="input-group date col-md-2" data-date-format="yyyymmdd" data-date-end-date="0d">
                         <input type="text" name='ETime' id='ETime' class="form-control" readonly>
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-th"></span>
                         </div>
                     </div>
 
-                    <div class="col-sm-2 "></div>
+                    <div class="col-sm-3 "></div>
                 </div>
 
 
                 <div class="form-group"  >
 
                     <label class="col-sm-1 control-label" for="ds_host">广告主：</label>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <input name='M_id' id='M_id' class="form-control" id="ds_host" type="text" placeholder="" />
                     </div>
 
                     <div class="col-sm-2">
                         <select name='Website' id="Website" class="form-control">
                             <option value=''>全部网址</option>
-                            <option value='A100217567'>某网站</option>
-                            <option value='A100217567'>某网站</option>
+                            <option value='A100217567'>A100217567</option>
                         </select>
                     </div>
+
+                    <div class="col-md-4"></div>
 
                     <div class="col-sm-1">
                         <button type="submit" class="btn btn-primary">查询</button>
@@ -77,7 +80,7 @@
                    data-url="/api/data/SalesReport">
                 <thead>
                     <tr>
-                        <th data-field="Sort" rowspan="2" data-halign="center" data-align="center">分组</th>
+                        <th data-field="Sort" rowspan="2" data-class="text-nowrap" data-halign="center" data-align="left">分组</th>
                         <th colspan="6" data-halign="center" data-align="left">CPS销售（<a href="/report">cps明细报表</a>）</th>
                     </tr>
                     <tr>

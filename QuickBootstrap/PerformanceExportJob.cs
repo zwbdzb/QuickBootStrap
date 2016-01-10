@@ -52,7 +52,7 @@ namespace QuickBootstrap
         // 每天执行90次，每次分别执行 -120 天到-90 天的业绩数据
         public void Execute(IJobExecutionContext context)
         {
-            Debug.WriteLine(DateTime.Now+"作业开始执行");
+            log.Info(string.Format("{0}-start exec ", DateTime.Now));
             // 作业范围
             var queryStartTime = DateTime.Now.AddDays(-30).AddDays(-90);
             var stopWatch = new Stopwatch();
@@ -64,7 +64,7 @@ namespace QuickBootstrap
             }
             stopWatch.Stop();
             var time = stopWatch.ElapsedMilliseconds;
-            log.Info(string.Format("{0}-start query  cost time {1} ", DateTime.Now, time));
+            log.Info(string.Format("{0}-exec cost time {1} ", DateTime.Now, time));
         }
 
         // http://www.linktech.cn/AC/trans_list.htm?account_id=xiaoqi3535&sign=6e4ffd56aac70e0ebe8d670946624f58&syyyymmdd=20150901&eyyyymmdd=20150931&type=&affiliate_id=&merchant_id=&stat=true&output_type=json
@@ -114,14 +114,14 @@ namespace QuickBootstrap
                 }
                 else
                 {
-                    log.Info(string.Format("{0}查询{1}-start query result : no data ", DateTime.Now, startTime));
+                    log.Info(string.Format("    {0}查询{1}-start query result : no data ", DateTime.Now, startTime));
                 }
                
             }
             else 
             {
 
-                log.Error(string.Format("{0}查询{1}-start query error:{3}", DateTime.Now, startTime ));
+                log.Error(string.Format("   {0}查询{1}-start query error:{3}", DateTime.Now, startTime ));
             }
         }
     }

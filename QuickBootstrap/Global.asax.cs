@@ -19,11 +19,11 @@ namespace QuickBootstrap
         protected void Application_Start()
         {
             // 在托管代码抛出异常的时候，将异常信息使用Log4J 管理起来
-            //AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
-            //{
-            //    var log = LogManager.GetLogger(typeof(MvcApplication));
-            //    log.Error(args.Exception.Message);
-            //};
+            AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
+            {
+                var log = LogManager.GetLogger(typeof(MvcApplication));
+                log.Error(args.Exception.Message);
+            };
 
 
             // 注册区域
