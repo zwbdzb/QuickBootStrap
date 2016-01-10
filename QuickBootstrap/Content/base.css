@@ -12,7 +12,8 @@ body {
 
 /*******************/
 .body-content {
-    margin-top: 25px;
+    margin-top: 20px;
+    border-radius: 8px;     /*div border 变圆角*/
     padding: 15px;
     background-color: #ffffff;
 }
