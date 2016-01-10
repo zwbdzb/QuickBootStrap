@@ -16,7 +16,7 @@
 
         <div class="jumbotron">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h1> 会员业绩管理平台</h1>
+            <h2> 广告业绩管理平台</h2>
             <p class="glyphicon glyphicon-list">  提供简单简约的绩效管理，用户管理服务</p>
             @*<p class="bg-primary"> 数据库连接字符串是：</p>
             <p class="bg-success"> 实时接收数据的接口是： </p>
@@ -26,19 +26,21 @@
             @*<p><a class="btn btn-primary btn-lg" role="button" href="#">Go</a></p>*@
         </div>
 
+        <div class="alert alert-info" role="alert">Hands up! This info needs your attention, but it's not super important</div>
+
         <div class="container">
+            
             <form class="form-horizontal">
                 @*@Html.ToHtmlInputItem(new User { UserName = "hiAladdin@163.com", CreateTime = DateTime.Now, Nick = "admin", IsEnable = true })*@
-
                 @Html.ToHtmlInputItem(new WebSiteConfig
                 {
                     LinktechAccountId = "xiaoqi3535",
                     LinktechAccountPwd = "zhh451815147",
-                    LinktechReceiveApiUrl = Request.Url.Scheme + "://" + Request.Url.Host+"/" + "api/data/sales",
+                    LinktechReceiveApiUrl = Request.Url.Scheme + "://" + Request.Url.Host + "/" + "api/data/sales",
                     Database = "QuickBootstrap"
                 })
             </form>
         </div>
 
+        </div>
     </div>
-</div>
