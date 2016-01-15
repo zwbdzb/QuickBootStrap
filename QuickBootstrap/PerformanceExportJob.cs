@@ -71,7 +71,7 @@ namespace QuickBootstrap
         public void ExecQuery(DateTime startTime)
         {
             var sign = EncryptUtil.MD5ForPHP(AccountId + "^." + AccountPwd);    // 
-            sign = "6e4ffd56aac70e0ebe8d670946624f58";
+          //  sign = "6e4ffd56aac70e0ebe8d670946624f58";
             var req = new RestRequest("/AC/trans_list.htm");
             req.AddQueryParameter("account_id", AccountId);
             req.AddQueryParameter("sign", sign);

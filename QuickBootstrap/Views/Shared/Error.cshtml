@@ -7,3 +7,14 @@
 <h1 class="text-danger">错误。</h1>
 <h2 class="text-danger">处理你的请求时出错。</h2>
 
+
+@if (Model != null)
+{
+    <p>
+        @Model.Exception.GetType().Name<br />
+    thrown in @Model.ControllerName @Model.ActionName
+</p>
+    <p>Error Details:</p>
+    <p>@Model.Exception.Message</p>
+}
+

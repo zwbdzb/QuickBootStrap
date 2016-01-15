@@ -30,15 +30,15 @@ namespace QuickBootstrap.App_Start
                 .Build();
 
             //  每隔1h 重复执行
-            //ITrigger trigger = TriggerBuilder.Create()
-            //        .WithIdentity("trigger1", "group1")
-            //        .StartNow()
-            //        //.WithSimpleSchedule(x => x
-            //        //    .WithIntervalInSeconds(10)
-            //        //   .RepeatForever())
-            //        .Build();
+            ITrigger trigger1 = TriggerBuilder.Create()
+                    .WithIdentity("trigger1", "group1")
+                    .StartNow()
+                    .WithSimpleSchedule(x => x
+                        .WithIntervalInHours(1)
+                       .RepeatForever())
+                    .Build();
 
-            scheduler.ScheduleJob(job, trigger);
+            scheduler.ScheduleJob(job, trigger1);
         }
 
         public static void Stop()
