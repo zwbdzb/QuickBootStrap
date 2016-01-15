@@ -18,7 +18,7 @@ namespace QuickBootstrap
     {
         protected void Application_Start()
         {
-            // 在托管代码抛出异常的时候，将异常信息使用Log4J 管理起来
+            // 当托管代码抛出异常时候发生，在运行时调用堆栈中搜索应用程序域异常处理程序之前，将异常信息使用Log4J 管理起来
             AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
             {
                 var log = LogManager.GetLogger(typeof(MvcApplication));
