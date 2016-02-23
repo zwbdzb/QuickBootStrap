@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using Common.Logging;
 using Microsoft.Practices.Unity;
@@ -57,11 +58,30 @@ namespace QuickBootstrap
             var queryStartTime = DateTime.Now.AddDays(-30).AddDays(-90);
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-            for (int i=1;i<=90;i++)
+            //for (var  i=1;i<=90;i++)
+            //{
+            //    ExecQuery(queryStartTime);
+            //    queryStartTime = queryStartTime.AddDays(1);
+            //}
+
+            //  并行编程
+            try
             {
-                ExecQuery(queryStartTime);
-                queryStartTime = queryStartTime.AddDays(1);
+                Parallel.For(0, 90, i =>
+                {
+                    ExecQuery(queryStartTime);
+                    queryStartTime = queryStartTime.AddDays(1);
+                });
             }
+            catch (AggregateException aex)
+            {
+                foreach (var cc in aex.InnerExceptions)
+                {
+                    log.Error(string.Format("   {0}查询{1}-start query error:{3}", DateTime.Now,cc.Message));
+                }
+            }
+            
+
             stopWatch.Stop();
             var time = stopWatch.ElapsedMilliseconds;
             log.Info(string.Format("{0}-exec cost time {1} ", DateTime.Now, time));
