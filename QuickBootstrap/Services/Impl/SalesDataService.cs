@@ -37,23 +37,23 @@ namespace QuickBootstrap.Services.Impl
             }
         }
 
-        //  更新数据，这里是根据订单更新数据
-        public bool UpdateSalesData(Func<SalesData, bool> whereExp, Action<SalesData> setValue, OrderData data)
+        /// <summary>
+        /// 更新销售数据，这里根据订单更新
+        /// </summary>
+        /// <param name="whereExp"> 这里必须使用表达式树 才能使用 IQueryable的延迟执行的特性 </param>
+        /// <param name="setValue"> 更新数据</param>
+        /// <param name="data"> 添加数据 </param>
+        /// <returns></returns>
+        public bool UpdateSalesData(Expression<Func<SalesData, bool>> whereExp, Action<SalesData> setValue, OrderData data)
         {
             var model = DbContext.SalesData.SingleOrDefault(whereExp);
             try
             {
-                if (model != null)
-                {
-                    setValue(model);
-                    DbContext.Entry(model).State = EntityState.Modified;
-                    return DbContext.SaveChanges() > 0;
-                }
-                else
-                {
-                    var saleModel = Mapper.Map<SalesData>(data);
-                    return  InsertSalesData(saleModel);
-                }
+                if (model == null)
+                    return InsertSalesData(Mapper.Map<SalesData>(data));
+                setValue(model);
+                DbContext.Entry(model).State = EntityState.Modified;
+                return DbContext.SaveChanges() > 0;
             }
             catch (Exception ex)
             {
@@ -82,6 +82,7 @@ namespace QuickBootstrap.Services.Impl
             {
                 data = data.Where(x => x.M_id == queryParams.M_id);
             }
+            // 以下便是动态linq：查询字段动态
             if (!string.IsNullOrEmpty(queryParams.TypeValue))
             {
                 data = data.Where(queryParams.QueryType + "=" + queryParams.TypeValue);

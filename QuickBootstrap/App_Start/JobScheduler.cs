@@ -20,7 +20,7 @@ namespace QuickBootstrap.App_Start
             IJobDetail job = JobBuilder.Create<PerformanceExportJob>().Build();
 
             // 间隔24小时，每天1点执行
-            ITrigger trigger = TriggerBuilder.Create()
+            var  trigger = TriggerBuilder.Create()
                 .WithDailyTimeIntervalSchedule
                   (s =>
                      s.WithIntervalInHours(24)
@@ -30,15 +30,15 @@ namespace QuickBootstrap.App_Start
                 .Build();
 
             //  每隔1h 重复执行
-            ITrigger trigger1 = TriggerBuilder.Create()
-                    .WithIdentity("trigger1", "group1")
-                    .StartNow()
-                    .WithSimpleSchedule(x => x
-                        .WithIntervalInHours(1)
-                       .RepeatForever())
-                    .Build();
-
-           // scheduler.ScheduleJob(job, trigger1);
+                /*  var trigger1 = TriggerBuilder.Create()
+                       .WithIdentity("trigger1", "group1")
+                       .StartNow()
+                       .WithSimpleSchedule(x => x
+                           .WithIntervalInHours(1)
+                          .RepeatForever())
+                       .Build();
+               */
+            scheduler.ScheduleJob(job, trigger);
         }
 
         public static void Stop()
