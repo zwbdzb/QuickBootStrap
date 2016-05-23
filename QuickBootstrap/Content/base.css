@@ -503,3 +503,7 @@ article.page .post-content h2 {
 	line-height:1;
 	border:1px solid #d43f3a
 }
+
+#map {
+    height: 700px;   /*map div 暂时非响应式布局，TODO 想办法自适应 */
+}

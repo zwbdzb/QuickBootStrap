@@ -2,73 +2,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <title>@ViewBag.Title - 极速管理后台</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=SSC5M3AFkxWqbgXLDpItGi8g"></script>
-
-    <meta name="description" content="The description of my page" />
 </head>
 <body>
 
-    <div class="navbar navbar-inverse  navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="/" class="navbar-brand">管理后台</a>
-            </div>
-            <div class="navbar-collapse collapse" role="navigation">
-                <ul class="nav navbar-nav">
-                    @if (Request.Cookies[UserAuthorizationAttribute.CookieUserName] != null &&
-                         !string.IsNullOrWhiteSpace(Request.Cookies[UserAuthorizationAttribute.CookieUserName].Value))
-                    {
-                        <li class="dropdown" id="accountmenu">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="/report">业绩报表<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/report/Summary">查看报表</a></li>
-                                <li><a href="/report">CPS报表</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="/UserManage">用户管理</a></li>
-                    }
-                </ul>
+<div class="navbar navbar-inverse  navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">管理后台</a>
+        </div>
+        <div class="navbar-collapse collapse" role="navigation">
+            <ul class="nav navbar-nav">
                 @if (Request.Cookies[UserAuthorizationAttribute.CookieUserName] != null &&
-                    !string.IsNullOrWhiteSpace(Request.Cookies[UserAuthorizationAttribute.CookieUserName].Value))
+                     !string.IsNullOrWhiteSpace(Request.Cookies[UserAuthorizationAttribute.CookieUserName].Value))
                 {
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="/Profile"> @Request.Cookies[UserAuthorizationAttribute.CookieUserName].Value</a>
-                        </li>
-                        <li><a href="/Home/LoginOut">退出登录</a></li>
-                    </ul>
+                    <li class="dropdown" id="accountmenu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="/report">业绩报表<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/report/Summary">查看报表</a></li>
+                            <li><a href="/report">CPS报表</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/UserManage">用户管理</a></li>
                 }
-                <ul class="nav navbar-nav ">
-                    <li><a href="/Map/Index">地图热点</a></li>
+            </ul>
+            @if (Request.Cookies[UserAuthorizationAttribute.CookieUserName] != null &&
+                 !string.IsNullOrWhiteSpace(Request.Cookies[UserAuthorizationAttribute.CookieUserName].Value))
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/Profile"> @Request.Cookies[UserAuthorizationAttribute.CookieUserName].Value</a>
+                    </li>
+                    <li><a href="/Home/LoginOut">退出登录</a></li>
                 </ul>
+            }
+            <ul class="nav navbar-nav ">
+                <li><a href="/Map/Index">地图热点</a></li>
+            </ul>
 
-            </div>
         </div>
     </div>
+</div>
 
-    <div class="container body-content">
-        <div style="min-height:650px;">
-            @RenderBody()
-        </div>
-        <hr />
-        <footer class="footer text-muted">
-            <p>&copy; @DateTime.Now.Year Smart 版权所有</p>
-        </footer>
+<div class="container body-content">
+    <div style="min-height: 650px;">
+        @RenderBody()
     </div>
-    @Html.Partial("_PartialTongJiCode")
+    <hr/>
+    <footer class="footer text-muted">
+        <p>&copy; @DateTime.Now.Year Smart 版权所有</p>
+    </footer>
+</div>
+@Html.Partial("_PartialTongJiCode")
+
+    @RenderSection("import", required: false)
 </body>
 </html>
+
+
