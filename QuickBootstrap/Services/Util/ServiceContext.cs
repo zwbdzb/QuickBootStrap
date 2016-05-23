@@ -5,6 +5,7 @@ using QuickBootstrap.Entities;
 
 namespace QuickBootstrap.Services.Util
 {
+    // 服务上下文基类，提供数据库操作上下文 和缓存组件，可以在继承类中随便这两个功能
     public abstract class ServiceContext : IDisposable
     {
         /// <summary>

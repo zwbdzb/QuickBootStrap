@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using QuickBootstrap.Cache;
 using QuickBootstrap.Entities;
 using QuickBootstrap.Services.Util;
 
@@ -9,6 +10,11 @@ namespace QuickBootstrap.Services.Impl
     // 用户管理服务类
     public sealed class UserManageService : ServiceContext, IUserManageService
     {
+        public UserManageService()
+        {
+            SetCacheInstance(typeof(EnyimMemcachedContext));
+        }
+
         public PagedResult<User> GetAll()
         {
             var result = new PagedResult<User>

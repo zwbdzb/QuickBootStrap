@@ -5,13 +5,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - 极速管理后台</title>
-
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=SSC5M3AFkxWqbgXLDpItGi8g"></script>
+
     <meta name="description" content="The description of my page" />
 </head>
 <body>
@@ -51,11 +52,15 @@
                         <li><a href="/Home/LoginOut">退出登录</a></li>
                     </ul>
                 }
+                <ul class="nav navbar-nav ">
+                    <li><a href="/Map/Index">地图热点</a></li>
+                </ul>
+
             </div>
         </div>
     </div>
 
-<div class="container body-content">
+    <div class="container body-content">
         <div style="min-height:650px;">
             @RenderBody()
         </div>
@@ -64,8 +69,6 @@
             <p>&copy; @DateTime.Now.Year Smart 版权所有</p>
         </footer>
     </div>
-
     @Html.Partial("_PartialTongJiCode")
-
 </body>
 </html>

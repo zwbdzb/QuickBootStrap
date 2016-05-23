@@ -199,6 +199,7 @@
     <Compile Include="Cache\CacheContext.cs" />
     <Compile Include="Cache\EnyimMemcachedContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\UserManageController.cs" />
@@ -337,6 +338,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jstree-map.js" />
     <Content Include="Scripts\js\bootstrap-datepicker.js" />
     <Content Include="Scripts\js\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\js\bootstrap-datetimepicker.js" />
@@ -620,7 +622,9 @@
     <Content Include="Scripts\js\parser.js" />
     <Content Include="Scripts\js\sugarpak.js" />
     <Content Include="Scripts\js\time.js" />
+    <Content Include="Scripts\map.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\overlay.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -650,6 +654,7 @@
     <Content Include="Views\Shared\_PartialPagingInfo.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Report\Summary.cshtml" />
+    <Content Include="Views\Map\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
