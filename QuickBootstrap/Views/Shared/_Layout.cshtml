@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <title>@ViewBag.Title - 极速管理后台</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -62,13 +62,13 @@
     </div>
     <hr/>
     <footer class="footer text-muted">
-        <p>&copy; @DateTime.Now.Year Smart 版权所有</p>
+        <p>&copy; @DateTime.Now.Year 有态度的马甲 版权所有</p>
     </footer>
 </div>
 @Html.Partial("_PartialTongJiCode")
 
-    @RenderSection("import", required: false)
 </body>
 </html>
 
+@RenderSection("import", required: false)
 

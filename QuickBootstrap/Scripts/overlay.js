@@ -1,15 +1,14 @@
 
 // 复杂的自定义覆盖物
-function ComplexCustomOverlay(point, option) {
-	this._point = point;
+function CustomOverlay(point,text,option) {
+    this._point = point;
+    this._text = text;
 	this._option = option;
 }
 
-if (window.BMap && window.BMap.Overlay) {
-	ComplexCustomOverlay.prototype = new BMap.Overlay();
-}
+CustomOverlay.prototype = new BMap.Overlay();
 
-ComplexCustomOverlay.prototype.initialize = function (map) {
+CustomOverlay.prototype.initialize = function (map) {
 	this._map = map;
 	var div = this._div = document.createElement("div");
 
@@ -27,7 +26,7 @@ ComplexCustomOverlay.prototype.initialize = function (map) {
 
 	var content = this._span = document.createElement("span");
 
-	content.innerHTML = this._option.DN;  // that._option.DeviceName;  
+	content.innerHTML = this._text;  // that._option.DeviceName;  
 	div.appendChild(content);
 
 	var that = this;
@@ -64,87 +63,67 @@ ComplexCustomOverlay.prototype.initialize = function (map) {
 
 	div.ondragstart = function (event, ui) {
 		map.disableDragging();
-
-		//  从拖拽释放像素位置求得地理位置信息	
-		var pt;
+		var pointStart= false;
 		var x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
 		var y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-		var position = $('#allmap').position();
+		var position = $('#map').position();
 		x = x - position.left;
 		y = y - position.top;
-		pt = map.pixelToPoint(new BMap.Pixel(x, y));
-		console.log('dragstart:' + pt.lng + '  ' + pt.lat);
+		pointStart = map.pixelToPoint(new BMap.Pixel(x, y));
+		this._point = pointStart;
+		console.log('dragstart:' + pointStart.lng + '  ' + pointStart.lat);
 	}
 
 	div.ondragstop = function (event, ui) {
-		//  从拖拽释放div箭头位置求得地理位置信息	
-		var pt = false;
+		var pointEnd = false;
 		var x = ui.offset.left + 10;
 		var y = ui.offset.top + 22 + 10;
-		var position = $('#allmap').position();
+		var position = $('#map').position();
 		x = x - position.left;
 		y = y - position.top;
-		pt = map.pixelToPoint(new BMap.Pixel(x, y));
-		console.log('dragstop:' + pt.lng + '  ' + pt.lat);
+		pointEnd = map.pixelToPoint(new BMap.Pixel(x, y));
+		console.log('dragstop:' + pointEnd.lng + '  ' + pointEnd.lat);
 		that._point = pt;
-
-		var dataJson = that._option;
-		updataUsedNode(dataJson.id.substring(0, 36), pt);     // 更新节点位置
-		$.ajax({
-			url: "/Device/DeviceMarker?id=" + dataJson.id.substring(0, 36) + "&&lat=" + that._point.lat + "&&lng=" + that._point.lng,
-			type: "POST",
-			dataType: "json",
-			success: function (data) {
-				if (!data.Result) {
-					return;
-				}
-				var node = $('#GroupDeviceList').jstree("get_node", dataJson.id.substring(0, 36));
-				node.li_attr.lng = that._point.lng;
-				node.li_attr.lat = that._point.lat;
-			}
-		});
-
 		map.enableDragging();
 	}
 
-	// 根据状态确定DIV是否可以拖拽
 	$(div).draggable({ scroll: true, opacity: 0.35, disabled: (flag ? false : true) });
-
 	map.getPanes().markerPane.appendChild(div);
 	return div;
 }
 
-ComplexCustomOverlay.prototype.getPosition = function () {
+CustomOverlay.prototype.draw = function () {
+    var map = this._map;
+    var pixel = map.pointToOverlayPixel(this._point);
+    this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
+    this._div.style.top = pixel.y - 30 + "px";
+}
+
+CustomOverlay.prototype.getPosition = function () {
 	return this._point;
 }
 
 // 这个一定要
-ComplexCustomOverlay.prototype.getMap = function () {
+CustomOverlay.prototype.getMap = function () {
 	return this._map;
 }
 
-ComplexCustomOverlay.prototype.draw = function () {
-	var map = this._map;
-	// console.log("marker-lbs:" + this._point.lng + ',' + this._point.lat);
-	var pixel = map.pointToOverlayPixel(this._point);
-	this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
-	this._div.style.top = pixel.y - 30 + "px";
-}
+
 
 // 自定义拖拽能力  (这个项目是没有使用的)
-ComplexCustomOverlay.prototype.disableDragging = function () {
+CustomOverlay.prototype.disableDragging = function () {
 	$(this._div).draggable("destroy");			//  调用"disable" 方法 要变成灰色
 }
 
-ComplexCustomOverlay.prototype.enableDragging = function () {
+CustomOverlay.prototype.enableDragging = function () {
 	$(this._div).draggable({ disabled: false });
 }
 
-ComplexCustomOverlay.prototype.Remove = function () {
+CustomOverlay.prototype.remove = function () {
 	map.removeOverlay(this);
 }
 
-ComplexCustomOverlay.prototype.toggle = function () {
+CustomOverlay.prototype.toggle = function () {
 	if (this._div) {
 		if (this._div.style.display == "") {
 			this.hide();
@@ -155,77 +134,7 @@ ComplexCustomOverlay.prototype.toggle = function () {
 	}
 }
 
-$('.marker').draggable();
 
-
-
-function Parse(dataJson) {
-	var sContent = '';
-	if (dataJson.channel !== "") {
-		sContent = dataJson.DN + '	';
-		var channels = dataJson.channel.split(',');
-		for (var i = 0; i < channels.length; i++) {
-			sContent += "<a style='color:white;' onclick=\"PlayVideo('" + dataJson.id + "'," + channels[i].split(':')[0] + "\);\">" + channels[i] + "</a>" + " ";
-		}
-	} else {
-		sContent = "<a style='color:white;text-decorationnone;' onclick=\"PlayVideo('" + dataJson.id + "',0 )\"   >" + dataJson.DN + "</a>";
-	}
-	return sContent;
-}
-
-function PlayVideo(id, ch) {
-	// 触发 JStree的交互
-	$.jstree.reference("#GroupDeviceList").deselect_all();
-	$.jstree.reference("#GroupDeviceList").select_node(id);
-
-	var d = FindDevice(id); 					//	得到设备
-	if (typeof (isFromPCClient) !== "undefined" && isFromPCClient == true) {
-		try {
-			//  使用脚本代码中的window.external 对象访问指定对象的公开属性和方法
-			window.external.JSCallCppCB(0, ch, d.SN);
-		} 			// 与PC端约定的调用函数 JSCallCppCB
-		catch (e) {
-
-			$('#devConfirm p').html("没有找到PC客户端调用的API");
-			$('#devConfirm').dialog({
-				autoOpen: true,
-				resizable: false,
-				height: 140,
-				modal: true,
-				buttons: {
-					"确定": function () {
-						$(this).dialog('close');
-					}
-				}
-			});
-		}
-	} else {
-		if (!d.online) {
-			$("#devConfirm").dialog({
-				autoOpen: true,
-				resizable: false,
-				height: 140,
-				modal: true,
-				buttons: {
-					"确定": function () {
-						$(this).dialog("close");
-						PlayDevice(id, ch);
-					},
-					"取消": function () {
-						$(this).dialog("close");
-						return false;
-					}
-				}
-			});
-		}
-		else {
-			PlayDevice(id, ch);
-		}
-		// 播放之后写入本地缓存( 设备ID)
-		SetRecentlyUserDevice(id);
-
-	}
-};
 
 
 

@@ -265,7 +265,6 @@
     <Compile Include="Validations\Validation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\base.bak.css" />
     <Content Include="Content\base.css" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker.standalone.css" />
@@ -289,6 +288,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\DateUtil.js" />
     <Content Include="Scripts\extensions\accent-neutralise\bootstrap-table-accent-neutralise.js" />
     <Content Include="Scripts\extensions\accent-neutralise\bootstrap-table-accent-neutralise.min.js" />
@@ -338,7 +338,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\jstree-map.js" />
+    <Content Include="Scripts\jstree.js" />
+    <Content Include="Scripts\jstree.min.js" />
     <Content Include="Scripts\js\bootstrap-datepicker.js" />
     <Content Include="Scripts\js\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\js\bootstrap-datetimepicker.js" />

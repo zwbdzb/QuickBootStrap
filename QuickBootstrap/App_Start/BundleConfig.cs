@@ -10,7 +10,11 @@ namespace QuickBootstrap
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/DateUtil.js",
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        // jquery Ui jstree
+                        "~/Scripts/jquery-ui.min.js",
+                        "~/Scripts/jstree.min.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -39,9 +43,12 @@ namespace QuickBootstrap
                        "~/Scripts/js/date-zh-CN.js",
                       "~/Scripts/js/globalization/zh-CN.js",
 
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js"
+
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Scripts/themes/default/style.min.css",
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-table.css",
                       "~/Content/bootstrap-datepicker.css",
