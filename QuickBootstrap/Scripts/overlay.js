@@ -13,14 +13,14 @@ CustomOverlay.prototype.initialize = function (map) {
     this._map = map;
     var div = this._div = document.createElement("div");
 
-    div.style.position = "absolute";
+    div.style.position = 'relative';
     div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
     //div.style.backgroundColor = "blue";
     div.style.color = "blue";
-    div.style.height = "25px";
-    div.style.lineHeight = "24px";
-    div.style.whiteSpace = "nowrap";
-    div.style.fontSize = "20px";
+   // div.style.height = "25px";
+   // div.style.lineHeight = "24px";
+   // div.style.whiteSpace = "nowrap";
+   // div.style.fontSize = "20px";
     div.className = "glyphicon glyphicon-map-marker";
 
     var content = this._span = document.createElement("span");
@@ -94,8 +94,9 @@ CustomOverlay.prototype.initialize = function (map) {
 CustomOverlay.prototype.draw = function () {
     var map = this._map;
     var pixel = map.pointToOverlayPixel(this._point);
-    this._div.style.left = pixel.x;     // - parseInt(this._arrow.style.left) + "px";
-    this._div.style.top = pixel.y;      // - 30 + "px";
+    this._div.style.left = pixel.x; //+ parseInt($('#map').position().left) + "px";
+    this._div.style.top = pixel.y;  // + parseInt($('#map').position().top) + "px";   //  - 30 + "px";
+    console.log(pixel.x + "__|||___" + pixel.y);
 }
 
 CustomOverlay.prototype.getPosition = function () {
