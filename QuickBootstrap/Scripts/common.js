@@ -2,7 +2,7 @@
 
 function createTree(container, data, domHandler, docHandler) {
     var conf = {
-        'plugins': ['dnd', 'search','types','contextmenu'],            
+        'plugins': ['dnd','search','types','contextmenu'],            
         'core': {
             'animation': 0,
             'multipe': 'false',                                    
@@ -12,12 +12,13 @@ function createTree(container, data, domHandler, docHandler) {
         },
         'types':{
             'default':{
-                'icon':'glyphicon glyphicon-facetime-video'
+                'icon':'glyphicon glyphicon-facetime-video',
+                'state':'open'
             },
              'group': {
-                'icon': 'glyphicon glyphicon-folder-open'
+                 'icon': 'glyphicon glyphicon-folder-open'
             }
-        },        
+        },
         'contextmenu': {
             'select_node': false,
             'show_at_node': false,
@@ -26,7 +27,6 @@ function createTree(container, data, domHandler, docHandler) {
                     _disabled: false,
                     label: "删除标记",
                     action: function (obj) {
-                        // obj 附带要素reference来表示交互的DOM元素
                        var node = $.jstree.reference("#" + container).get_node(obj.reference);
                         /* 以下应该当做事件触发 */
                        var overlay = map.getOverlay(node.id); 						

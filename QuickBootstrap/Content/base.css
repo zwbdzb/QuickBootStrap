@@ -510,7 +510,7 @@ article.page .post-content h2 {
 
 .bs-docs-example {
   height:500px;   /*map div 暂时非响应式布局，TODO 想办法自适应 */
-  position: relative;
+  position:relative;
   margin: 15px 0;
   padding: 39px 19px 14px;
   *padding-top: 19px;

@@ -30,7 +30,7 @@ function initMap(container) {
     map.addControl(myZoomCtrl);
 
 	window.map = map;
-	window.map.markerClusterer = new BMapLib.MarkerClusterer(map, { "maxZoom": "9" });
+	window.markerClusterer = new BMapLib.MarkerClusterer(map, { "maxZoom": "9" });
 }
 
 BMap.Map.prototype.getOverlay = function (id) {
@@ -53,7 +53,8 @@ BMap.Map.markLocation = function (obj) {
     var myOverlay = new CustomOverlay(pt,obj.text, obj);
     map.addOverlay(myOverlay);
     markers.push(myOverlay);
-    markerClusterer.addMarker(marker);
+    markerClusterer.addMarker(myOverlay);
+    return true;
 }
 
 // #region custom control
