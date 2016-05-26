@@ -27,18 +27,6 @@
 
             <div id="using_json" class="container"></div>
 
-            @*<a href="/UserManage" class="list-group-item">
-                    <span class="glyphicon glyphicon-list"></span> 用户列表
-                </a>
-                <a href="/UserManage/Create" class="list-group-item">
-                    <span class="glyphicon glyphicon-plus"></span> 新建用户
-                </a>
-                <a href="/UserManage/RoleList" class="list-group-item">
-                    <span class="glyphicon glyphicon-list"></span> 角色列表
-                </a>
-                <a href="/UserManage/CreateRole" class="list-group-item">
-                    <span class="glyphicon glyphicon-plus"></span> 新建角色
-                </a>*@
         </div>
         <div class="panel panel-info">
             <div class="panel-heading">
@@ -86,11 +74,10 @@
                     var node = data.node;
                     $('#using_json').jstree("toggle_node", node);
                     if (node.parent === '#') {
-                        if (window.map && window.map.reset)
-                            map.reset();
+                        map.reset();
+                        return false;
                     }
-
-                    if (node.li_attr.attr === 'd' && node.li_attr.lng && node.li_attr.lat) {
+                    if ( node.li_attr.lng && node.li_attr.lat) {
                         var pt = new BMap.Point(node.li_attr.lng, node.li_attr.lat);
                         map.setCenter(pt);
                         map.setZoom(13);
@@ -125,16 +112,13 @@
                     var x1 = x - $('#map').offset().left;
                     var y1 = y - $('#map').offset().top;
 
-                    //var x2 = x - (position.left + $('#map').width());
-                    //var y2 = y - (position.left + $('#map').height());
-                    //if ((x1 < 0 || y1 < 0) || (x2 > 0 || y2 > 0)) {
-                    //    return false;
-                    //}
+                    var x2 = x - ($('#map').offset().left + $('#map').width());
+                    var y2 = y - ($('#map').offset().top + $('#map').height());
+                    if ((x1 < 0 || y1 < 0) || (x2 > 0 || y2 > 0)) {
+                        return false;
+                    }
                     
                     pt = map.pixelToPoint(new BMap.Pixel(x1, y1));
-                    console.log(x1+'___'+y1);
-                    var marker = new BMap.Marker(pt);
-                    map.addOverlay(marker);
 
                     obj.li_attr.lng = pt.lng;
                     obj.li_attr.lat = pt.lat;
@@ -146,8 +130,11 @@
                 'context_show.vakata': function (e,data) {
                     var jstree = $.jstree.reference('#' + data.reference.context.id);
                     var node = jstree.get_node(data.reference);
-                    if (node.type == 'group')
+                    if (node.type == 'group' || !node.li_attr.lng || !node.li_attr.lat ){
                         $(data.element).hide();
+                        return false;
+                    }
+                    
                 }
             }
             );

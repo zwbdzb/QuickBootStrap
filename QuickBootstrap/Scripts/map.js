@@ -68,12 +68,14 @@ CustomControl.prototype = new BMap.Control();
 
 CustomControl.prototype.initialize = function (map) {
     var div = document.createElement("div");
+    div.className = 'glyphicon glyphicon-edit';
     div.appendChild(document.createTextNode("编辑标记"));
     div.style.cursor = "pointer";
-    div.style.border = "1px solid #A6C2DE";
-    div.style.backgroundColor = "#8BA4DC";
-    div.style.color = "white";
-    div.style.padding = "5px";
+    div.style.border = '1px solid #A6C2DE';
+    div.style.backgroundColor = '#8BA4DC';
+    div.style.color = 'white';
+    div.style.padding = '5px';
+    div.style.borderRadius ='4px';
     div.onclick = function (e) {
         if (flag == 0) {
             flag = 1;

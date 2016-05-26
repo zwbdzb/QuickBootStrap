@@ -27,10 +27,13 @@ function createTree(container, data, domHandler, docHandler) {
                     _disabled: false,
                     label: "删除标记",
                     action: function (obj) {
-                       var node = $.jstree.reference("#" + container).get_node(obj.reference);
+                        var node = $.jstree.reference("#" + container).get_node(obj.reference);
+                        node.li_attr.lng = null;
+                        node.li_attr.lat = null;
                         /* 以下应该当做事件触发 */
                        var overlay = map.getOverlay(node.id); 						
-                       overlay.Remove();
+                        // 这里有 bug
+                       overlay.remove();
                        markerClusterer.removeMarker(overlay);
                     }
 

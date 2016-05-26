@@ -1,6 +1,5 @@
 // JavaScript source code
 
-// 复杂的自定义覆盖物
 function CustomOverlay(point, text, option) {
     this._point = point;
     this._text = text;
@@ -13,51 +12,28 @@ CustomOverlay.prototype.initialize = function (map) {
     this._map = map;
     var div = this._div = document.createElement("div");
 
-    div.style.position = 'relative';
+    div.style.position = 'absolute';
     div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
-    //div.style.backgroundColor = "blue";
-    div.style.color = "blue";
-   // div.style.height = "25px";
-   // div.style.lineHeight = "24px";
-   // div.style.whiteSpace = "nowrap";
-   // div.style.fontSize = "20px";
-    div.className = "glyphicon glyphicon-map-marker";
+    div.style.width = '24px';
+    div.style.height = '24px';
+    div.style.lineHeight = '24px';
+    div.style.whiteSpace = "nowrap";
+    div.style.fontSize = '18px';
+    div.className = 'glyphicon glyphicon-facetime-video';       // 'glyphicon glyphicon-map-marker';
 
     var content = this._span = document.createElement("span");
-
-   // content.innerHTML = this._text;  // that._option.DeviceName;  
+    content.className = 'label label-default';
+   // content.innerHTML = this._text;
     div.appendChild(content);
 
     var that = this;
 
-    //// #region 页面箭头部分
-    //var arrow = this._arrow = document.createElement("div");
-    //arrow.style.background = "url(http://map.baidu.com/fwmap/upload/r/map/fwmap/static/house/images/label.png) no-repeat";
-    //arrow.style.position = "absolute";
-    //arrow.style.width = "11px";
-    //arrow.style.height = "10px";
-    //arrow.style.top = "22px";
-    //arrow.style.left = "10px";
-    //arrow.style.overflow = "hidden";
-    //div.appendChild(arrow);
-    ////#endregion      
-
     div.onmouseenter = function () {
-        if (flag == 0) {
-            //this.style.backgroundColor = "#6BADCA";
-            //this.style.borderColor = "#0000ff";
-            this.getElementsByTagName("span")[0].innerHTML = that._text;
-            //arrow.style.backgroundPosition = "0px -20px";
-        }
+        this.getElementsByTagName("span")[0].innerHTML = that._text;
     }
 
     div.onmouseleave = function () {
-        if (flag == 0) {
-            //this.style.backgroundColor = "#EE5D5B";
-            //this.style.borderColor = "#BC3B3A";
-            this.getElementsByTagName("span")[0].innerHTML = null;         
-            // arrow.style.backgroundPosition = "0px 0px";
-        }
+        this.getElementsByTagName("span")[0].innerHTML = null;
     }
 
     div.ondragstart = function (event, ui) {
@@ -94,9 +70,8 @@ CustomOverlay.prototype.initialize = function (map) {
 CustomOverlay.prototype.draw = function () {
     var map = this._map;
     var pixel = map.pointToOverlayPixel(this._point);
-    this._div.style.left = pixel.x; //+ parseInt($('#map').position().left) + "px";
-    this._div.style.top = pixel.y;  // + parseInt($('#map').position().top) + "px";   //  - 30 + "px";
-    console.log(pixel.x + "__|||___" + pixel.y);
+    this._div.style.left = pixel.x - $(this._div).width() / 2 + 'px';           // 这里有一个坑，必须携带px
+    this._div.style.top = pixel.y - $(this._div).height() / 2 + 'px';
 }
 
 CustomOverlay.prototype.getPosition = function () {
@@ -116,7 +91,7 @@ CustomOverlay.prototype.enableDragging = function () {
 }
 
 CustomOverlay.prototype.remove = function () {
-    map.removeOverlay(this);
+    window.map.removeOverlay(this);
 }
 
 CustomOverlay.prototype.toggle = function () {
