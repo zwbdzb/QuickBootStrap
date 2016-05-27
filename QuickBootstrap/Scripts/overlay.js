@@ -92,6 +92,7 @@ CustomOverlay.prototype.enableDragging = function () {
 
 CustomOverlay.prototype.remove = function () {
     window.map.removeOverlay(this);
+    return false;
 }
 
 CustomOverlay.prototype.toggle = function () {

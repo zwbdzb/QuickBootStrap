@@ -33,7 +33,8 @@ function createTree(container, data, domHandler, docHandler) {
                         /* 以下应该当做事件触发 */
                        var overlay = map.getOverlay(node.id); 						
                         // 这里有 bug
-                       overlay.remove();
+                       map.removeOverlay(overlay);
+                        // overlay.remove();
                        markerClusterer.removeMarker(overlay);
                     }
 

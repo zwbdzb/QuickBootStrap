@@ -44,16 +44,13 @@ BMap.Map.prototype.getOverlay = function (id) {
 
 
 //  静态方法
-BMap.Map.markLocation = function (obj) {
-    var pt = {
-        lng: obj.li_attr.lng,
-        lat: obj.li_attr.lat
-    }
+BMap.Map.markLocation = function (point, obj) {
+
     /* TODO 后端更新位置*/
-    var myOverlay = new CustomOverlay(pt,obj.text, obj);
+    var myOverlay = new CustomOverlay(point,obj.text, obj);
     map.addOverlay(myOverlay);
     markers.push(myOverlay);
-    markerClusterer.addMarker(myOverlay);
+  //  markerClusterer.addMarker(myOverlay);
     return true;
 }
 

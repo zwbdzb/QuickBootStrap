@@ -118,11 +118,11 @@
                         return false;
                     }
                     
-                    pt = map.pixelToPoint(new BMap.Pixel(x1, y1));
+                    var point = map.pixelToPoint(new BMap.Pixel(x1, y1));
+                    obj.li_attr.lng = point.lng;
+                    obj.li_attr.lat = point.lat;
 
-                    obj.li_attr.lng = pt.lng;
-                    obj.li_attr.lat = pt.lat;
-                    if (BMap.Map.markLocation(obj) === true) {
+                    if (BMap.Map.markLocation(point, obj) === true) {
                         // TODO something  change the jstree node data
                         return true;
                     }
