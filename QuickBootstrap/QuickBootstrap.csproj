@@ -177,7 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\Configuration.cs" />
+    <Compile Include="App_Start\AutoMapConfiguration.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\JobScheduler.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
