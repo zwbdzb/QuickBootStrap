@@ -79,8 +79,14 @@ CustomOverlay.prototype.getPosition = function () {
     return this._point;
 }
 
-CustomOverlay.prototype.getMap = function () {
-    return this._map;
+// 返回overlay 所属map -jquery对象
+CustomOverlay.prototype.getJMap = function () {
+    return $(this._map.Ua);
+}
+
+// 返回overlay 所属 div-jquery对象
+CustomOverlay.prototype.getJDom = function () {
+    return $(this._div);
 }
 
 CustomOverlay.prototype.disableDragging = function () {
@@ -98,12 +104,12 @@ CustomOverlay.prototype.enableDragging = function () {
 //}
 
 CustomOverlay.prototype.toggle = function () {
-    if (this._div) {
-        if (this._div.style.display == "") {
-            this.hide();
+    if (this._span) {
+        if (this._span.className === '') {
+            $(this._div).trigger('mouseenter');
         }
         else {
-            this.show();
+            $(this._div).trigger('mouseleave');
         }
     }
 }

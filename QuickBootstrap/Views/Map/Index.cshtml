@@ -68,7 +68,7 @@
                             'text': 'Root node 2',
                             'type': 'group',
                             'children': [
-                              { 'text': 'Child 1' },
+                              { 'text': 'Child 11' },
                                 'Child 2',
                                 {
                                    'text': 'Root node 3',
@@ -92,8 +92,11 @@
                     }
                     if (node.li_attr.lng && node.li_attr.lat) {
                         var pt = new BMap.Point(node.li_attr.lng, node.li_attr.lat);
-                        map.setCenter(pt);
-                        map.setZoom(15);
+                        map.panTo(pt);
+                        var overlay  = map.getOverlay(node.li_attr.id);
+                        overlay.toggle();
+                        // setTimeout( overlay.toggle, 2000); 是错误的，setTimeOut 内部函数的执行环境是window，以下写法形成一个闭包
+                        setTimeout(function () { overlay.toggle() }, 2000);
                     }
                 },
                 'loaded.jstree': function (e, data) {

@@ -32,10 +32,9 @@ function createTree(container, data, domHandler, docHandler) {
                         node.li_attr.lat = null;
                         /* 以下应该当做事件触发 */
                        var overlay = map.getOverlay(node.id); 						
-                        // 这里有 bug
+                        // 这里有 bug [ 现在没有了]
                        map.removeOverlay(overlay);
                         // overlay.remove();
-                    //   markerClusterer.removeMarker(overlay);
                     }
 
                 }
