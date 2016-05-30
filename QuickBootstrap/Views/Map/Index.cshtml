@@ -122,6 +122,9 @@
                     obj.li_attr.lng = point.lng;
                     obj.li_attr.lat = point.lat;
 
+                    //var ov = new BMap.Marker(point);
+                    //map.addOverlay(ov);
+
                     if (BMap.Map.markLocation(point, obj) === true) {
                         // TODO something  change the jstree node data
                         return true;

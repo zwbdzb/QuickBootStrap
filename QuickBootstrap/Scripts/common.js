@@ -35,7 +35,7 @@ function createTree(container, data, domHandler, docHandler) {
                         // 这里有 bug
                        map.removeOverlay(overlay);
                         // overlay.remove();
-                       markerClusterer.removeMarker(overlay);
+                    //   markerClusterer.removeMarker(overlay);
                     }
 
                 }

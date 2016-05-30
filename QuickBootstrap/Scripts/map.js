@@ -29,8 +29,8 @@ function initMap(container) {
     var myZoomCtrl = new CustomControl();
     map.addControl(myZoomCtrl);
 
-	window.map = map;
-	window.markerClusterer = new BMapLib.MarkerClusterer(map, { "maxZoom": "9" });
+    window.map = map;
+  //   window.markerClusterer = new BMapLib.MarkerClusterer(map, { "maxZoom": "9" });
 }
 
 BMap.Map.prototype.getOverlay = function (id) {

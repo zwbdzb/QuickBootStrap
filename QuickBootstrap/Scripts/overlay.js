@@ -29,11 +29,13 @@ CustomOverlay.prototype.initialize = function (map) {
     var that = this;
 
     div.onmouseenter = function () {
+        content.className = 'label label-default';
         this.getElementsByTagName("span")[0].innerHTML = that._text;
     }
 
     div.onmouseleave = function () {
-        this.getElementsByTagName("span")[0].innerHTML = null;
+        content.className = '';
+        this.getElementsByTagName("span")[0].innerHTML = '';
     }
 
     div.ondragstart = function (event, ui) {
@@ -90,10 +92,11 @@ CustomOverlay.prototype.enableDragging = function () {
     $(this._div).draggable({ disabled: false });
 }
 
-CustomOverlay.prototype.remove = function () {
-    window.map.removeOverlay(this);
-    return false;
-}
+// 不能定义 overlay原型对象的remove的方法，会覆盖原对象的remove，形成死循环
+//CustomOverlay.prototype.remove = function () {
+//    window.map.removeOverlay(this);
+//    return false;
+//}
 
 CustomOverlay.prototype.toggle = function () {
     if (this._div) {
