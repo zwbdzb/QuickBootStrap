@@ -47,7 +47,7 @@
         window.map = null;
         window.flag = 0;                       // edit 1 ，load 0
         window.markers = [];
-        window.markerClusterer = null;
+        // window.markerClusterer = null;
 
         initMap("map");
         initData();
@@ -57,14 +57,27 @@
             var data = [
                         {
                             'text': 'Simple root node',
-                            'type': 'group'                  // 自定义类型type
+                            'type': 'group',                  // 自定义类型type
+                            'children': [
+                              { 'text': 'Child 0', 'li_attr': { lng: '104.062736', lat: '30.528012' } },
+                                'Child 01',
+
+                            ]
                         },
                         {
                             'text': 'Root node 2',
-                            'type': 'group',                 // 自定义类型type
+                            'type': 'group',
                             'children': [
                               { 'text': 'Child 1' },
-                              'Child 2'
+                                'Child 2',
+                                {
+                                   'text': 'Root node 3',
+                                   'type': 'group',
+                                   'children': [
+                                     { 'text': 'Child 4','state':{'selected': true } },
+                                       'Child 04'
+                                   ]
+                                }
                             ]
                         }
             ];
@@ -77,14 +90,23 @@
                         map.reset();
                         return false;
                     }
-                    if ( node.li_attr.lng && node.li_attr.lat) {
+                    if (node.li_attr.lng && node.li_attr.lat) {
                         var pt = new BMap.Point(node.li_attr.lng, node.li_attr.lat);
                         map.setCenter(pt);
-                        map.setZoom(13);
+                        map.setZoom(15);
                     }
                 },
                 'loaded.jstree': function (e, data) {
                     data.instance.open_all();
+                    //  data.instance._model.data 是object，不是array，还不能方便的使用 grep，所以这里使用each【用于遍历对象和数组】
+                    var nodes = $.each(data.instance._model.data, function (i, n) {
+                        if (n.li_attr && n.li_attr.lng && n.li_attr.lat) {
+
+                            var point = new BMap.Point(n.li_attr.lng, n.li_attr.lat);
+                            BMap.Map.markLocation(point, n);
+                        }
+                    });
+                    
                 },
                 'open_node.jstree': function (e, data) {
                     var node = data.node;
@@ -97,8 +119,8 @@
             }, {
                 'dnd_stop.vakata': function (e, data) {
 
-                    var obj = $.jstree.reference('#'+data.data.obj.context.id).get_node( data.data.nodes[0]);
-                    if (obj.type==='group')
+                    var obj = $.jstree.reference('#' + data.data.obj.context.id).get_node(data.data.nodes[0]);
+                    if (obj.type === 'group')
                         return false;
                     if (obj.li_attr.lat && obj.li_attr.lng) {
                         return;
@@ -107,7 +129,7 @@
                     var pt = null;
                     var x = data.event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
                     var y = data.event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-                   
+
 
                     var x1 = x - $('#map').offset().left;
                     var y1 = y - $('#map').offset().top;
@@ -117,7 +139,7 @@
                     if ((x1 < 0 || y1 < 0) || (x2 > 0 || y2 > 0)) {
                         return false;
                     }
-                    
+
                     var point = map.pixelToPoint(new BMap.Pixel(x1, y1));
                     obj.li_attr.lng = point.lng;
                     obj.li_attr.lat = point.lat;
@@ -130,14 +152,14 @@
                         return true;
                     }
                 },
-                'context_show.vakata': function (e,data) {
+                'context_show.vakata': function (e, data) {
                     var jstree = $.jstree.reference('#' + data.reference.context.id);
                     var node = jstree.get_node(data.reference);
-                    if (node.type == 'group' || !node.li_attr.lng || !node.li_attr.lat ){
+                    if (node.type == 'group' || !node.li_attr.lng || !node.li_attr.lat) {
                         $(data.element).hide();
                         return false;
                     }
-                    
+
                 }
             }
             );

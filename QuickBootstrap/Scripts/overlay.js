@@ -20,13 +20,13 @@ CustomOverlay.prototype.initialize = function (map) {
     div.style.whiteSpace = "nowrap";
     div.style.fontSize = '18px';
     div.className = 'glyphicon glyphicon-facetime-video';       // 'glyphicon glyphicon-map-marker';
-
+    div.style.color = 'purple';
     var content = this._span = document.createElement("span");
     content.className = 'label label-default';
-   // content.innerHTML = this._text;
     div.appendChild(content);
 
     var that = this;
+    var $map = $(this._map.Ua);
 
     div.onmouseenter = function () {
         content.className = 'label label-default';
@@ -43,28 +43,27 @@ CustomOverlay.prototype.initialize = function (map) {
         var pointStart = false;
         var x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
         var y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-        var position = $('#map').position();
-        x = x - position.left;
-        y = y - position.top;
+        x = x - $map.offset().left;
+        y = y - $map.offset().top;
         pointStart = map.pixelToPoint(new BMap.Pixel(x, y));
-        this._point = pointStart;
+        that._point = pointStart;               // 这里不要使用 this._point,会给div DOM无故添加 _point 属性，要使用that
         console.log('dragstart:' + pointStart.lng + '  ' + pointStart.lat);
     }
 
     div.ondragstop = function (event, ui) {
         var pointEnd = false;
-        var x = ui.offset.left + 10;
-        var y = ui.offset.top + 22 + 10;
-        var position = $('#map').position();
-        x = x - position.left;
-        y = y - position.top;
+        var x = ui.offset.left + $(this).width() / 2;
+        var y = ui.offset.top + $(this).height() / 2;
+
+        x = x - $map.offset().left;
+        y = y - $map.offset().top;
         pointEnd = map.pixelToPoint(new BMap.Pixel(x, y));
         console.log('dragstop:' + pointEnd.lng + '  ' + pointEnd.lat);
-        that._point = pt;
+        that._point = pointEnd;
         map.enableDragging();
     }
 
-    $(div).draggable({ scroll: true, opacity: 0.35, disabled: (flag ? false : true) });
+    $(div).draggable({ scroll: true, opacity: 0.35 });
     map.getPanes().markerPane.appendChild(div);
     return div;
 }
@@ -92,7 +91,7 @@ CustomOverlay.prototype.enableDragging = function () {
     $(this._div).draggable({ disabled: false });
 }
 
-// 不能定义 overlay原型对象的remove的方法，会覆盖原对象的remove，形成死循环
+// 不能定义 overlay原型对象的同名remove的方法，会覆盖原对象的remove，形成死循环
 //CustomOverlay.prototype.remove = function () {
 //    window.map.removeOverlay(this);
 //    return false;
@@ -108,6 +107,8 @@ CustomOverlay.prototype.toggle = function () {
         }
     }
 }
+
+// $('glyphicon-facetime-video').draggable();
 
 
 
