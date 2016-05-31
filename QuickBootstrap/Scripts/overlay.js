@@ -22,7 +22,6 @@ CustomOverlay.prototype.initialize = function (map) {
     div.className = 'glyphicon glyphicon-facetime-video';       // 'glyphicon glyphicon-map-marker';
     div.style.color = 'purple';
     var content = this._span = document.createElement("span");
-    content.className = 'label label-default';
     div.appendChild(content);
 
     var that = this;
