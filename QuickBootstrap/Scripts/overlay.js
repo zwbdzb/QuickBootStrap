@@ -1,4 +1,4 @@
-// JavaScript source code
+ï»¿// JavaScript source code
 
 function CustomOverlay(point, text, option) {
     this._point = point;
@@ -46,7 +46,7 @@ CustomOverlay.prototype.initialize = function (map) {
         x = x - $map.offset().left;
         y = y - $map.offset().top;
         pointStart = map.pixelToPoint(new BMap.Pixel(x, y));
-        that._point = pointStart;               // ÕâÀï²»ÒªÊ¹ÓÃ this._point,»á¸ødiv DOMÎŞ¹ÊÌí¼Ó _point ÊôĞÔ£¬ÒªÊ¹ÓÃthat
+        that._point = pointStart;               // è¿™é‡Œä¸è¦ä½¿ç”¨ this._point,ä¼šç»™div DOMæ— æ•…æ·»åŠ  _point å±æ€§ï¼Œè¦ä½¿ç”¨that
         console.log('dragstart:' + pointStart.lng + '  ' + pointStart.lat);
     }
 
@@ -71,7 +71,7 @@ CustomOverlay.prototype.initialize = function (map) {
 CustomOverlay.prototype.draw = function () {
     var map = this._map;
     var pixel = map.pointToOverlayPixel(this._point);
-    this._div.style.left = pixel.x - $(this._div).width() / 2 + 'px';           // ÕâÀïÓĞÒ»¸ö¿Ó£¬±ØĞëĞ¯´øpx
+    this._div.style.left = pixel.x - $(this._div).width() / 2 + 'px';           // è¿™é‡Œæœ‰ä¸€ä¸ªå‘ï¼Œå¿…é¡»æºå¸¦px
     this._div.style.top = pixel.y - $(this._div).height() / 2 + 'px';
 }
 
@@ -79,12 +79,12 @@ CustomOverlay.prototype.getPosition = function () {
     return this._point;
 }
 
-// ·µ»Øoverlay ËùÊômap -jquery¶ÔÏó
+// è¿”å›overlay æ‰€å±map -jqueryå¯¹è±¡
 CustomOverlay.prototype.getJMap = function () {
     return $(this._map.Ua);
 }
 
-// ·µ»Øoverlay ËùÊô div-jquery¶ÔÏó
+// è¿”å›overlay æ‰€å± div-jqueryå¯¹è±¡
 CustomOverlay.prototype.getJDom = function () {
     return $(this._div);
 }
@@ -97,7 +97,7 @@ CustomOverlay.prototype.enableDragging = function () {
     $(this._div).draggable({ disabled: false });
 }
 
-// ²»ÄÜ¶¨Òå overlayÔ­ĞÍ¶ÔÏóµÄÍ¬ÃûremoveµÄ·½·¨£¬»á¸²¸ÇÔ­¶ÔÏóµÄremove£¬ĞÎ³ÉËÀÑ­»·
+// ä¸èƒ½å®šä¹‰ overlayåŸå‹å¯¹è±¡çš„åŒåremoveçš„æ–¹æ³•ï¼Œä¼šè¦†ç›–åŸå¯¹è±¡çš„removeï¼Œå½¢æˆæ­»å¾ªç¯
 //CustomOverlay.prototype.remove = function () {
 //    window.map.removeOverlay(this);
 //    return false;
