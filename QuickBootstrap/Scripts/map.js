@@ -30,7 +30,6 @@ function initMap(container) {
     map.addControl(myZoomCtrl);
 
     window.map = map;
-  //   window.markerClusterer = new BMapLib.MarkerClusterer(map, { "maxZoom": "9" });
 }
 
 BMap.Map.prototype.getOverlay = function (id) {
@@ -41,16 +40,12 @@ BMap.Map.prototype.getOverlay = function (id) {
     }
 };
 
-
-
-//  静态方法
-BMap.Map.markLocation = function (point, obj) {
+BMap.Map.prototype.markLocation = function (point, obj) {
 
     /* TODO 后端更新位置*/
     var myOverlay = new CustomOverlay(point,obj.text, obj);
-    map.addOverlay(myOverlay);
+    this.addOverlay(myOverlay);
     markers.push(myOverlay);
-  //  markerClusterer.addMarker(myOverlay);
     return true;
 }
 

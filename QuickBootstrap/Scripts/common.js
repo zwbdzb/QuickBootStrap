@@ -48,5 +48,9 @@ function createTree(container, data, domHandler, docHandler) {
     for (var h in docHandler) {
         $(document).bind(h, docHandler[h]);
     }
+
+    tree.on('dragend', function (event,x,y) {
+
+    });
     return tree;
 }

@@ -47,7 +47,6 @@
         window.map = null;
         window.flag = 0;                       // edit 1 ，load 0
         window.markers = [];
-        // window.markerClusterer = null;
 
         initMap("map");
         initData();
@@ -96,7 +95,7 @@
                         var overlay  = map.getOverlay(node.li_attr.id);
                         overlay.toggle();
                         // setTimeout( overlay.toggle, 2000); 是错误的，setTimeOut 内部函数的执行环境是window，以下写法形成一个闭包
-                        setTimeout(function () { overlay.toggle() }, 2000);
+                        setTimeout(function () { overlay.toggle() }, 3000);
                     }
                 },
                 'loaded.jstree': function (e, data) {
@@ -106,7 +105,7 @@
                         if (n.li_attr && n.li_attr.lng && n.li_attr.lat) {
 
                             var point = new BMap.Point(n.li_attr.lng, n.li_attr.lat);
-                            BMap.Map.markLocation(point, n);
+                            map.markLocation(point, n);
                         }
                     });
                     
@@ -122,10 +121,10 @@
             }, {
                 'dnd_stop.vakata': function (e, data) {
 
-                    var obj = $.jstree.reference('#' + data.data.obj.context.id).get_node(data.data.nodes[0]);
-                    if (obj.type === 'group')
+                    var node = $.jstree.reference('#' + data.data.obj.context.id).get_node(data.data.nodes[0]);
+                    if (node.type === 'group')
                         return false;
-                    if (obj.li_attr.lat && obj.li_attr.lng) {
+                    if (node.li_attr.lat && node.li_attr.lng) {
                         return;
                     }
                     /* 以下将采用事件触发的方式 */
@@ -144,13 +143,10 @@
                     }
 
                     var point = map.pixelToPoint(new BMap.Pixel(x1, y1));
-                    obj.li_attr.lng = point.lng;
-                    obj.li_attr.lat = point.lat;
+                    node.li_attr.lng = point.lng;
+                    node.li_attr.lat = point.lat;
 
-                    //var ov = new BMap.Marker(point);
-                    //map.addOverlay(ov);
-
-                    if (BMap.Map.markLocation(point, obj) === true) {
+                    if (map.markLocation(point, node) === true) {
                         // TODO something  change the jstree node data
                         return true;
                     }

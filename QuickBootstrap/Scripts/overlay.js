@@ -27,17 +27,15 @@ CustomOverlay.prototype.initialize = function (map) {
     var that = this;
     var $map = $(this._map.Ua);
 
-    // 原生事件监听器
+    // 覆写原生事件监听器,默认函数参数只有event
     div.onmouseenter = function () {
         content.className = 'label label-default';
         this.getElementsByTagName("span")[0].innerHTML = that._text;
     }
-
     div.onmouseleave = function () {
         content.className = '';
         this.getElementsByTagName("span")[0].innerHTML = '';
     }
-
     div.ondragstart = function (event,ui) {
         map.disableDragging();
         var pointStart = false;
@@ -49,7 +47,6 @@ CustomOverlay.prototype.initialize = function (map) {
         that._point = pointStart;               // 这里不要使用 this._point,会给div DOM无故添加 _point 属性，要使用that
         console.log('dragstart:' + pointStart.lng + '  ' + pointStart.lat);
     }
-
     div.ondragstop = function (event,ui) {
         var pointEnd = false;
         var x = ui.offset.left + $(this).width() / 2;
@@ -61,6 +58,11 @@ CustomOverlay.prototype.initialize = function (map) {
         console.log('dragstop:' + pointEnd.lng + '  ' + pointEnd.lat);
         that._point = pointEnd;
         map.enableDragging();
+
+        // 对外触发节点拖拽完成事件
+        var node = $.jstree.reference('#using_json').get_node(that._option.id)
+        node.li_attr.lng = pointEnd.lng;
+        node.li_attr.lat = pointEnd.lat;
     }
     
     // 给div 提供自由拖拽的能力
@@ -69,29 +71,29 @@ CustomOverlay.prototype.initialize = function (map) {
         opacity: 0.35,
         start: function (event, ui) {           // jquery 事件监听器
             console.log(arguments);
-        //    map.disableDragging();
-        //    var pointStart = false;
-        //    var x = event.clientX;
-        //    var y = event.clientY;
-        //    x = x - $map.offset().left;
-        //    y = y - $map.offset().top;
-        //    pointStart = map.pixelToPoint(new BMap.Pixel(x, y));
-        //    that._point = pointStart;               // 这里不要使用 this._point,会给div DOM无故添加 _point 属性，要使用that
-        //    console.log('dragstart:' + pointStart.lng + '  ' + pointStart.lat);
+            //map.disableDragging();
+            //var pointStart = false;
+            //var x = event.clientX;
+            //var y = event.clientY;
+            //x = x - $map.offset().left;
+            //y = y - $map.offset().top;
+            //pointStart = map.pixelToPoint(new BMap.Pixel(x, y));
+            //that._point = pointStart;               // 这里不要使用 this._point,会给div DOM无故添加 _point 属性，要使用that
+            //console.log('dragstart:' + pointStart.lng + '  ' + pointStart.lat);
         },
         stop: function (event, ui) {
             console.log(arguments);
-        //    var pointEnd = false;
-        //    var x = ui.offset.left + $(this).width() / 2;
-        //    var y = ui.offset.top + $(this).height() / 2;
+            //var pointEnd = false;
+            //var x = ui.offset.left + $(this).width() / 2;
+            //var y = ui.offset.top + $(this).height() / 2;
 
-        //    x = x - $map.offset().left;
-        //    y = y - $map.offset().top;
-        //    pointEnd = map.pixelToPoint(new BMap.Pixel(x, y));
-        //    console.log('dragstop:' + pointEnd.lng + '  ' + pointEnd.lat);
-        //    that._point = pointEnd;
-        //    map.enableDragging();
-        }
+            //x = x - $map.offset().left;
+            //y = y - $map.offset().top;
+            //pointEnd = map.pixelToPoint(new BMap.Pixel(x, y));
+            //console.log('dragstop:' + pointEnd.lng + '  ' + pointEnd.lat);
+            //that._point = pointEnd;
+            //map.enableDragging();
+         }
     });
     map.getPanes().markerPane.appendChild(div);
     return div;
@@ -142,8 +144,6 @@ CustomOverlay.prototype.toggle = function () {
         }
     }
 }
-
-// $('glyphicon-facetime-video').draggable();
 
 
 
