@@ -47,7 +47,7 @@ CustomOverlay.prototype.initialize = function (map) {
         that._point = pointStart;               // 这里不要使用 this._point,会给div DOM无故添加 _point 属性，要使用that
         console.log('dragstart:' + pointStart.lng + '  ' + pointStart.lat);
     }
-    div.ondragstop = function (event,ui) {
+    div.ondragstop = function (event, ui) {
         var pointEnd = false;
         var x = ui.offset.left + $(this).width() / 2;
         var y = ui.offset.top + $(this).height() / 2;
@@ -67,6 +67,7 @@ CustomOverlay.prototype.initialize = function (map) {
     
     // 给div 提供自由拖拽的能力
     $(div).draggable({
+        disabled:true,
         scroll: true,
         opacity: 0.35,
         start: function (event, ui) {           // jquery 事件监听器
@@ -78,7 +79,7 @@ CustomOverlay.prototype.initialize = function (map) {
             //x = x - $map.offset().left;
             //y = y - $map.offset().top;
             //pointStart = map.pixelToPoint(new BMap.Pixel(x, y));
-            //that._point = pointStart;               // 这里不要使用 this._point,会给div DOM无故添加 _point 属性，要使用that
+            //that._point = pointStart;               
             //console.log('dragstart:' + pointStart.lng + '  ' + pointStart.lat);
         },
         stop: function (event, ui) {
@@ -95,6 +96,9 @@ CustomOverlay.prototype.initialize = function (map) {
             //map.enableDragging();
          }
     });
+
+    console.log($(div).draggable("option"));
+
     map.getPanes().markerPane.appendChild(div);
     return div;
 }
@@ -121,11 +125,11 @@ CustomOverlay.prototype.getJDom = function () {
 }
 
 CustomOverlay.prototype.disableDragging = function () {
-    $(this._div).draggable("destroy");			
+    $(this._div).draggable("disable");
 }
 
 CustomOverlay.prototype.enableDragging = function () {
-    $(this._div).draggable({ disabled: false });
+    $(this._div).draggable("enable");
 }
 
 // 不能定义 overlay原型对象的同名remove的方法，会覆盖原对象的remove，形成死循环

@@ -21,11 +21,12 @@ function createTree(container, data, domHandler, docHandler) {
         },
         'contextmenu': {
             'select_node': false,
-            'show_at_node': false,
+            'show_at_node': tree,
             'items': {
                 "delMarker": {
                     _disabled: false,
                     label: "删除标记",
+                    icon: 'glyphicon glyphicon-remove',
                     action: function (obj) {
                         var node = $.jstree.reference("#" + container).get_node(obj.reference);
                         node.li_attr.lng = null;
