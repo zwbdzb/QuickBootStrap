@@ -1,7 +1,7 @@
 # QuickBootStrap
 
 ## 背景
-    QuickBootstrap 广告营销业绩管理平台最早是基于网上开源急速QuickBootstrap开发的外包项目。
+    QuickBootstrap 广告营销业绩管理平台最早是基于网上开源QuickBootstrap开发的外包项目。
       项目主要是 实时接收服务端传递的广告佣金分成数据，服务端确认有效佣金之后[服务端最早1个月确认数据，最晚需要4个月确认数据]，  
       主动请求接口更新实时存储的佣金数据。
     后来集成了baiduLBS自定义实时标记的开发功能： 从jstree树上拖拽节点到百度地图上标记定位。 
