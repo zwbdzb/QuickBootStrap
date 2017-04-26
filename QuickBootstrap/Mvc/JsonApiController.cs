@@ -18,35 +18,21 @@ namespace QuickBootstrap.Mvc
     public class JsonApiController : ApiController
     {
         private List<ResponseError> _validationErrors;
-        protected List<ResponseError> ValidationErrors
-        {
-            get { return _validationErrors ?? (_validationErrors = new List<ResponseError>()); }
-        }
+        protected List<ResponseError> ValidationErrors => _validationErrors ?? (_validationErrors = new List<ResponseError>());
+       
 
-        protected bool HasValidationError
-        {
-            get { return ValidationErrors.Count > 0; }
-        }
+        protected bool HasValidationError => ValidationErrors.Count > 0;
+       
 
-        protected HttpContext HttpContext
-        {
-            get { return HttpContext.Current; }
-        }
+        protected HttpContext HttpContext => HttpContext.Current;
 
-        protected HttpRequest HttpRequest
-        {
-            get { return HttpContext.Current.Request; }
-        }
+        protected HttpRequest HttpRequest => HttpContext.Current.Request;
+        
 
-        protected HttpResponse HttpResponse
-        {
-            get { return HttpContext.Current.Response; }
-        }
+        protected HttpResponse HttpResponse => HttpContext.Current.Response; 
+       
 
-        protected HttpServerUtility Server
-        {
-            get { return HttpContext.Current.Server; }
-        }
+        protected HttpServerUtility Server => HttpContext.Current.Server;
 
 
         [NonAction]

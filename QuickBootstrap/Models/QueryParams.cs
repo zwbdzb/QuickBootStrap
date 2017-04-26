@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace QuickBootstrap.Models
 {
-
-
     public class QueryParams
     {
         public int Limit { get; set; }

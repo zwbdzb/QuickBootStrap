@@ -10,14 +10,14 @@ namespace QuickBootstrap.Entities
 
         static DefaultDbContext()
         {
-            System.Data.Entity.Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DefaultDbContext>());
+         //   Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DefaultDbContext>());
         }
      
         public DbSet<User> User { get; set; }
 
         public DbSet<SalesData>  SalesData { get; set; }
 
-        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<SalesData>().Property(x => x.Comm).HasPrecision(18, 4);
             modelBuilder.Entity<SalesData>().Property(x => x.Price).HasPrecision(18, 2);

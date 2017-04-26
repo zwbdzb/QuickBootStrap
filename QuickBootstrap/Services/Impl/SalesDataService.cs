@@ -6,8 +6,6 @@ using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
-using System.Web.Mvc.Html;
 using AutoMapper;
 using QuickBootstrap.Entities;
 using QuickBootstrap.Extendsions;

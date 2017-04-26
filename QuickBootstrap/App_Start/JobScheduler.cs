@@ -13,11 +13,11 @@ namespace QuickBootstrap.App_Start
     {
         public static void Start()
         {
-            IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
+            var scheduler = StdSchedulerFactory.GetDefaultScheduler();
             Debug.WriteLine("default Scheduler is:" + scheduler.SchedulerName);
             scheduler.Start();
 
-            IJobDetail job = JobBuilder.Create<PerformanceExportJob>().Build();
+            var job = JobBuilder.Create<PerformanceExportJob>().Build();
 
             // 间隔24小时，每天1点执行
             var  trigger = TriggerBuilder.Create()

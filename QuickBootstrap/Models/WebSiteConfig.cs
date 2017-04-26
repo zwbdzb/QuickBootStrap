@@ -7,7 +7,7 @@ using QuickBootstrap.Attributes;
 
 namespace QuickBootstrap.Models
 {
-    //  网站配置
+    //网站配置
     public class WebSiteConfig
     {
         [BootstrapTextBox]

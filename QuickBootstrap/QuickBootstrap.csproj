@@ -204,7 +204,7 @@
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\UserManageController.cs" />
     <Compile Include="Controllers\WebAPI\SalesDataController.cs" />
-    <Compile Include="Entities\InitData.cs" />
+    <Compile Include="Entities\InitDataBase.cs" />
     <Compile Include="Entities\SalesData.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\DefaultDbContext.cs" />

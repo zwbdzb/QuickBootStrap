@@ -8,7 +8,9 @@ using QuickBootstrap.Models;
 
 namespace QuickBootstrap.Profiles
 {
-    // 命名的映射类
+    /// <summary>
+    /// AutoMapper 映射规则
+    /// </summary>
     public class SaleDataRequestProfile: Profile
     {
         public SaleDataRequestProfile()

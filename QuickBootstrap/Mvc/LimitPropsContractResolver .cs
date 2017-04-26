@@ -11,9 +11,9 @@ namespace MillenniumHotels.Website.Mvc
     // 动态决定属性是否可以序列化
     public class LimitPropsContractResolver : DefaultContractResolver
     {
-        private string[] props = null;
+        private readonly string[] _props = null;
 
-        private bool retain;
+        private readonly bool _retain;
 
         /// <summary>
         /// 构造函数
@@ -23,9 +23,9 @@ namespace MillenniumHotels.Website.Mvc
         public LimitPropsContractResolver(string[] props, bool retain = true)
         {
             //指定要序列化属性的清单
-            this.props = props;
+            _props = props;
 
-            this.retain = retain;
+            _retain = retain;
         }
 
         protected override IList<JsonProperty> CreateProperties(Type type,MemberSerialization memberSerialization)
@@ -34,14 +34,10 @@ namespace MillenniumHotels.Website.Mvc
             //只保留清单有列出的属性
             return list.Where(p =>
             {
-                if (retain)
-                {
-                    return props.Contains(p.PropertyName);
-                }
-                else
-                {
-                    return !props.Contains(p.PropertyName);
-                }
+                if (_retain)
+                    return _props.Contains(p.PropertyName);
+
+                return !_props.Contains(p.PropertyName);
             }).ToList();
         }
     }

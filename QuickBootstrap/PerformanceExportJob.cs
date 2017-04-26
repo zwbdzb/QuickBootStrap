@@ -22,38 +22,29 @@ namespace QuickBootstrap
 {
     public class PerformanceExportJob:IJob
     {
-        ILog log = LogManager.GetLogger(typeof(PerformanceExportJob));
+        private  readonly ILog log = LogManager.GetLogger(typeof(PerformanceExportJob));
 
         private readonly ISalesDataService _salesDataService = UnityHelper.Instance.Unity.Resolve<ISalesDataService>();
 
         private static RestClient _client;
-        private static RestClient WebClient
+        public  static RestClient WebClient
         {
             get
             {
-                if (_client == null)
-                {
-                    _client = new RestClient("http://www.linktech.cn");
-                }
+                _client  = _client ?? new RestClient("http://www.linktech.cn");
                 return _client;
             }
         }
+        private static string AccountId => ConfigurationManager.AppSettings["linktechAccountId"];
 
-        private static string AccountId
-        {
-            get { return ConfigurationManager.AppSettings["linktechAccountId"]; }
-        }
 
-        private static string AccountPwd
-        {
-            get { return ConfigurationManager.AppSettings["linktechAccountPwd"]; }
-        }
+        private static string AccountPwd => ConfigurationManager.AppSettings["linktechAccountPwd"];
 
 
         // 每天执行90次，每次分别执行 -120 天到-90 天的业绩数据
         public void Execute(IJobExecutionContext context)
         {
-            log.Info(string.Format("{0}-start exec ", DateTime.Now));
+            log.Info($"{DateTime.Now}-start exec ");
             // 作业范围
             var queryStartTime = DateTime.Now.AddDays(-30).AddDays(-90);
             var stopWatch = new Stopwatch();
@@ -84,7 +75,7 @@ namespace QuickBootstrap
 
             stopWatch.Stop();
             var time = stopWatch.ElapsedMilliseconds;
-            log.Info(string.Format("{0}-exec cost time {1} ", DateTime.Now, time));
+            log.Info($"{DateTime.Now}-exec cost time {time} ");
         }
 
         // http://www.linktech.cn/AC/trans_list.htm?account_id=xiaoqi3535&sign=6e4ffd56aac70e0ebe8d670946624f58&syyyymmdd=20150901&eyyyymmdd=20150931&type=&affiliate_id=&merchant_id=&stat=true&output_type=json
@@ -118,7 +109,7 @@ namespace QuickBootstrap
                     foreach (var c in orderResp.Order_list)
                     {
                         _salesDataService.UpdateSalesData(
-                            x => x.O_cd.Equals(c.Order_code, StringComparison.CurrentCultureIgnoreCase),
+                            x => x.O_cd.Equals(c.Order_code, StringComparison.OrdinalIgnoreCase),
                             x =>
                             {
                                 x.Sales = c.Sales;
@@ -134,14 +125,14 @@ namespace QuickBootstrap
                 }
                 else
                 {
-                    log.Info(string.Format("    {0}查询{1}-start query result : no data ", DateTime.Now, startTime));
+                    log.Info(string.Format("{0}查询{1}-start query result : no data ", DateTime.Now, startTime));
                 }
                
             }
             else 
             {
 
-                log.Error(string.Format("   {0}查询{1}-start query error:{3}", DateTime.Now, startTime ));
+                log.Error(string.Format("{0}查询{1}-start query error:{3}", DateTime.Now, startTime ));
             }
         }
     }

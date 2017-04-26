@@ -6,6 +6,9 @@ using AutoMapper;
 
 namespace QuickBootstrap
 {
+    /// <summary>
+    /// AutoMapper 对象映射配置
+    /// </summary>
     public class AutoMapConfiguration
     {
         public static void Configure()

@@ -49,7 +49,7 @@ namespace QuickBootstrap
             JobScheduler.Stop();
 
             var log = LogManager.GetLogger(typeof(MvcApplication));
-            log.Info(string.Format("{0}- website applicetion end ", DateTime.Now ));
+            log.Info($"{DateTime.Now}- website applicetion end ");
 
         }
 
@@ -68,14 +68,11 @@ namespace QuickBootstrap
         /// </summary>
         private static void InitDataBase()
         {
-            //数据库不存在时创建
-            Database.SetInitializer(new CreateDatabaseIfNotExists<DefaultDbContext>());
-
-            //初始化数据
-            Database.SetInitializer(new InitData());
+            //初始化数据，内部完成数据库不存在创建数据库，
+            Database.SetInitializer(new InitDataBase());
 
             var log = LogManager.GetLogger(typeof(MvcApplication));
-            log.Info(string.Format("{0}-start", DateTime.Now));
+            log.Info($"{DateTime.Now}- website start");
         }
     }
 }

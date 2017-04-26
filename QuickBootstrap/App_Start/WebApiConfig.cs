@@ -7,9 +7,11 @@ using System.Web.Http;
 
 namespace QuickBootstrap
 {
+    /// <summary>
+    ///  WebAPI 配置
+    /// </summary>
     public static class WebApiConfig
     {
-        // 设置特性路由
         public static void Register(HttpConfiguration config)
         {
             // Web API routes
