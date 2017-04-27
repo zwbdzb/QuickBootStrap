@@ -5,9 +5,7 @@ function CustomOverlay(point, text, option) {
     this._text = text;
     this._option = option;
 }
-
 CustomOverlay.prototype = new BMap.Overlay();
-
 CustomOverlay.prototype.initialize = function (map) {
     this._map = map;
     var div = this._div = document.createElement("div");
@@ -23,9 +21,9 @@ CustomOverlay.prototype.initialize = function (map) {
     div.style.color = 'purple';
     var content = this._span = document.createElement("span");
     div.appendChild(content);
-
+    
     var that = this;
-    var $map = $(this._map.Ua);
+    var $map = $(this._map.Dom);
 
     // 覆写原生事件监听器,默认函数参数只有event
     div.onmouseenter = function () {
@@ -36,7 +34,7 @@ CustomOverlay.prototype.initialize = function (map) {
         content.className = '';
         this.getElementsByTagName("span")[0].innerHTML = '';
     }
-    div.ondragstart = function (event,ui) {
+    div.ondragstart = function (event) {
         map.disableDragging();
         var pointStart = false;
         var x = event.clientX;

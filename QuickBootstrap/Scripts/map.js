@@ -5,6 +5,7 @@
 
 function initMap(container) {
     var map = new BMap.Map(container);
+    map.Dom = $("#" + container);
     var local = new BMap.LocalCity();
     local.get(function (LocalCityResult) {
         map.centerAndZoom(LocalCityResult.center, 13);
@@ -28,9 +29,9 @@ function initMap(container) {
 
     var myZoomCtrl = new CustomControl();
     map.addControl(myZoomCtrl);
-
-    window.map = map;
+    window.map = map;   
 }
+
 
 BMap.Map.prototype.getOverlay = function (id) {
     var overlays = this.getOverlays();

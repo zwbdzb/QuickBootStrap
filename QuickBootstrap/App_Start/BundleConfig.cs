@@ -54,7 +54,7 @@ namespace QuickBootstrap
                       "~/Content/bootstrap-datepicker.css",
                       "~/Content/base.css"));
 
-          //  BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

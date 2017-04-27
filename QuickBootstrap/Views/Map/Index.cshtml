@@ -48,9 +48,9 @@
         window.flag = 0;                       // edit 1 ，load 0
         window.markers = [];
 
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
 
         initMap("map");
         initData();
@@ -104,8 +104,7 @@
                 },
                 'loaded.jstree': function (e, data) {
                     data.instance.open_all();
-                    //  data.instance._model.data 是object，不是array，还不能方便的使用 grep，所以这里使用each【用于遍历对象和数组】
-                    var nodes = $.each(data.instance._model.data, function (i, n) {
+                    $.each(data.instance._model.data, function (i, n) {
                         if (n.li_attr && n.li_attr.lng && n.li_attr.lat) {
 
                             var point = new BMap.Point(n.li_attr.lng, n.li_attr.lat);
