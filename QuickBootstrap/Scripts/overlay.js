@@ -95,8 +95,6 @@ CustomOverlay.prototype.initialize = function (map) {
          }
     });
 
-    console.log($(div).draggable("option"));
-
     map.getPanes().markerPane.appendChild(div);
     return div;
 }
