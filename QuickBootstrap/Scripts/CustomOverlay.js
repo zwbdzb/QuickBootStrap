@@ -76,7 +76,7 @@ CustomOverlay.prototype.initialize = function (map) {
 
     // 给div 提供自由拖拽的能力,由Jquery—UI提供
     $(div).draggable({
-        disabled: false,
+        disabled: !window.flag,
         scroll: true,
         opacity: 0.35,
         start: function (event) {
