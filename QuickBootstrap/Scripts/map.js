@@ -46,10 +46,6 @@ BMap.Map.prototype.markLocation = function (point, obj) {
     /* TODO 后端更新位置*/
     var myOverlay = new CustomOverlay(point, obj.text, obj);
     this.addOverlay(myOverlay);
-
-   // myOverlay.enableDragging();
-   // console.log(myOverlay.getJDom().draggable("option"));
-
     markers.push(myOverlay);
     return true;
 }
@@ -76,12 +72,12 @@ CustomControl.prototype.initialize = function (map) {
     div.setAttribute('data-toggle', 'tooltip');     // 改变已有属性的值，或创建新属性
     div.setAttribute('data-placement', 'right');     // 改变已有属性的值，或创建新属性
     div.setAttribute('title', '单击切换模式');     // 改变已有属性的值，或创建新属性
-    div.onclick = function (e) {
-        if (flag == 0) {
+    div.onclick = function() {
+        if (flag === 0) {
             flag = 1;
             div.childNodes[0].textContent = "编辑模式";
             div.className = 'glyphicon glyphicon-pencil';
-            //  改变所有marker的 编辑状态
+            //  改变所有marker的 编辑状态,应该把设备列表做成map里面，形成一个大的map控件
             var markers = map.getOverlays();
             $.each(markers, function (i,n) {
                 if (n instanceof CustomOverlay) {

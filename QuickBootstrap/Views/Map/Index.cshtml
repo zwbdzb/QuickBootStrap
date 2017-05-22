@@ -4,7 +4,7 @@
 
 @section scripts{
     @Scripts.Render("http://api.map.baidu.com/api?v=2.0&ak=SSC5M3AFkxWqbgXLDpItGi8g")
-    <script src="@Url.Content("~/scripts/overlay.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/scripts/CustomOverlay.js")" type="text/javascript"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
     @Scripts.Render("http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer.js")
@@ -62,9 +62,8 @@
                             'text': 'Simple root node',
                             'type': 'group',                  // 自定义类型type
                             'children': [
-                              { 'text': 'Child 0', 'li_attr': { lng: '104.062736', lat: '30.528012' } },
-                                'Child 01',
-
+                              { 'text': 'Child 0', 'li_attr': { lng: '104.062735', lat: '30.528018' } },
+                                'Child 01'
                             ]
                         },
                         {
@@ -127,7 +126,7 @@
                     var node = $.jstree.reference('#' + data.data.obj.context.id).get_node(data.data.nodes[0]);
                     if (node.type === 'group')
                         return false;
-                    if ( flag ===0 ||  node.li_attr.lat && node.li_attr.lng) {
+                    if ( flag === 0 ||  node.li_attr.lat && node.li_attr.lng) {
                         return false;
                     }
                     /* 以下将采用事件触发的方式 */
