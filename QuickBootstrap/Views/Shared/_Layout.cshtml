@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<div class="navbar navbar-inverse  navbar-static-top">
+<header class="navbar navbar-inverse  navbar-static-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -54,20 +54,21 @@
 
         </div>
     </div>
-</div>
+</header>
 
 <div class="container body-content">
     <div>
         @RenderBody()
     </div>
     <hr/>
-    <footer class="footer text-muted">
-        <p>&copy; @DateTime.Now.Year 有态度的马甲 版权所有</p>
-    </footer>
 </div>
-@Html.Partial("_PartialTongJiCode")
+
+<footer class="footer text-muted">
+    <p>&copy; @DateTime.Now.Year 有态度的马甲 版权所有</p>
+</footer>
 
 </body>
+
 </html>
 
 @RenderSection("import", required: false)

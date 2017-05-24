@@ -1,14 +1,8 @@
-﻿// JavaScript source code
-
-function CustomOverlay(point, text, option) {
+﻿///
+function CustomOverlay(point, data) {
     this._point = point;
-    this._text = text;
-    this._option = option;
-
-     //  TODO  明天来验证词法作用域的概念
-    //this.getCurrentMap = function() {
-    //    return $(this._map.Dom);
-    //};  
+    this._data = data;
+   // this._style = style;
 }
 CustomOverlay.prototype = new BMap.Overlay();
 
@@ -35,44 +29,12 @@ CustomOverlay.prototype.initialize = function (map) {
     // 覆写原生事件监听器,默认函数参数只有event
     div.onmouseenter = function () {
         content.className = 'label label-default';
-        this.getElementsByTagName("span")[0].innerHTML = that._text;
+        this.getElementsByTagName("span")[0].innerHTML = that._data.text;
     }
     div.onmouseleave = function () {
         content.className = '';
         this.getElementsByTagName("span")[0].innerHTML = '';
     }
-    //#region  原生javascript写法
-    //div.ondragstart = function (event) {
-    //    map.disableDragging();
-    //    var pointStart;
-    //    var x = event.clientX;
-    //    var y = event.clientY;
-    //    x = x - $map.offset().left;
-    //    y = y - $map.offset().top;
-    //    pointStart = map.pixelToPoint(new BMap.Pixel(x, y));
-    //    that._point = pointStart;               // 这里不要使用 this._point,会给div DOM无故添加 _point 属性，要使用that
-    //    console.log('dragstart:' + pointStart.lng + '  ' + pointStart.lat);
-    //}
-    //div.ondragstop = function (event, ui) {
-    //    var pointEnd;
-    //    var x = ui.offset.left + $(this).width() / 2;
-    //    var y = ui.offset.top + $(this).height() / 2;
-
-    //    x = x - $map.offset().left;
-    //    y = y - $map.offset().top;
-    //    pointEnd = map.pixelToPoint(new BMap.Pixel(x, y));
-    //    console.log('dragstop:' + pointEnd.lng + '  ' + pointEnd.lat);
-    //    that._point = pointEnd;
-    //    map.enableDragging();
-
-    //    // 对外触发节点拖拽完成事件
-    //    var node = $.jstree.reference('#using_json').get_node(that._option.id);
-    //    node.li_attr.lng = pointEnd.lng;
-    //    node.li_attr.lat = pointEnd.lat;
-    //}
-
-    //#endregion
-
 
     // 给div 提供自由拖拽的能力,由Jquery—UI提供
     $(div).draggable({
@@ -99,8 +61,8 @@ CustomOverlay.prototype.initialize = function (map) {
             pointEnd = map.pixelToPoint(new BMap.Pixel(x, y));
             that._point = pointEnd;
             map.enableDragging();
-
-            var node = $.jstree.reference('#using_json').get_node(that._option.id);
+            // TODO 使用事件触发的方式更新tree上的数据
+            var node = $.jstree.reference('#using_json').get_node(that._data.id);
             node.li_attr.lng = pointEnd.lng;
             node.li_attr.lat = pointEnd.lat;
         }
@@ -137,12 +99,6 @@ CustomOverlay.prototype.disableDragging = function () {
 CustomOverlay.prototype.enableDragging = function () {
     $(this._div).draggable("enable");
 }
-
-// 不能定义overlay原型对象的同名remove的方法，会覆盖原对象的remove，形成死循环
-//CustomOverlay.prototype.remove = function () {
-//    window.map.removeOverlay(this);
-//    return false;
-//}
 
 CustomOverlay.prototype.toggle = function () {
     if (this._span) {

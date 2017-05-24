@@ -43,6 +43,7 @@ function createTree(container, data, domHandler, docHandler) {
         }
     }
     var tree = $("#" + container).jstree(conf);
+
     for (var h in domHandler) {
         tree.on(h, domHandler[h]);
     }
