@@ -2,7 +2,6 @@
 function CustomOverlay(point, data, style) {
     this._point = point;
     this._data = data;
-    this._style = style;
 }
 CustomOverlay.prototype = new BMap.Overlay();
 
@@ -10,7 +9,12 @@ CustomOverlay.prototype = new BMap.Overlay();
 CustomOverlay.prototype.initialize = function (map) {
     this._map = map;
     var div = this._div = document.createElement("div");
-
+    // 行内样式优先于 页面样式，优先于外挂样式
+    div.style.position = 'absolute';
+    div.style.width = '24px';
+    div.style.height = '24px';
+    div.style.whiteSpace = "nowrap";
+    div.style.fontSize = '18px';
     div.className = $.jsmap.reference(map).options.overlay.style|| 'glyphicon glyphicon-facetime-video';       // 'glyphicon glyphicon-map-marker';
     var content = this._span = document.createElement("span");
     div.appendChild(content);
@@ -47,7 +51,7 @@ CustomOverlay.prototype.initialize = function (map) {
             var $map = $("#" + map.container);
             var pointEnd;
             var x = ui.offset.left + $(this).width() / 2;
-            var y = ui.offset.top + $(this).height() / 2;
+            var y = ui.offset.top+ $(this).height() / 2;
 
             x = x - $map.offset().left;
             y = y - $map.offset().top;
@@ -67,9 +71,11 @@ CustomOverlay.prototype.initialize = function (map) {
 
 CustomOverlay.prototype.draw = function () {
     var map = this._map;
-    var pixel = map.pointToOverlayPixel(this._point);
-    this._div.style.left = pixel.x + 'px';           //   - $(this._div).width() / 2  这里有一个坑，必须携带px
-    this._div.style.top = pixel.y + 'px';         // - $(this._div).height() / 2 
+    var position = map.pointToOverlayPixel(this._point);
+
+    this._div.style.left = position.x - $(this._div).width() / 2 + "px";
+    this._div.style.top = position.y - $(this._div).height() / 2 + "px";
+
 }
 
 //  对外提供的API
