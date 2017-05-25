@@ -3,10 +3,10 @@ $.jsmap = {
     version : '0.0.1',
     defaults: {
         'controls': { 
-            MapTypeControl :{ isopen:1},
-            OverviewMapControl:{ isopen:1},
-            ScaleControl:{ isopen:1},
-            NavigationControl: { isopen:1}
+                MapTypeControl: { isopen: 1 },
+                OverviewMapControl: { isopen: 1 },
+                ScaleControl: { isopen: 1 },
+                NavigationControl: { isopen: 1 }
         },
         'overlay': {
             'icon': 'glyphicon glyphicon-facetime-video',
@@ -30,8 +30,6 @@ $.jsmap.create = function(el, options) {
     var options = $.extend(true, {}, $.jsmap.defaults, options);
 
     var jsmap = new $.jsmap.core(el, options);
-    jsmap.container = el;
-    jsmap.userMarkers = [];
     return jsmap;
 }
 
@@ -43,6 +41,11 @@ $.jsmap.create = function(el, options) {
 	 */
 $.jsmap.core = function(el,options) {
     var map = new BMap.Map(el);
+
+    map.container = el;
+    this.map = map;
+    this.userMarkers = [];
+    this.options = options;
 
     var local = new BMap.LocalCity();
     local.get(function (localCityResult) {
@@ -70,34 +73,33 @@ $.jsmap.core = function(el,options) {
 
     var statusCtrl = new StatusControl();
     map.addControl(statusCtrl);
-    var treeControl = new TreeControl(conf);
+    var treeControl = new TreeControl(options.controls.tree);
     map.addControl(treeControl);
-    
-    return map;
 };
 
-/* map container ， control context map*/
-$.jsmap.reference = function (args) {
-    return window.jsmap;
-}
-
-BMap.Map.prototype.findOverlay = function(id) {
-    var overlays = this.getOverlays();
+$.jsmap.core.prototype.findOverlay = function (id) {
+    var overlays = this.map.getOverlays();
     for (x in overlays) {
         if (!!overlays[x]._data && overlays[x]._data.id === id)
             return overlays[x];
     }
 };
 
-BMap.Map.prototype.getUserMarkers = function() {
+$.jsmap.core.prototype.getUserMarkers = function () {
     return this.userMarkers;
 }
 
-BMap.Map.prototype.loadOverlay = function (point, obj) {   
-    var myOverlay = new CustomOverlay(point,obj );
-    this.addOverlay(myOverlay);
+$.jsmap.core.prototype.loadMarker = function (point, obj,style) {
+    var myOverlay = new CustomOverlay(point, obj,style);
+    this.map.addOverlay(myOverlay);
     this.userMarkers.push(myOverlay);
     return true;
+}
+
+/* map container ， internal map*/
+$.jsmap.reference = function (args) {
+    // TODO 怎么根据id，dom返回 jsmap对象
+    return window.jsmap;
 }
 
 function StatusControl() {
@@ -119,8 +121,9 @@ StatusControl.prototype.initialize = function (map) {
     div.setAttribute('data-placement', 'right');     // 改变已有属性的值，或创建新属性
     div.setAttribute('title', '单击切换模式');     // 改变已有属性的值，或创建新属性
     div.onclick = function() {
-        if (flag === 0) {
-            flag = 1;
+        if ( !$.jsmap.reference(map).status ) {
+            $.jsmap.reference(map).status = true;
+
             div.childNodes[0].textContent = "编辑模式";
             div.className = 'glyphicon glyphicon-pencil';
             //  改变所有marker的 编辑状态,应该把设备列表做成map里面，形成一个大的map控件
@@ -131,7 +134,7 @@ StatusControl.prototype.initialize = function (map) {
                 }
             });
         } else {
-            flag = 0;
+            $.jsmap.reference(map).status = false;
             div.childNodes[0].textContent = "正常模式";
             div.className = 'glyphicon glyphicon-star';
             // 改变所有marker的编辑状态
@@ -195,23 +198,19 @@ $.jsmap.defaults.tree = {
                         node.li_attr.lng = null;
                         node.li_attr.lat = null;
                         /* TODO 以下应该当做事件触发 */
-                        var overlay = map.getOverlay(node.id);
+                        var overlay = $.jsmap.reference(map).map.getOverlay(node.id);
                         map.removeOverlay(overlay);
                     }
 
                 }
             }
-        }
-    },
-    // TODO 下面的事件订阅应该作为默认事件订阅，移到这里来
-    events: {
-        
+        },
     }
 }
 
- // 用于反射出tree控件
-$.jsmap.controls.tree = function(options,parent) {
+$.jsmap.controls.tree = function (options, parent) {
     var options = $.fn.extend(true, {}, $.jsmap.defaults.tree, options);
+    var jsmap = $.jsmap.reference(parent);
 
     var el = options.treeId;
     var domHandlers = {
@@ -221,7 +220,7 @@ $.jsmap.controls.tree = function(options,parent) {
                 if (n.li_attr && n.li_attr.lng && n.li_attr.lat) {
                     // TODO 这里也应该用事件通知的方式来完成
                     var point = new BMap.Point(n.li_attr.lng, n.li_attr.lat);
-                    $.jsmap.reference(parent).loadOverlay(point, n);
+                    $.jsmap.reference(parent).loadMarker(point, n);
                 }
             });
 
@@ -230,14 +229,14 @@ $.jsmap.controls.tree = function(options,parent) {
             var node = data.node;
             $('#' + el).jstree("toggle_node", node);
             if (node.parent === '#') {
-                map.reset();
+                $.jsmap.reference(parent).map.reset();
                 return false;
             }
             if (node.li_attr.lng && node.li_attr.lat) {
                 var pt = new BMap.Point(node.li_attr.lng, node.li_attr.lat);
-                var map = $.jsmap.reference(parent);
-                map.panTo(pt);
-                var overlay = map.findOverlay(node.li_attr.id);
+                var jsmap = $.jsmap.reference(parent);
+                jsmap.map.panTo(pt);
+                var overlay = jsmap.findOverlay(node.li_attr.id);
                 overlay.toggle();
                 // setTimeout( overlay.toggle, 2000); 是错误的，setTimeOut 内部函数的执行环境是window，以下写法形成一个闭包
                 setTimeout(function () {
@@ -260,7 +259,8 @@ $.jsmap.controls.tree = function(options,parent) {
             var node = $.jstree.reference('#' + data.data.obj.context.id).get_node(data.data.nodes[0]);
             if (node.type === 'group')
                 return false;
-            if (flag === 0 || node.li_attr.lat && node.li_attr.lng) {
+            var jsmap = $.jsmap.reference(parent);
+            if (!jsmap.status || node.li_attr.lat && node.li_attr.lng) {
                 return false;
             }
             /* 以下将采用事件触发的方式 */
@@ -268,21 +268,22 @@ $.jsmap.controls.tree = function(options,parent) {
             var x = data.event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
             var y = data.event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 
+            var jsmap = $.jsmap.reference(parent);
+            var $map = $("#" + jsmap.map.container);
+            var x1 = x - $map.offset().left;
+            var y1 = y - $map.offset().top;
 
-            var x1 = x - $('#map').offset().left;
-            var y1 = y - $('#map').offset().top;
-
-            var x2 = x - ($('#map').offset().left + $('#map').width());
-            var y2 = y - ($('#map').offset().top + $('#map').height());
+            var x2 = x - ($map.offset().left + $map.width());
+            var y2 = y - ($map.offset().top + $map.height());
             if ((x1 < 0 || y1 < 0) || (x2 > 0 || y2 > 0)) {
                 return false;
             }
 
-            var point = map.pixelToPoint(new BMap.Pixel(x1, y1));
+            var point = jsmap.map.pixelToPoint(new BMap.Pixel(x1, y1));
             node.li_attr.lng = point.lng;
             node.li_attr.lat = point.lat;
 
-            if (map.loadOverlay(point, node) === true) {
+            if (jsmap.loadMarker(point, node) === true) {
                 // TODO something  change the jstree node data
                 return true;
             }
@@ -290,7 +291,7 @@ $.jsmap.controls.tree = function(options,parent) {
         'context_show.vakata': function (e, data) { // 控制是否显示 右键菜单
             var jstree = $.jstree.reference('#' + data.reference.context.id);
             var node = jstree.get_node(data.reference);
-            if (flag === 0 || node.type == 'group' || !node.li_attr.lng || !node.li_attr.lat) {
+            if (jsmap.status === 0 || node.type === 'group' || !node.li_attr.lng || !node.li_attr.lat) {
                 $(data.element).hide();
                 return false;
             }

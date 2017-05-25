@@ -4,14 +4,14 @@
 
 <style type="text/css">
     .overlay {
-        position : 'absolute';
+        position:absolute;
         z-index: 1000;
         width :24px;
         height:24px;
         line-height:24px;
-        white-space :'nowrap';
-        font-size: '18px';
-        color: 'purple'
+        white-space :nowrap;
+        font-size: 18px;
+        color: purple
     }
 </style>
 
@@ -42,9 +42,6 @@
     <script src="/scripts/common.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-        
-        window.flag = 0; // edit 1 ，load 0
-        window.markers = [];
 
         $(function() {
             $('[data-toggle="tooltip"]').tooltip();
@@ -77,10 +74,10 @@
             }
         ];
 
-        
+
         // 配置tree控件
         var conf = {
-            title: '设备列表',
+            title: '设备列表SSSS',
             location: {
                 defaultAnchor: BMAP_ANCHOR_TOP_RIGHT,
                 defaultOffset: new BMap.Size(20, 20),
@@ -92,18 +89,16 @@
                 }
             }
         }
-        //  $.jsmap.tree(conf,'map');
 
         // TODO javascript怎么做插件热启动
         // 配置地图，加载默认的statusControl，treeControl
         var options = {
-            controls: ['status', 'tree'],
+            controls: { status:{}, tree:conf },
             overlay: {
-                'icon': 'glyphicon glyphicon-facetime-video',
-                'style': 'overlay'
+                //  style: 'glyphicon glyphicon-facetime-video overlay' 
             }
         }
-        var jsmap = $.jsmap.create("map",options);
+        var jsmap = $.jsmap.create("map", options);
 
 
     </script>

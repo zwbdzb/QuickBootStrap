@@ -1,8 +1,8 @@
 ﻿///
-function CustomOverlay(point, data) {
+function CustomOverlay(point, data, style) {
     this._point = point;
     this._data = data;
-   // this._style = style;
+    this._style = style;
 }
 CustomOverlay.prototype = new BMap.Overlay();
 
@@ -11,20 +11,11 @@ CustomOverlay.prototype.initialize = function (map) {
     this._map = map;
     var div = this._div = document.createElement("div");
 
-    div.style.position = 'absolute';
-    div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
-    div.style.width = '24px';
-    div.style.height = '24px';
-    div.style.lineHeight = '24px';
-    div.style.whiteSpace = "nowrap";
-    div.style.fontSize = '18px';
-    div.className = 'glyphicon glyphicon-facetime-video';       // 'glyphicon glyphicon-map-marker';
-    div.style.color = 'purple';
+    div.className = $.jsmap.reference(map).options.overlay.style|| 'glyphicon glyphicon-facetime-video';       // 'glyphicon glyphicon-map-marker';
     var content = this._span = document.createElement("span");
     div.appendChild(content);
 
     var that = this;
-    var $map = $(this._map.Dom);
 
     // 覆写原生事件监听器,默认函数参数只有event
     div.onmouseenter = function () {
@@ -38,11 +29,12 @@ CustomOverlay.prototype.initialize = function (map) {
 
     // 给div 提供自由拖拽的能力,由Jquery—UI提供
     $(div).draggable({
-        disabled: !window.flag,
+        disabled: !$.jsmap.reference(map).status,
         scroll: true,
         opacity: 0.35,
         start: function (event) {
             map.disableDragging();
+            var $map = $("#"+ map.container);
             var pointStart;
             var x = event.clientX;
             var y = event.clientY;
@@ -52,6 +44,7 @@ CustomOverlay.prototype.initialize = function (map) {
             that._point = pointStart;
         },
         stop: function (event, ui) {
+            var $map = $("#" + map.container);
             var pointEnd;
             var x = ui.offset.left + $(this).width() / 2;
             var y = ui.offset.top + $(this).height() / 2;
@@ -75,8 +68,8 @@ CustomOverlay.prototype.initialize = function (map) {
 CustomOverlay.prototype.draw = function () {
     var map = this._map;
     var pixel = map.pointToOverlayPixel(this._point);
-    this._div.style.left = pixel.x - $(this._div).width() / 2 + 'px';           // 这里有一个坑，必须携带px
-    this._div.style.top = pixel.y - $(this._div).height() / 2 + 'px';
+    this._div.style.left = pixel.x + 'px';           //   - $(this._div).width() / 2  这里有一个坑，必须携带px
+    this._div.style.top = pixel.y + 'px';         // - $(this._div).height() / 2 
 }
 
 //  对外提供的API
