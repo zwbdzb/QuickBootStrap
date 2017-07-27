@@ -30,6 +30,7 @@ $.jsmap.create = function(el, options) {
     var options = $.extend(true, {}, $.jsmap.defaults, options);
 
     var jsmap = new $.jsmap.core(el, options);
+   
     return jsmap;
 }
 
@@ -90,7 +91,7 @@ $.jsmap.core.prototype.getUserMarkers = function () {
 }
 
 $.jsmap.core.prototype.loadMarker = function (point, obj,style) {
-    var myOverlay = new CustomOverlay(point, obj,style);
+    var myOverlay = new DraggableMarker(point, obj, style);
     this.map.addOverlay(myOverlay);
     this.userMarkers.push(myOverlay);
     return true;
@@ -120,16 +121,16 @@ StatusControl.prototype.initialize = function (map) {
     div.setAttribute('data-toggle', 'tooltip');     // 改变已有属性的值，或创建新属性
     div.setAttribute('data-placement', 'right');     // 改变已有属性的值，或创建新属性
     div.setAttribute('title', '单击切换模式');     // 改变已有属性的值，或创建新属性
-    div.onclick = function() {
+    div.onclick = function () {
+        var markers = jsmap.userMarkers;
         if ( !$.jsmap.reference(map).status ) {
             $.jsmap.reference(map).status = true;
 
             div.childNodes[0].textContent = "编辑模式";
             div.className = 'glyphicon glyphicon-pencil';
             //  改变所有marker的 编辑状态,应该把设备列表做成map里面，形成一个大的map控件
-            var markers = map.getOverlays();
             $.each(markers, function (i,n) {
-                if (n instanceof CustomOverlay) {
+                if (n.hasOwnProperty('_data')) {
                     n.enableDragging();
                 }
             });
@@ -138,9 +139,8 @@ StatusControl.prototype.initialize = function (map) {
             div.childNodes[0].textContent = "正常模式";
             div.className = 'glyphicon glyphicon-star';
             // 改变所有marker的编辑状态
-            var markers = map.getOverlays();
             $.each(markers, function (i, n) {
-                if (n instanceof CustomOverlay) {
+                if (n.hasOwnProperty('_data')) {
                     n.disableDragging();
                 }
             });
@@ -312,7 +312,7 @@ $.jsmap.controls.tree = function (options, parent) {
 
 // 直接实例化出tree控件
 function TreeControl(options) {
-    var options = $.fn.extend(true, {}, $.jsmap.defaults.tree, options);
+    options = $.fn.extend(true, {}, $.jsmap.defaults.tree, options);
     this.defaultAnchor = options.location.defaultAnchor;
     this.defaultOffset = options.location.defaultOffset;
     this.title = options.title;

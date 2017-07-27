@@ -13,7 +13,7 @@
 
 @section scripts{
     @Scripts.Render("http://api.map.baidu.com/api?v=2.0&ak=SSC5M3AFkxWqbgXLDpItGi8g")
-    <script src="@Url.Content("~/scripts/CustomOverlay.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/scripts/draggableMarker.js")" type="text/javascript"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
     @Scripts.Render("http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer.js")
@@ -46,7 +46,7 @@
                 'text': 'Simple root node',
                 'type': 'group', // 自定义类型type
                 'children': [
-                    { 'text': 'Child 0', 'li_attr': { lng: '104.022736', lat: '30.528012' } },
+                    { 'text': 'Child 0', 'li_attr': { lng: '104.0608', lat: '30.6711' } },
                     'Child 01',
                 ]
             },
@@ -71,7 +71,7 @@
 
         // 配置tree控件
         var conf = {
-            title: '设备列表SSSS',
+            title: '设备列表',
             location: {
                 defaultAnchor: BMAP_ANCHOR_TOP_RIGHT,
                 defaultOffset: new BMap.Size(20, 20)
@@ -80,6 +80,7 @@
             treebody: {
                 core: {
                     data: data
+
                 }
             }
         }
