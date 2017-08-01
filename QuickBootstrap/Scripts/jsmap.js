@@ -238,10 +238,11 @@ $.jsmap.controls.tree = function (options, parent) {
                 jsmap.map.panTo(pt);
                 var overlay = jsmap.findOverlay(node.li_attr.id);
                 overlay.toggle();
-                // setTimeout( overlay.toggle, 2000); 是错误的，setTimeOut 内部函数的执行环境是window，以下写法形成一个闭包
-                setTimeout(function () {
-                    overlay.toggle();
-                }, 3000);
+             //   setTimeout(overlay.toggle, 2000);  // 是错误的，setTimeOut只是指定一个函数在2000ms之后执行，并没有指定scope,执行时函数的执行环境是window，以下写法形成一个闭包
+                setTimeout(overlay.toggle.bind(overlay), 2000);   // 这是以下写法另外一种优雅的写法
+                //setTimeout(function () {
+                //    overlay.toggle();
+                //}, 3000);
             }
         },
         'open_node.jstree': function (e, data) {
