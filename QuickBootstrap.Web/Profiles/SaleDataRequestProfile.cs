@@ -16,11 +16,6 @@ namespace QuickBootstrap.Profiles
         public SaleDataRequestProfile()
             : base("SaleDataRequestProfile")
         {
-            
-        }
-
-        protected  override void Configure()
-        {
             CreateMap<SaleDataRequest, SalesData>()
                 .ForMember(dest => dest.AddTime, opt => opt.MapFrom(src => DateTime.Now))
                 .ForMember(dest => dest.GenerationTime, opt =>
@@ -37,7 +32,7 @@ namespace QuickBootstrap.Profiles
                 .ForMember(dest => dest.Yyyymmdd, opt => opt.MapFrom(src => src.Order_time.Split(' ')[0]))
                 .ForMember(dest => dest.Hhmiss, opt => opt.MapFrom(src => src.Order_time.Split(' ')[1]))
 
-                .ForMember(dest => dest.GenerationTime, opt => opt.MapFrom(src => DateTime.ParseExact(src.Order_time.Replace(" ",""), "yyyyMMddHHmmss", null)))
+                .ForMember(dest => dest.GenerationTime, opt => opt.MapFrom(src => DateTime.ParseExact(src.Order_time.Replace(" ", ""), "yyyyMMddHHmmss", null)))
                 .ForMember(dest => dest.P_cd, opt => opt.MapFrom(src => src.Product_code))
                 .ForMember(dest => dest.It_cnt, opt => opt.MapFrom(src => src.Item_count))
                 .ForMember(dest => dest.Price, opt => opt.MapFrom(src => decimal.Parse(src.Item_price)))
@@ -48,6 +43,4 @@ namespace QuickBootstrap.Profiles
                 .ForMember(dest => dest.UpdateTime, opt => opt.MapFrom(src => DateTime.Now));
         }
     }
-
-
 }

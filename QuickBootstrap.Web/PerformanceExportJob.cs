@@ -2,27 +2,23 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using Common.Logging;
 using Microsoft.Practices.Unity;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Quartz;
-using QuickBootstrap.Cache;
 using QuickBootstrap.Helpers;
 using QuickBootstrap.Models;
 using QuickBootstrap.Services;
 using QuickBootstrap.Services.Util;
 using RestSharp;
+using log4net;
 
 namespace QuickBootstrap
 {
     public class PerformanceExportJob:IJob
     {
-        private  readonly ILog log = LogManager.GetLogger(typeof(PerformanceExportJob));
+        private readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly ISalesDataService _salesDataService = UnityHelper.Instance.Unity.Resolve<ISalesDataService>();
 

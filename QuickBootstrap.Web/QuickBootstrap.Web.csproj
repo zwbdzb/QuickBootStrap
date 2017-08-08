@@ -42,53 +42,79 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
-      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Common.Logging">
-      <HintPath>..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Common.Logging.Core">
-      <HintPath>..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Enyim.Caching, Version=2.13.0.0, Culture=neutral, PublicKeyToken=cec98615db04012e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EnyimMemcached.2.13\lib\net35\Enyim.Caching.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    <Reference Include="Enyim.Caching, Version=2.16.0.0, Culture=neutral, PublicKeyToken=cec98615db04012e, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnyimMemcached.2.16.0\lib\net35\Enyim.Caching.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Practices.Unity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration">
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Quartz">
-      <HintPath>..\packages\Quartz.2.3.3\lib\net40\Quartz.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Quartz, Version=2.6.0.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.2.6.0\lib\net40\Quartz.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="StackExchange.Redis">
-      <HintPath>..\packages\StackExchange.Redis.1.0.488\lib\net45\StackExchange.Redis.dll</HintPath>
+    <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.2.6\lib\net45\StackExchange.Redis.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Linq.Dynamic">
-      <HintPath>..\packages\System.Linq.Dynamic.1.0.6\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -100,12 +126,40 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
@@ -125,54 +179,9 @@
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Optimization">
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="WebGrease">
-      <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
-    </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +279,8 @@
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-table.css" />
     <Content Include="Content\bootstrap-table.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\ImageGui\UI_1.jpg" />
@@ -279,13 +290,28 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Common.js" />
     <Content Include="Scripts\DateUtil.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -618,170 +644,6 @@
     <Content Include="Scripts\lib\datepicker\parser.js" />
     <Content Include="Scripts\lib\datepicker\sugarpak.js" />
     <Content Include="Scripts\lib\datepicker\time.js" />
-    <Content Include="Scripts\lib\globalization\af-ZA.js" />
-    <Content Include="Scripts\lib\globalization\ar-AE.js" />
-    <Content Include="Scripts\lib\globalization\ar-BH.js" />
-    <Content Include="Scripts\lib\globalization\ar-DJ.js" />
-    <Content Include="Scripts\lib\globalization\ar-DZ.js" />
-    <Content Include="Scripts\lib\globalization\ar-EG.js" />
-    <Content Include="Scripts\lib\globalization\ar-IQ.js" />
-    <Content Include="Scripts\lib\globalization\ar-JO.js" />
-    <Content Include="Scripts\lib\globalization\ar-KM.js" />
-    <Content Include="Scripts\lib\globalization\ar-KW.js" />
-    <Content Include="Scripts\lib\globalization\ar-LB.js" />
-    <Content Include="Scripts\lib\globalization\ar-LY.js" />
-    <Content Include="Scripts\lib\globalization\ar-MA.js" />
-    <Content Include="Scripts\lib\globalization\ar-MR.js" />
-    <Content Include="Scripts\lib\globalization\ar-OM.js" />
-    <Content Include="Scripts\lib\globalization\ar-PS.js" />
-    <Content Include="Scripts\lib\globalization\ar-QA.js" />
-    <Content Include="Scripts\lib\globalization\ar-SA.js" />
-    <Content Include="Scripts\lib\globalization\ar-SD.js" />
-    <Content Include="Scripts\lib\globalization\ar-SO.js" />
-    <Content Include="Scripts\lib\globalization\ar-SY.js" />
-    <Content Include="Scripts\lib\globalization\ar-TN.js" />
-    <Content Include="Scripts\lib\globalization\ar-YE.js" />
-    <Content Include="Scripts\lib\globalization\az-Cyrl-AZ.js" />
-    <Content Include="Scripts\lib\globalization\az-Latn-AZ.js" />
-    <Content Include="Scripts\lib\globalization\be-BY.js" />
-    <Content Include="Scripts\lib\globalization\bg-BG.js" />
-    <Content Include="Scripts\lib\globalization\bs-Latn-BA.js" />
-    <Content Include="Scripts\lib\globalization\ca-ES.js" />
-    <Content Include="Scripts\lib\globalization\cs-CZ.js" />
-    <Content Include="Scripts\lib\globalization\cy-GB.js" />
-    <Content Include="Scripts\lib\globalization\da-DK.js" />
-    <Content Include="Scripts\lib\globalization\de-AT.js" />
-    <Content Include="Scripts\lib\globalization\de-CH.js" />
-    <Content Include="Scripts\lib\globalization\de-DE.js" />
-    <Content Include="Scripts\lib\globalization\de-LI.js" />
-    <Content Include="Scripts\lib\globalization\de-LU.js" />
-    <Content Include="Scripts\lib\globalization\dv-MV.js" />
-    <Content Include="Scripts\lib\globalization\el-GR.js" />
-    <Content Include="Scripts\lib\globalization\en-029.js" />
-    <Content Include="Scripts\lib\globalization\en-AU.js" />
-    <Content Include="Scripts\lib\globalization\en-BZ.js" />
-    <Content Include="Scripts\lib\globalization\en-CA.js" />
-    <Content Include="Scripts\lib\globalization\en-GB.js" />
-    <Content Include="Scripts\lib\globalization\en-IE.js" />
-    <Content Include="Scripts\lib\globalization\en-JM.js" />
-    <Content Include="Scripts\lib\globalization\en-NZ.js" />
-    <Content Include="Scripts\lib\globalization\en-PH.js" />
-    <Content Include="Scripts\lib\globalization\en-TT.js" />
-    <Content Include="Scripts\lib\globalization\en-US.js" />
-    <Content Include="Scripts\lib\globalization\en-ZA.js" />
-    <Content Include="Scripts\lib\globalization\en-ZW.js" />
-    <Content Include="Scripts\lib\globalization\es-AR.js" />
-    <Content Include="Scripts\lib\globalization\es-BO.js" />
-    <Content Include="Scripts\lib\globalization\es-CL.js" />
-    <Content Include="Scripts\lib\globalization\es-CO.js" />
-    <Content Include="Scripts\lib\globalization\es-CR.js" />
-    <Content Include="Scripts\lib\globalization\es-DO.js" />
-    <Content Include="Scripts\lib\globalization\es-EC.js" />
-    <Content Include="Scripts\lib\globalization\es-ES.js" />
-    <Content Include="Scripts\lib\globalization\es-GT.js" />
-    <Content Include="Scripts\lib\globalization\es-HN.js" />
-    <Content Include="Scripts\lib\globalization\es-MX.js" />
-    <Content Include="Scripts\lib\globalization\es-NI.js" />
-    <Content Include="Scripts\lib\globalization\es-PA.js" />
-    <Content Include="Scripts\lib\globalization\es-PE.js" />
-    <Content Include="Scripts\lib\globalization\es-PR.js" />
-    <Content Include="Scripts\lib\globalization\es-PY.js" />
-    <Content Include="Scripts\lib\globalization\es-SV.js" />
-    <Content Include="Scripts\lib\globalization\es-UY.js" />
-    <Content Include="Scripts\lib\globalization\es-VE.js" />
-    <Content Include="Scripts\lib\globalization\et-EE.js" />
-    <Content Include="Scripts\lib\globalization\eu-ES.js" />
-    <Content Include="Scripts\lib\globalization\fa-IR.js" />
-    <Content Include="Scripts\lib\globalization\fi-FI.js" />
-    <Content Include="Scripts\lib\globalization\fo-FO.js" />
-    <Content Include="Scripts\lib\globalization\fr-BE.js" />
-    <Content Include="Scripts\lib\globalization\fr-CA.js" />
-    <Content Include="Scripts\lib\globalization\fr-CH.js" />
-    <Content Include="Scripts\lib\globalization\fr-FR.js" />
-    <Content Include="Scripts\lib\globalization\fr-LU.js" />
-    <Content Include="Scripts\lib\globalization\fr-MC.js" />
-    <Content Include="Scripts\lib\globalization\gl-ES.js" />
-    <Content Include="Scripts\lib\globalization\gu-IN.js" />
-    <Content Include="Scripts\lib\globalization\he-IL.js" />
-    <Content Include="Scripts\lib\globalization\hi-IN.js" />
-    <Content Include="Scripts\lib\globalization\hr-BA.js" />
-    <Content Include="Scripts\lib\globalization\hr-HR.js" />
-    <Content Include="Scripts\lib\globalization\hu-HU.js" />
-    <Content Include="Scripts\lib\globalization\hy-AM.js" />
-    <Content Include="Scripts\lib\globalization\id-ID.js" />
-    <Content Include="Scripts\lib\globalization\is-IS.js" />
-    <Content Include="Scripts\lib\globalization\it-CH.js" />
-    <Content Include="Scripts\lib\globalization\it-IT.js" />
-    <Content Include="Scripts\lib\globalization\ja-JP.js" />
-    <Content Include="Scripts\lib\globalization\ka-GE.js" />
-    <Content Include="Scripts\lib\globalization\kab-DZ.js" />
-    <Content Include="Scripts\lib\globalization\kk-KZ.js" />
-    <Content Include="Scripts\lib\globalization\kn-IN.js" />
-    <Content Include="Scripts\lib\globalization\ko-KR.js" />
-    <Content Include="Scripts\lib\globalization\kok-IN.js" />
-    <Content Include="Scripts\lib\globalization\ky-KG.js" />
-    <Content Include="Scripts\lib\globalization\lt-LT.js" />
-    <Content Include="Scripts\lib\globalization\lv-LV.js" />
-    <Content Include="Scripts\lib\globalization\mi-NZ.js" />
-    <Content Include="Scripts\lib\globalization\mk-MK.js" />
-    <Content Include="Scripts\lib\globalization\mn-MN.js" />
-    <Content Include="Scripts\lib\globalization\mr-IN.js" />
-    <Content Include="Scripts\lib\globalization\ms-BN.js" />
-    <Content Include="Scripts\lib\globalization\ms-MY.js" />
-    <Content Include="Scripts\lib\globalization\mt-MT.js" />
-    <Content Include="Scripts\lib\globalization\nb-NO.js" />
-    <Content Include="Scripts\lib\globalization\nl-BE.js" />
-    <Content Include="Scripts\lib\globalization\nl-NL.js" />
-    <Content Include="Scripts\lib\globalization\nn-NO.js" />
-    <Content Include="Scripts\lib\globalization\ns-ZA.js" />
-    <Content Include="Scripts\lib\globalization\pa-IN.js" />
-    <Content Include="Scripts\lib\globalization\pl-PL.js" />
-    <Content Include="Scripts\lib\globalization\pt-BR.js" />
-    <Content Include="Scripts\lib\globalization\pt-PT.js" />
-    <Content Include="Scripts\lib\globalization\quz-BO.js" />
-    <Content Include="Scripts\lib\globalization\quz-EC.js" />
-    <Content Include="Scripts\lib\globalization\quz-PE.js" />
-    <Content Include="Scripts\lib\globalization\ro-RO.js" />
-    <Content Include="Scripts\lib\globalization\ru-RU.js" />
-    <Content Include="Scripts\lib\globalization\sa-IN.js" />
-    <Content Include="Scripts\lib\globalization\se-FI.js" />
-    <Content Include="Scripts\lib\globalization\se-NO.js" />
-    <Content Include="Scripts\lib\globalization\se-SE.js" />
-    <Content Include="Scripts\lib\globalization\sk-SK.js" />
-    <Content Include="Scripts\lib\globalization\sl-SI.js" />
-    <Content Include="Scripts\lib\globalization\sma-NO.js" />
-    <Content Include="Scripts\lib\globalization\sma-SE.js" />
-    <Content Include="Scripts\lib\globalization\smj-NO.js" />
-    <Content Include="Scripts\lib\globalization\smj-SE.js" />
-    <Content Include="Scripts\lib\globalization\smn-FI.js" />
-    <Content Include="Scripts\lib\globalization\sms-FI.js" />
-    <Content Include="Scripts\lib\globalization\sq-AL.js" />
-    <Content Include="Scripts\lib\globalization\sr-Cyrl-BA.js" />
-    <Content Include="Scripts\lib\globalization\sr-Cyrl-CS.js" />
-    <Content Include="Scripts\lib\globalization\sr-Latn-BA.js" />
-    <Content Include="Scripts\lib\globalization\sr-Latn-CS.js" />
-    <Content Include="Scripts\lib\globalization\sv-FI.js" />
-    <Content Include="Scripts\lib\globalization\sv-SE.js" />
-    <Content Include="Scripts\lib\globalization\sw-KE.js" />
-    <Content Include="Scripts\lib\globalization\syr-SY.js" />
-    <Content Include="Scripts\lib\globalization\ta-IN.js" />
-    <Content Include="Scripts\lib\globalization\te-IN.js" />
-    <Content Include="Scripts\lib\globalization\th-TH.js" />
-    <Content Include="Scripts\lib\globalization\tn-ZA.js" />
-    <Content Include="Scripts\lib\globalization\tr-TR.js" />
-    <Content Include="Scripts\lib\globalization\tt-RU.js" />
-    <Content Include="Scripts\lib\globalization\uk-UA.js" />
-    <Content Include="Scripts\lib\globalization\ur-PK.js" />
-    <Content Include="Scripts\lib\globalization\uz-Cyrl-UZ.js" />
-    <Content Include="Scripts\lib\globalization\uz-Latn-UZ.js" />
-    <Content Include="Scripts\lib\globalization\vi-VN.js" />
-    <Content Include="Scripts\lib\globalization\xh-ZA.js" />
-    <Content Include="Scripts\lib\globalization\zh-CN.js" />
-    <Content Include="Scripts\lib\globalization\zh-HK.js" />
-    <Content Include="Scripts\lib\globalization\zh-MO.js" />
-    <Content Include="Scripts\lib\globalization\zh-SG.js" />
-    <Content Include="Scripts\lib\globalization\zh-TW.js" />
-    <Content Include="Scripts\lib\globalization\zu-ZA.js" />
     <Content Include="Scripts\lib\jstree\jquery-1.10.2.js" />
     <Content Include="Scripts\lib\jstree\jstree.js" />
     <Content Include="Scripts\lib\jstree\jstree.min.js" />
@@ -797,9 +659,12 @@
     <Content Include="Scripts\lib\jstree\themes\default\throbber.gif" />
     <Content Include="Scripts\jsmap.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\draggableMarker.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -815,7 +680,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_PartialTongJiCode.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\UserManage\Index.cshtml" />
@@ -828,14 +692,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Report\Summary.cshtml" />
     <Content Include="Views\Map\Index.cshtml" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>

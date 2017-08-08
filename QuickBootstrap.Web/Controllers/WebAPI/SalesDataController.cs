@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using AutoMapper;
-using Common.Logging;
 using log4net.DateFormatter;
 using Microsoft.Practices.Unity;
 using QuickBootstrap.Entities;
