@@ -9,7 +9,7 @@ namespace QuickBootstrap
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                "~/Scripts/jquery-1.10.2.min.js",
+                "~/Scripts/jquery-3.1.1.js",
                 "~/Scripts/DateUtil.js",
                         // jquery Ui jstree
                  "~/Scripts/jquery-ui.min.js",
@@ -19,6 +19,7 @@ namespace QuickBootstrap
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
+            // javascript 函数库，用来侦测浏览器是否支持HTML5和css3等规格
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
@@ -42,7 +43,7 @@ namespace QuickBootstrap
                        // datejs
                        "~/Scripts/lib/datepicker/date-zh-CN.js",
                       "~/Scripts/lib/datepicker/globalization/zh-CN.js",
-
+                      // 一个轻量级的为IE8提供CSS3媒体查询的库
                       "~/Scripts/respond.js"
                       ));
 
