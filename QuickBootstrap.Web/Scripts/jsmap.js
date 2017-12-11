@@ -255,9 +255,9 @@ $.jsmap.controls.tree = function (options, parent) {
         }
     };
     var docHandlers = {
-        'dnd_stop.vakata': function (e, data) {
+        'dnd_stop.vakata': function (e, arg) {
 
-            var node = $.jstree.reference('#' + data.data.obj.context.id).get_node(data.data.nodes[0]);
+            var node = arg.data.origin.get_node(arg.data.nodes[0]);  
             if (node.type === 'group')
                 return false;
             var jsmap = $.jsmap.reference(parent);
@@ -266,10 +266,9 @@ $.jsmap.controls.tree = function (options, parent) {
             }
             /* 以下将采用事件触发的方式 */
             var pt = null;
-            var x = data.event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-            var y = data.event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+            var x = arg.event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+            var y = arg.event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 
-            var jsmap = $.jsmap.reference(parent);
             var $map = $("#" + jsmap.map.container);
             var x1 = x - $map.offset().left;
             var y1 = y - $map.offset().top;
@@ -289,10 +288,10 @@ $.jsmap.controls.tree = function (options, parent) {
                 return true;
             }
         },
-        'context_show.vakata': function (e, data) { // 控制是否显示 右键菜单
-            var jstree = $.jstree.reference('#' + data.reference.context.id);
-            var node = jstree.get_node(data.reference);
-            if (jsmap.status === 0 || node.type === 'group' || !node.li_attr.lng || !node.li_attr.lat) {
+        'context_show.vakata': function (e, arg) { // 控制是否显示 右键菜单
+            var jstree = $.jstree.reference('#' + arg.reference[0].id);
+            var node = jstree.get_node(arg.reference);
+            if (!window.jsmap.status || node.type === 'group' || !node.li_attr.lng || !node.li_attr.lat) {
                 $(data.element).hide();
                 return false;
             }
